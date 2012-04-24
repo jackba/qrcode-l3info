@@ -14,6 +14,6 @@ public class TxtListener implements ActionListener
 	
     public void actionPerformed(ActionEvent e)
     {
-        System.out.println("RadioButton Texte clicked");
+        m_f.showTxtBox();
     }
 }

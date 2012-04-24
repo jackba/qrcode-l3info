@@ -14,6 +14,6 @@ public class TelListener implements ActionListener
 	
     public void actionPerformed(ActionEvent e)
     {
-        System.out.println("RadioButton Numéro de Tel clicked");
+        m_f.showTelBox();
     }
 }
