@@ -1,339 +1,261 @@
 package Vue;
-
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
 import javax.swing.*;
-import java.awt.*;
 
 @SuppressWarnings("serial")
 public class Fenetre extends JFrame{
-	
-	private Container m_CP_main;
-	
-	private BoxLayout m_BL_main;
-	private BoxLayout m_BL_titre;
-	private BoxLayout m_BL_commande;
-	private BoxLayout m_BL_contenu;
-	private BoxLayout m_BL_saisie;
-	private BoxLayout m_BL_taille;
-	private BoxLayout m_BL_generer;
-	private BoxLayout m_BL_url;
-	private BoxLayout m_BL_txt;
-	private BoxLayout m_BL_tel;
-	private BoxLayout m_BL_sms;
-	
-	private JPanel m_P_image;
-	private JPanel m_P_titre;
-	private JPanel m_P_commande;
-	private JPanel m_P_contenu;
-	private JPanel m_P_saisie;
-	private JPanel m_P_taille;
-	private JPanel m_P_generer;
-	private JPanel m_P_RBs;
-	private JPanel m_P_url;
-	private JPanel m_P_txt;
-	private JPanel m_P_tel;
-	private JPanel m_P_sms;
-	
-	private JLabel m_L_titre;
-	private JLabel m_L_taille;
-	private JLabel m_L_url;
-	private JLabel m_L_txt;
-	// private JLabel m_L_charCount;
-	
-	private JButton m_B_generer;
-	
-	private JComboBox m_CmB_taille;
 	
 	private JRadioButton m_RB_url;
 	private JRadioButton m_RB_txt;
 	private JRadioButton m_RB_tel;
 	private JRadioButton m_RB_sms;
 	
-	private ButtonGroup m_BG_typesDonnees;
+	private Box m_vB_url;
+	private Box m_vB_txt;
+	private Box m_vB_tel;
+	private Box m_vB_sms;
 	
-	static String string_RB_url = "URL";
-    static String string_RB_txt = "Texte";
-    static String string_RB_tel = "Numéro de Tel";
-    static String string_RB_sms = "SMS";
+	private JButton m_B_generer;
 	
-	private JTextField m_TF_url;
+	public Fenetre()
+	{
+		super();
+		build();
+	}
 	
-	private JTextArea m_TA_txt;
-
-	public Fenetre(String title) {
+	private void build()
+	{
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Générateur de QRcode");
+		setSize(320,240);
+		setLocationRelativeTo(null);
 		
-		super(title);	// Super constructeur
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	// Ferme la fenêtre lors d'un clic sur la croix
-
-		m_CP_main = this.getContentPane();	// Récupère le panel de contenu de la fenêtre
-		m_BL_main = new BoxLayout(m_CP_main, BoxLayout.X_AXIS);	// Crée un nouveau boxLayout orienté horizontalement
-		
-		m_CP_main.setLayout(m_BL_main);	// Définit le boxlayout comme étant notre gestionnaire de contenu principal
-		
-		m_P_image = new JPanel();	// Crée un nouveau JPanel pour y stocker le résultat du QRcode
-		m_P_image.setMinimumSize(new Dimension(300,300));
-		m_P_image.setPreferredSize(new Dimension(300,300));
-		m_P_image.setMaximumSize(new Dimension(300,Short.MAX_VALUE));	// Largeur maximum fixée à 300, hauteur maximum infinie
-		//m_P_image.setBackground(new Color(100,75,255));	// DEBUG Couleur bleue
-		
-		m_P_commande = new JPanel();	// Crée un nouveau JPanel pour y stocker les boutons et commandes
-		m_P_commande.setMinimumSize(new Dimension(450,300));
-		m_P_commande.setPreferredSize(new Dimension(450,300));
-		m_P_commande.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));	// Hauteur et largeur maximum infinie
-		//m_P_commande.setBackground(new Color(255,75,100));	// DEBUG Couleur rouge
-		
-		m_BL_commande = new BoxLayout(m_P_commande, BoxLayout.Y_AXIS);	// Crée un nouveau boxLayout orienté verticalement
-		m_P_commande.setLayout(m_BL_commande);	// Attribue le BoxLayout comme étant le gestionnaire de contenu du JPanel
-		
-		m_L_titre = new JLabel("Générateur de QRcode");
-		
-		m_P_titre = new JPanel();
-		m_BL_titre = new BoxLayout(m_P_titre, BoxLayout.X_AXIS);
-		m_P_titre.setLayout(m_BL_titre);
-		m_P_titre.add(m_L_titre);
-		m_P_titre.setMaximumSize(new Dimension(Short.MAX_VALUE,m_P_titre.getHeight()));	// Largeur infinie, hauteur du label
-		
-		// Création des boutons-radio
-        m_RB_url = new JRadioButton(string_RB_url);
-        m_RB_url.setActionCommand(string_RB_url);
-        m_RB_url.addActionListener(new UrlListener(this));	// Ajout d'un listener pour traiter le déclenchement des évènements
- 
-        m_RB_txt = new JRadioButton(string_RB_txt);
-        m_RB_txt.setActionCommand(string_RB_txt);
-        m_RB_txt.addActionListener(new TxtListener(this));
- 
-        m_RB_tel = new JRadioButton(string_RB_tel);
-        m_RB_tel.setActionCommand(string_RB_tel);
-        m_RB_tel.addActionListener(new TelListener(this));
- 
-        m_RB_sms = new JRadioButton(string_RB_sms);
-        m_RB_sms.setActionCommand(string_RB_sms);
-        m_RB_sms.addActionListener(new SmsListener(this));
+		// Boutons-radios de contenu
+		m_RB_url = new JRadioButton("URL");
+		m_RB_txt = new JRadioButton("Texte");
+		m_RB_tel = new JRadioButton("Numéro de Tel");
+		m_RB_sms = new JRadioButton("SMS");
  
         // Ajout des boutons dans un même groupe
-        m_BG_typesDonnees = new ButtonGroup();
-        m_BG_typesDonnees.add(m_RB_url);
-        m_BG_typesDonnees.add(m_RB_txt);
-        m_BG_typesDonnees.add(m_RB_tel);
-        m_BG_typesDonnees.add(m_RB_sms);
+        ButtonGroup BG_contenu = new ButtonGroup();
+        BG_contenu.add(m_RB_url);
+        BG_contenu.add(m_RB_txt);
+        BG_contenu.add(m_RB_tel);
+        BG_contenu.add(m_RB_sms);
         
-        // Création et intégration des boutons radio dans un panel sur une seule ligne
-        m_P_RBs = new JPanel(new GridLayout(1, 0));
-        m_P_RBs.add(m_RB_url);
-        m_P_RBs.add(m_RB_txt);
-        m_P_RBs.add(m_RB_tel);
-        m_P_RBs.add(m_RB_sms);
+        // Ajout des boutons dans une boîte horizontale
+        Box hB_boutonsR = Box.createHorizontalBox();
+        hB_boutonsR.add(m_RB_url);
+        hB_boutonsR.add(m_RB_txt);
+        hB_boutonsR.add(m_RB_tel);
+        hB_boutonsR.add(m_RB_sms);
+        hB_boutonsR.add(Box.createHorizontalGlue());
+        
+        // Ajout des listeners sur les boutons
+        m_RB_url.addActionListener(new UrlListener(this));
+        m_RB_txt.addActionListener(new TxtListener(this));
+        m_RB_tel.addActionListener(new TelListener(this));
+        m_RB_sms.addActionListener(new SmsListener(this));
 		
-        // Création du panel de contenu
-		m_P_contenu = new JPanel();
-		m_BL_contenu = new BoxLayout(m_P_contenu, BoxLayout.X_AXIS);
-		m_P_contenu.setLayout(m_BL_contenu);
-		m_P_contenu.add(m_P_RBs);	// Ajout des boutons-radio dans le panel de contenu
-		m_P_contenu.setMaximumSize(new Dimension(Short.MAX_VALUE,m_P_contenu.getHeight()));
-		m_P_contenu.setBorder(BorderFactory.createTitledBorder("Contenu"));	// Définit la bordure et le titre
+		// Contenu
+		Box hB_contenu = Box.createHorizontalBox();
+		hB_contenu.add(hB_boutonsR);	// Ajout des boutons-radio dans le panel de contenu
+		hB_contenu.setBorder(BorderFactory.createTitledBorder("Contenu"));	// Définit la bordure et le titre
+		hB_contenu.add(Box.createHorizontalGlue());
 		
-		// Création du panel de saisie
-		m_P_saisie = new JPanel();
-		m_BL_saisie = new BoxLayout(m_P_saisie, BoxLayout.X_AXIS);
-		m_P_saisie.setLayout(m_BL_saisie);
-		m_P_saisie.setMinimumSize(new Dimension(Short.MAX_VALUE,0));
-		m_P_saisie.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));
-		m_P_saisie.setBorder(BorderFactory.createTitledBorder("Saisie :"));
+		/*
+		 *  PANEL URL
+		 */
+		// Label URL
+		JLabel L_url = new JLabel("URL:");
+		Box hB_labelUrl = Box.createHorizontalBox();
+		hB_labelUrl.add(L_url);
+		hB_labelUrl.add(Box.createHorizontalGlue());
 		
-		m_P_taille = new JPanel();
-		m_P_taille.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));
+		// Champs texte URL
+		JTextField TF_url = new JTextField(Short.MAX_VALUE);
+		TF_url.setMaximumSize(new Dimension(Short.MAX_VALUE,TF_url.getPreferredSize().height));	// Largeur du champs infinie
+		Box hB_textfieldUrl = Box.createHorizontalBox();
+		hB_textfieldUrl.add(TF_url);
 		
-		m_BL_taille = new BoxLayout(m_P_taille, BoxLayout.X_AXIS);
-		m_P_taille.setLayout(m_BL_taille);
+		// Saisie URL (Label - TextField)
+		m_vB_url = Box.createVerticalBox();
+		m_vB_url.add(hB_labelUrl);
+		m_vB_url.add(hB_textfieldUrl);
 		
-		m_L_taille = new JLabel("Taille:");
+		/*
+		 *  PANEL TEXTE LIBRE
+		 */
+		// Label Texte libre - caracteres restants
+		JLabel L_txt = new JLabel("Texte libre:");
+		JLabel L_txtCount = new JLabel("250 caractères restants");
+		Box hB_labelTxt = Box.createHorizontalBox();
+		hB_labelTxt.add(L_txt);
+		hB_labelTxt.add(Box.createHorizontalGlue());
+		hB_labelTxt.add(L_txtCount);
+		
+		// Champs Texte libre
+		JTextArea TA_txt = new JTextArea(Short.MAX_VALUE,Short.MAX_VALUE);
+		TA_txt.setLineWrap(true);	// Découpe la ligne lorsqu'on arrive au bout
+		TA_txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); // Ajoute une bordure grise d'1 pixel autour de la zone de texte
+		TA_txt.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));	// Largeur et hauteur de la zone de texte infinie
+		Box hB_textareaTxt = Box.createHorizontalBox();
+		hB_textareaTxt.add(TA_txt);
+		
+		// Saisie Texte libre (Label1, Label2 - TextArea)
+		m_vB_txt = Box.createVerticalBox();
+		m_vB_txt.add(hB_labelTxt);
+		m_vB_txt.add(hB_textareaTxt);
+		
+		/*
+		 * PANEL NUMERO DE TEL
+		 */
+		// Label Num de Tel
+		JLabel L_tel = new JLabel("Numéro de Téléphone:");
+		Box hB_labelTel = Box.createHorizontalBox();
+		hB_labelTel.add(L_tel);
+		hB_labelTel.add(Box.createHorizontalGlue());
+		
+		// Champs texte Num de Tel
+		JTextField TF_tel = new JTextField(Short.MAX_VALUE);
+		TF_tel.setMaximumSize(new Dimension(Short.MAX_VALUE,TF_tel.getPreferredSize().height));	// Largeur du champs infinie
+		Box hB_textfieldTel = Box.createHorizontalBox();
+		hB_textfieldTel.add(TF_tel);
+		
+		// Saisie Num de Tel (Label - TextField)
+		m_vB_tel = Box.createVerticalBox();
+		m_vB_tel.add(hB_labelTel);
+		m_vB_tel.add(hB_textfieldTel);
+		
+		/*
+		 * PANEL SMS
+		 */
+		// Label SMS - Num de tel
+		JLabel L_smsTel = new JLabel("Numéro de Téléphone:");
+		Box hB_labelSmsTel = Box.createHorizontalBox();
+		hB_labelSmsTel.add(L_smsTel);
+		hB_labelSmsTel.add(Box.createHorizontalGlue());
+		
+		// Champs texte SMS - Num de Tel
+		JTextField TF_smsTel = new JTextField(Short.MAX_VALUE);
+		TF_smsTel.setMaximumSize(new Dimension(Short.MAX_VALUE,TF_smsTel.getPreferredSize().height));	// Largeur du champs infinie
+		Box hB_textfieldSmsTel = Box.createHorizontalBox();
+		hB_textfieldSmsTel.add(TF_smsTel);
+		
+		// Label Message - caracteres restants
+		JLabel L_smsMsg = new JLabel("Message:");
+		JLabel L_smsMsgCount = new JLabel("160 caractères restants");
+		Box hB_labelSmsMsg = Box.createHorizontalBox();
+		hB_labelSmsMsg.add(L_smsMsg);
+		hB_labelSmsMsg.add(Box.createHorizontalGlue());
+		hB_labelSmsMsg.add(L_smsMsgCount);
+		
+		// Champs Texte libre
+		JTextArea TA_smsMsg = new JTextArea(Short.MAX_VALUE,Short.MAX_VALUE);
+		TA_smsMsg.setLineWrap(true);	// Découpe la ligne lorsqu'on arrive au bout
+		TA_smsMsg.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); // Ajoute une bordure grise d'1 pixel autour de la zone de texte
+		TA_smsMsg.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));	// Largeur et hauteur de la zone de texte infinie
+		Box hB_textAreaSmsMsg = Box.createHorizontalBox();
+		hB_textAreaSmsMsg.add(TA_smsMsg);
+		
+		// Saisie SMS - Num de Tel (Label - TextField) - Message (Label1, Label2 - TextArea)
+		m_vB_sms = Box.createVerticalBox();
+		m_vB_sms.add(hB_labelSmsTel);
+		m_vB_sms.add(hB_textfieldSmsTel);
+		m_vB_sms.add(hB_labelSmsMsg);
+		m_vB_sms.add(hB_textAreaSmsMsg);
+		
+		// Saisie
+		Box vB_saisie = Box.createHorizontalBox();
+		
+		// On ajoute les différents panneaux
+		vB_saisie.add(m_vB_url);
+		vB_saisie.add(m_vB_txt);
+		vB_saisie.add(m_vB_tel);
+		vB_saisie.add(m_vB_sms);
+		
+		// On masque les différents panneaux. Leur affichage sera géré dynamiquement lors des évènements utilisateurs
+		m_vB_url.setVisible(false);
+		m_vB_txt.setVisible(false);
+		m_vB_tel.setVisible(false);
+		m_vB_sms.setVisible(false);
+		
+		vB_saisie.add(Box.createHorizontalGlue());
+		vB_saisie.setBorder(BorderFactory.createTitledBorder("Saisie"));	// Définit la bordure et le titre
+		
+		// Taille (Label - ComboBox)
+		JLabel L_taille = new JLabel("Taille : ");
 		String comboBoxItems[] = { "S","M", "L", "XL" };
-		m_CmB_taille = new JComboBox(comboBoxItems);
-		m_CmB_taille.setMaximumSize(new Dimension(50,20));
-		
-		m_P_taille.add(m_L_taille);
-		m_P_taille.add(m_CmB_taille);
-		m_P_taille.setMaximumSize(new Dimension(Short.MAX_VALUE,m_P_taille.getHeight()));	// Largeur infinie, hauteur du label
-		
-		m_B_generer = new JButton("Générer");
-		
-		m_P_generer = new JPanel();
-		m_BL_generer = new BoxLayout(m_P_generer, BoxLayout.X_AXIS);
-		m_P_generer.setLayout(m_BL_generer);
-		m_P_generer.add(m_B_generer);
-		m_P_generer.setMaximumSize(new Dimension(Short.MAX_VALUE,m_P_generer.getHeight()));	// Largeur infinie, hauteur du label
-		
-		m_P_commande.add(m_P_titre);
-		m_P_commande.add(m_P_contenu);
-		m_P_commande.add(m_P_saisie);
-		m_P_commande.add(m_P_taille);
-		m_P_commande.add(m_P_generer);
-		
-		m_CP_main.add(m_P_image);
-		m_CP_main.add(m_P_commande);
+		JComboBox CmB_taille = new JComboBox(comboBoxItems);
+		CmB_taille.setMaximumSize(CmB_taille.getPreferredSize());
+		CmB_taille.setAlignmentX(CENTER_ALIGNMENT);
+       
+        Box hB_taille = Box.createHorizontalBox();
+        hB_taille.add(L_taille);
+        hB_taille.add(CmB_taille);
+        hB_taille.add(Box.createHorizontalGlue());
+        
+        // Générer (Bouton)
+        m_B_generer = new JButton("Générer");
+        m_B_generer.addActionListener(new BoutonGenererListener(this));	// Ajout d'un listener sur le bouton
+        
+        Box hB_generer = Box.createHorizontalBox();
+        hB_generer.add(m_B_generer);
+        hB_generer.add(Box.createHorizontalGlue());
+        
+        // Taille - Générer (VerticalBox)
+        Box vB_tailleGenerer = Box.createVerticalBox();
+        vB_tailleGenerer.add(hB_taille);
+        vB_tailleGenerer.add(Box.createVerticalStrut(5));
+        vB_tailleGenerer.add(hB_generer);
 
-		this.pack();	// Demande d'attribuer une taille minimale à la fenêtre tout en gardant visible tous les composants
-		this.setMinimumSize(new Dimension(this.getWidth(),this.getHeight()));	// Définit la taille actuelle comme étant la taille minimale
-		this.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()));
-		this.setLocationRelativeTo(null);	// Centre la fenêtre
-		this.setVisible(true);	// Affiche la fenêtre
-	}
-	
-	private void initUrlBox()
-	{
-		m_P_url = new JPanel();
-		m_BL_url = new BoxLayout(m_P_url, BoxLayout.Y_AXIS);
-		m_P_url.setLayout(m_BL_url);
-		
-		m_L_url = new JLabel("URL:");
-		
-		m_TF_url = new JTextField("http://");
-		m_TF_url.setMaximumSize(new Dimension(Short.MAX_VALUE,25)); // Largeur infinie, hauteur 25 pixels
-		
-		m_P_url.add(m_L_url);
-		m_P_url.add(m_TF_url);
-		//m_P_url.setBackground(new Color(100,75,255)); //DEBUG
-	}
-	
-	private void initTxtBox()
-	{
-		m_P_txt = new JPanel();
-		m_BL_txt = new BoxLayout(m_P_txt, BoxLayout.Y_AXIS);
-		m_P_txt.setLayout(m_BL_txt);
-		
-		m_L_txt = new JLabel("Texte libre:");
-		
-		m_TA_txt = new JTextArea();
-		m_TA_txt.setLineWrap(true);
-		m_TA_txt.setBorder(BorderFactory.createLineBorder(new Color(0,0,0), 1));	// Ajoute une bordure noire d'1 pixel autour de la zone de texte
-		//m_TA_txt.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE)); // Largeur infinie, hauteur 25 pixels
-		
-		m_P_txt.add(m_L_txt);
-		m_P_txt.add(m_TA_txt);
-		m_L_txt.setAlignmentX(LEFT_ALIGNMENT);
-		//m_P_txt.setBackground(new Color(255,75,100)); // DEBUG
-	}
-	
-	private void initTelBox()
-	{
-		m_P_tel = new JPanel();
-		m_P_tel.setBackground(new Color(75,255,100));
-	}
-	
-	private void initSmsBox()
-	{
-		m_P_sms = new JPanel();
-		m_P_sms.setBackground(new Color(255,255,255));
-	}
-	
-	// Affiche la boite de saisie de l'url
-	public void showUrlBox()
-	{
-		if (m_P_url == null) initUrlBox();
-		m_P_url.setVisible(true);
-		m_P_url.setAlignmentY(TOP_ALIGNMENT);
-		m_P_saisie.add(m_P_url);
-		m_CP_main.validate(); // Validation de l'ajout
-		System.out.println("Url showed");
-	}
-	
-	// Affiche la boite de saisie du texte
-	public void showTxtBox()
-	{
-		if (m_P_txt == null) initTxtBox();
-		m_P_txt.setVisible(true);
-		m_P_txt.setAlignmentY(MAXIMIZED_BOTH);
-		m_P_saisie.add(m_P_txt);
-		m_CP_main.validate(); // Validation de l'ajout
-		System.out.println("Txt showed");
-	}
-	
-	// Affiche la boite de saisie du numéro de téléphone
-	public void showTelBox()
-	{
-		if (m_P_tel == null) initTelBox();
-		m_P_tel.setVisible(true);
-		m_P_saisie.add(m_P_tel);
-		m_CP_main.validate(); // Validation de l'ajout
-		System.out.println("Tel showed");
-	}
-	
-	// Affiche la boite de saisie du sms
-	public void showSmsBox()
-	{
-		if (m_P_sms == null) initSmsBox();
-		m_P_sms.setVisible(true);
-		m_P_saisie.add(m_P_sms);
-		m_CP_main.validate(); // Validation de l'ajout
-		System.out.println("Sms showed");
-	}
-	
-	// Masque la boîte de saisie de l'url
-	private void hideUrlBox()
-	{
-		m_P_url.setVisible(false);
-		m_P_saisie.remove(m_P_url);
-		System.out.println("Url hidden");
-	}
-	
-	// Masque la boîte de saisie du texte
-	private void hideTxtBox()
-	{
-		m_P_txt.setVisible(false);
-		m_P_saisie.remove(m_P_txt);
-		System.out.println("Txt hidden");
-	}
-	
-	// Masque la boîte de saisie du numéro de téléphone
-	private void hideTelbox()
-	{
-		m_P_tel.setVisible(false);
-		m_P_saisie.remove(m_P_tel);
-		System.out.println("Tel hidden");
-	}
-	
-	// Masque la boîte de saisie du sms
-	private void hideSmsbox()
-	{
-		m_P_sms.setVisible(false);
-		m_P_saisie.remove(m_P_sms);
-		System.out.println("Sms hidden");
-	}
-	
-	public Boolean isPanelUrlShown()
-	{
-		if (m_P_url != null)
-			if (m_P_url.isVisible()) return true;
-		return false;
-	}
-	
-	public Boolean isPanelTxtShown()
-	{
-		if (m_P_txt != null)
-			if (m_P_txt.isVisible()) return true;
-		return false;
-	}
-	
-	public Boolean isPanelTelShown()
-	{
-		if (m_P_tel != null)
-			if (m_P_tel.isVisible()) return true;
-		return false;
-	}
-	
-	public Boolean isPanelSmsShown()
-	{
-		if (m_P_sms != null)
-			if (m_P_sms.isVisible()) return true;
-		return false;
+        // Boite de commandes
+        Box vB_commandes = Box.createVerticalBox();
+        vB_commandes.add(hB_contenu);
+        vB_commandes.add(vB_saisie);
+        vB_commandes.add(Box.createVerticalGlue());
+        vB_commandes.add(vB_tailleGenerer);
+        
+        // Panel de l'image QRcode (taille fixée à 200x200 pixels)
+        JPanel P_image = new JPanel();
+        P_image.setMaximumSize(new Dimension(200,200));
+        P_image.setMinimumSize(new Dimension(200,200));
+        P_image.setPreferredSize(new Dimension(200,200));
+        P_image.setSize(200, 200);
+        P_image.setBackground(Color.WHITE);
+        
+        // Boite de l'image QRcode
+        Box vB_image = Box.createVerticalBox();
+        vB_image.add(Box.createVerticalGlue());
+        vB_image.add(P_image);
+        vB_image.add(Box.createVerticalGlue());
+        
+        // Boite principale
+        Box hB_principale = Box.createHorizontalBox();
+        hB_principale.add(vB_image);
+        hB_principale.add(vB_commandes);
+        
+        Container c = getContentPane();	// Récupère la zone cliente de la frame (zone dans laquelle on peut placer des composants/conteneurs)
+        c.add(hB_principale,BorderLayout.CENTER);	// Place la boite principale dans la fenêtre
+        pack();	// Ajuste la taille de la frame de manière à ce que tous les composants soient visibles
+        setMinimumSize(getPreferredSize());	// Définit la taille minimale de la frame comme étant la taille après l'opération pack (tous les composants visibles)
 	}
 	
 	// Masque les panels de saisie affichés (en théorie un seul est affiché)
-	public void hideShowedBoxes()
+	public void hideShownBoxes()
 	{
-		if (isPanelUrlShown()) hideUrlBox();
-		if (isPanelTxtShown()) hideTxtBox();
-		if (isPanelTelShown()) hideTelbox();
-		if (isPanelSmsShown()) hideSmsbox();
+		if (m_vB_url.isVisible()) m_vB_url.setVisible(false);
+		if (m_vB_txt.isVisible()) m_vB_txt.setVisible(false);
+		if (m_vB_tel.isVisible()) m_vB_tel.setVisible(false);
+		if (m_vB_sms.isVisible()) m_vB_sms.setVisible(false);
 	}
 	
+	// Permet d'afficher les conteneurs Box désirés depuis les listeners
+	public void showUrlBox() {m_vB_url.setVisible(true);}
+	public void showTxtBox() {m_vB_txt.setVisible(true);}
+	public void showTelBox() {m_vB_tel.setVisible(true);}
+	public void showSmsBox() {m_vB_sms.setVisible(true);}
 }
