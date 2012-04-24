@@ -14,6 +14,6 @@ public class SmsListener implements ActionListener
 	
     public void actionPerformed(ActionEvent e)
     {
-        System.out.println("RadioButton SMS clicked");
+        m_f.showSmsBox();
     }
 }

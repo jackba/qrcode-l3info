@@ -1,10 +1,7 @@
 package Vue;
 
 import javax.swing.*;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 @SuppressWarnings("serial")
 public class Fenetre extends JFrame{
@@ -39,6 +36,8 @@ public class Fenetre extends JFrame{
 	private JLabel m_L_titre;
 	private JLabel m_L_taille;
 	private JLabel m_L_url;
+	private JLabel m_L_txt;
+	// private JLabel m_L_charCount;
 	
 	private JButton m_B_generer;
 	
@@ -57,6 +56,8 @@ public class Fenetre extends JFrame{
     static String string_RB_sms = "SMS";
 	
 	private JTextField m_TF_url;
+	
+	private JTextArea m_TA_txt;
 
 	public Fenetre(String title) {
 		
@@ -94,7 +95,6 @@ public class Fenetre extends JFrame{
 		// Création des boutons-radio
         m_RB_url = new JRadioButton(string_RB_url);
         m_RB_url.setActionCommand(string_RB_url);
-        m_RB_url.setSelected(true);
         m_RB_url.addActionListener(new UrlListener(this));	// Ajout d'un listener pour traiter le déclenchement des évènements
  
         m_RB_txt = new JRadioButton(string_RB_txt);
@@ -180,36 +180,64 @@ public class Fenetre extends JFrame{
 	// Affiche la boite de saisie de l'url
 	public void showUrlBox()
 	{
-		if (m_P_url == null)	// La boite de saisie n'a pas été initialisée
-		{
-			m_P_url = new JPanel();
-			m_BL_url = new BoxLayout(m_P_url, BoxLayout.Y_AXIS);
-			m_P_url.setLayout(m_BL_url);
-			
-			m_L_url = new JLabel("URL:");
-			m_L_url.setAlignmentX(LEFT_ALIGNMENT);			
-			m_TF_url = new JTextField("http://",20);
-			
-			m_P_url.add(m_L_url);
-			m_P_url.add(m_TF_url);
-			m_P_url.setMaximumSize(new Dimension(Short.MAX_VALUE,m_P_url.getHeight()));	// Le panneau de contenu des composants URL prend toute la largeur
-			
-			m_TF_url.setMaximumSize(new Dimension(Short.MAX_VALUE,m_TF_url.getHeight()));	// Le champs de texte prend toute la largeur
-			
-			m_P_saisie.add(m_P_url);
-			m_P_saisie.setMaximumSize(new Dimension(Short.MAX_VALUE,m_P_saisie.getHeight()));
-			System.out.println("URL panel showed");
-		}
-		m_P_url.setVisible(true);
+		System.out.println("Url showed");
 	}
 	
 	// Masque la boîte de saisie de l'url
 	public void hideUrlBox()
 	{
+		System.out.println("Url hidden");
+	}
+	
+	// Affiche la boite de saisie du texte
+	public void showTxtBox()
+	{
+		System.out.println("Txt showed");
+	}
+	
+	// Masque la boîte de saisie du texte
+	public void hideTxtBox()
+	{
+		System.out.println("Txt hidden");
+	}
+	
+	// Affiche la boite de saisie du numéro de téléphone
+	public void showTelBox()
+	{
+		System.out.println("Tel showed");
+	}
+	
+	// Masque la boîte de saisie du numéro de téléphone
+	public void hideTelbox()
+	{
+		System.out.println("Tel hidden");
+	}
+	
+	// Affiche la boite de saisie du numéro de téléphone
+	public void showSmsBox()
+	{
+		System.out.println("Sms showed");
+	}
+	
+	// Masque la boîte de saisie du numéro de téléphone
+	public void hideSmsbox()
+	{
+		System.out.println("Sms hidden");
+	}
+	
+	private void hideShowedBoxes()
+	{
 		if (m_P_url != null)
-		{
-			m_P_url.setVisible(false);
-		}
+			if (m_P_url.isVisible()) m_P_url.setVisible(false);
+		
+		if (m_P_txt != null)
+			if (m_P_txt.isVisible()) m_P_txt.setVisible(false);
+		
+		if (m_P_tel != null)
+			if (m_P_tel.isVisible()) m_P_tel.setVisible(false);
+		
+		if (m_P_sms != null)
+			if (m_P_sms.isVisible()) m_P_sms.setVisible(false);
 	}
 	
 }

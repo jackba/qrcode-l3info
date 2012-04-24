@@ -14,7 +14,6 @@ public class UrlListener implements ActionListener
 	
     public void actionPerformed(ActionEvent e)
     {
-        System.out.println("RadioButton URL clicked");
         m_f.showUrlBox();
     }
 }
