@@ -14,6 +14,7 @@ public class SmsListener implements ActionListener
 	
     public void actionPerformed(ActionEvent e)
     {
+    	m_f.hideShowedBoxes();
         m_f.showSmsBox();
     }
 }

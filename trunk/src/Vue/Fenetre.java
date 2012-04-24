@@ -135,6 +135,7 @@ public class Fenetre extends JFrame{
 		m_P_saisie = new JPanel();
 		m_BL_saisie = new BoxLayout(m_P_saisie, BoxLayout.X_AXIS);
 		m_P_saisie.setLayout(m_BL_saisie);
+		m_P_saisie.setMinimumSize(new Dimension(Short.MAX_VALUE,0));
 		m_P_saisie.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));
 		m_P_saisie.setBorder(BorderFactory.createTitledBorder("Saisie :"));
 		
@@ -177,67 +178,162 @@ public class Fenetre extends JFrame{
 		this.setVisible(true);	// Affiche la fenêtre
 	}
 	
+	private void initUrlBox()
+	{
+		m_P_url = new JPanel();
+		m_BL_url = new BoxLayout(m_P_url, BoxLayout.Y_AXIS);
+		m_P_url.setLayout(m_BL_url);
+		
+		m_L_url = new JLabel("URL:");
+		
+		m_TF_url = new JTextField("http://");
+		m_TF_url.setMaximumSize(new Dimension(Short.MAX_VALUE,25)); // Largeur infinie, hauteur 25 pixels
+		
+		m_P_url.add(m_L_url);
+		m_P_url.add(m_TF_url);
+		//m_P_url.setBackground(new Color(100,75,255)); //DEBUG
+	}
+	
+	private void initTxtBox()
+	{
+		m_P_txt = new JPanel();
+		m_BL_txt = new BoxLayout(m_P_txt, BoxLayout.Y_AXIS);
+		m_P_txt.setLayout(m_BL_txt);
+		
+		m_L_txt = new JLabel("Texte libre:");
+		
+		m_TA_txt = new JTextArea();
+		m_TA_txt.setLineWrap(true);
+		m_TA_txt.setBorder(BorderFactory.createLineBorder(new Color(0,0,0), 1));	// Ajoute une bordure noire d'1 pixel autour de la zone de texte
+		//m_TA_txt.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE)); // Largeur infinie, hauteur 25 pixels
+		
+		m_P_txt.add(m_L_txt);
+		m_P_txt.add(m_TA_txt);
+		m_L_txt.setAlignmentX(LEFT_ALIGNMENT);
+		//m_P_txt.setBackground(new Color(255,75,100)); // DEBUG
+	}
+	
+	private void initTelBox()
+	{
+		m_P_tel = new JPanel();
+		m_P_tel.setBackground(new Color(75,255,100));
+	}
+	
+	private void initSmsBox()
+	{
+		m_P_sms = new JPanel();
+		m_P_sms.setBackground(new Color(255,255,255));
+	}
+	
 	// Affiche la boite de saisie de l'url
 	public void showUrlBox()
 	{
+		if (m_P_url == null) initUrlBox();
+		m_P_url.setVisible(true);
+		m_P_url.setAlignmentY(TOP_ALIGNMENT);
+		m_P_saisie.add(m_P_url);
+		m_CP_main.validate(); // Validation de l'ajout
 		System.out.println("Url showed");
-	}
-	
-	// Masque la boîte de saisie de l'url
-	public void hideUrlBox()
-	{
-		System.out.println("Url hidden");
 	}
 	
 	// Affiche la boite de saisie du texte
 	public void showTxtBox()
 	{
+		if (m_P_txt == null) initTxtBox();
+		m_P_txt.setVisible(true);
+		m_P_txt.setAlignmentY(MAXIMIZED_BOTH);
+		m_P_saisie.add(m_P_txt);
+		m_CP_main.validate(); // Validation de l'ajout
 		System.out.println("Txt showed");
-	}
-	
-	// Masque la boîte de saisie du texte
-	public void hideTxtBox()
-	{
-		System.out.println("Txt hidden");
 	}
 	
 	// Affiche la boite de saisie du numéro de téléphone
 	public void showTelBox()
 	{
+		if (m_P_tel == null) initTelBox();
+		m_P_tel.setVisible(true);
+		m_P_saisie.add(m_P_tel);
+		m_CP_main.validate(); // Validation de l'ajout
 		System.out.println("Tel showed");
 	}
 	
-	// Masque la boîte de saisie du numéro de téléphone
-	public void hideTelbox()
-	{
-		System.out.println("Tel hidden");
-	}
-	
-	// Affiche la boite de saisie du numéro de téléphone
+	// Affiche la boite de saisie du sms
 	public void showSmsBox()
 	{
+		if (m_P_sms == null) initSmsBox();
+		m_P_sms.setVisible(true);
+		m_P_saisie.add(m_P_sms);
+		m_CP_main.validate(); // Validation de l'ajout
 		System.out.println("Sms showed");
 	}
 	
-	// Masque la boîte de saisie du numéro de téléphone
-	public void hideSmsbox()
+	// Masque la boîte de saisie de l'url
+	private void hideUrlBox()
 	{
+		m_P_url.setVisible(false);
+		m_P_saisie.remove(m_P_url);
+		System.out.println("Url hidden");
+	}
+	
+	// Masque la boîte de saisie du texte
+	private void hideTxtBox()
+	{
+		m_P_txt.setVisible(false);
+		m_P_saisie.remove(m_P_txt);
+		System.out.println("Txt hidden");
+	}
+	
+	// Masque la boîte de saisie du numéro de téléphone
+	private void hideTelbox()
+	{
+		m_P_tel.setVisible(false);
+		m_P_saisie.remove(m_P_tel);
+		System.out.println("Tel hidden");
+	}
+	
+	// Masque la boîte de saisie du sms
+	private void hideSmsbox()
+	{
+		m_P_sms.setVisible(false);
+		m_P_saisie.remove(m_P_sms);
 		System.out.println("Sms hidden");
 	}
 	
-	private void hideShowedBoxes()
+	public Boolean isPanelUrlShown()
 	{
 		if (m_P_url != null)
-			if (m_P_url.isVisible()) m_P_url.setVisible(false);
-		
+			if (m_P_url.isVisible()) return true;
+		return false;
+	}
+	
+	public Boolean isPanelTxtShown()
+	{
 		if (m_P_txt != null)
-			if (m_P_txt.isVisible()) m_P_txt.setVisible(false);
-		
+			if (m_P_txt.isVisible()) return true;
+		return false;
+	}
+	
+	public Boolean isPanelTelShown()
+	{
 		if (m_P_tel != null)
-			if (m_P_tel.isVisible()) m_P_tel.setVisible(false);
-		
+			if (m_P_tel.isVisible()) return true;
+		return false;
+	}
+	
+	public Boolean isPanelSmsShown()
+	{
 		if (m_P_sms != null)
-			if (m_P_sms.isVisible()) m_P_sms.setVisible(false);
+			if (m_P_sms.isVisible()) return true;
+		return false;
+	}
+	
+	// Masque les panels de saisie affichés (en théorie un seul est affiché)
+	public void hideShowedBoxes()
+	{
+		if (isPanelUrlShown()) hideUrlBox();
+		if (isPanelTxtShown()) hideTxtBox();
+		if (isPanelTelShown()) hideTelbox();
+		if (isPanelSmsShown()) hideSmsbox();
 	}
 	
 }
