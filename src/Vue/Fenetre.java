@@ -1,6 +1,7 @@
 package Vue;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -94,19 +95,19 @@ public class Fenetre extends JFrame{
         m_RB_url = new JRadioButton(string_RB_url);
         m_RB_url.setActionCommand(string_RB_url);
         m_RB_url.setSelected(true);
-        m_RB_url.addActionListener(new UrlListener());	// Ajout d'un listener pour traiter le déclenchement des évènements
+        m_RB_url.addActionListener(new UrlListener(this));	// Ajout d'un listener pour traiter le déclenchement des évènements
  
         m_RB_txt = new JRadioButton(string_RB_txt);
         m_RB_txt.setActionCommand(string_RB_txt);
-        m_RB_txt.addActionListener(new TxtListener());
+        m_RB_txt.addActionListener(new TxtListener(this));
  
         m_RB_tel = new JRadioButton(string_RB_tel);
         m_RB_tel.setActionCommand(string_RB_tel);
-        m_RB_tel.addActionListener(new TelListener());
+        m_RB_tel.addActionListener(new TelListener(this));
  
         m_RB_sms = new JRadioButton(string_RB_sms);
         m_RB_sms.setActionCommand(string_RB_sms);
-        m_RB_sms.addActionListener(new SmsListener());
+        m_RB_sms.addActionListener(new SmsListener(this));
  
         // Ajout des boutons dans un même groupe
         m_BG_typesDonnees = new ButtonGroup();
@@ -195,10 +196,11 @@ public class Fenetre extends JFrame{
 			
 			m_TF_url.setMaximumSize(new Dimension(Short.MAX_VALUE,m_TF_url.getHeight()));	// Le champs de texte prend toute la largeur
 			
-			m_P_saisie.add(m_TF_url);
+			m_P_saisie.add(m_P_url);
 			m_P_saisie.setMaximumSize(new Dimension(Short.MAX_VALUE,m_P_saisie.getHeight()));
+			System.out.println("URL panel showed");
 		}
-		m_TF_url.setVisible(true);
+		m_P_url.setVisible(true);
 	}
 	
 	// Masque la boîte de saisie de l'url
@@ -206,40 +208,8 @@ public class Fenetre extends JFrame{
 	{
 		if (m_P_url != null)
 		{
-			m_TF_url.setVisible(false);
+			m_P_url.setVisible(false);
 		}
 	}
-	
-	public class UrlListener implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            System.out.println("RadioButton URL clicked");
-        }
-    }
-	
-	public class TxtListener implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            System.out.println("RadioButton Texte clicked");
-        }
-    }
-	
-	public class TelListener implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            System.out.println("RadioButton Numéro de Tel clicked");
-        }
-    }
-	
-	public class SmsListener implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            System.out.println("RadioButton SMS clicked");
-        }
-    }
 	
 }
