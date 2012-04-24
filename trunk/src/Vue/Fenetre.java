@@ -102,6 +102,7 @@ public class Fenetre extends JFrame{
 		TA_txt.setLineWrap(true);	// Découpe la ligne lorsqu'on arrive au bout
 		TA_txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); // Ajoute une bordure grise d'1 pixel autour de la zone de texte
 		TA_txt.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));	// Largeur et hauteur de la zone de texte infinie
+		TA_txt.setMinimumSize(new Dimension(0,0));	// Largeur et hauteur de la zone de texte infinie
 		Box hB_textareaTxt = Box.createHorizontalBox();
 		hB_textareaTxt.add(TA_txt);
 		
@@ -158,6 +159,7 @@ public class Fenetre extends JFrame{
 		TA_smsMsg.setLineWrap(true);	// Découpe la ligne lorsqu'on arrive au bout
 		TA_smsMsg.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); // Ajoute une bordure grise d'1 pixel autour de la zone de texte
 		TA_smsMsg.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));	// Largeur et hauteur de la zone de texte infinie
+		TA_smsMsg.setMinimumSize(new Dimension(0,0));	// Largeur et hauteur minimum de la zone de texte nulle
 		Box hB_textAreaSmsMsg = Box.createHorizontalBox();
 		hB_textAreaSmsMsg.add(TA_smsMsg);
 		
@@ -183,7 +185,7 @@ public class Fenetre extends JFrame{
 		m_vB_tel.setVisible(false);
 		m_vB_sms.setVisible(false);
 		
-		vB_saisie.add(Box.createHorizontalGlue());
+		vB_saisie.add(Box.createHorizontalGlue());	// Etend la boite sur toute la largeur
 		vB_saisie.setBorder(BorderFactory.createTitledBorder("Saisie"));	// Définit la bordure et le titre
 		
 		// Taille (Label - ComboBox)
