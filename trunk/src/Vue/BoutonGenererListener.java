@@ -1,19 +1,20 @@
 package Vue;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SmsListener implements ActionListener
+public class BoutonGenererListener implements ActionListener
 {	
+	@SuppressWarnings("unused")
 	private Fenetre m_f;
 	
-	public SmsListener(Fenetre f)
+	public BoutonGenererListener(Fenetre f)
 	{
 		m_f = f;
 	}
 	
     public void actionPerformed(ActionEvent e)
     {
-    	m_f.hideShownBoxes();
-        m_f.showSmsBox();
+    	System.out.println("Bouton \"Générer\" cliqué");
     }
 }
