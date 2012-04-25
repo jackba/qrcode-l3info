@@ -11,7 +11,7 @@ public class GeneratorPolynomial {
 		initBasePolynom();
 	}
 	
-	// initialise le polygone utilisé à la base de toute génération polynomiale basePolynom = a^0.x^1 + a^0.x^0
+	// initialise le polynome utilisé à la base de toute génération polynomiale basePolynom = a^0.x^1 + a^0.x^0
 	private void initBasePolynom()
 	{
 		m_basePolynom = new AlphaPolynom();	// bP =
@@ -41,7 +41,7 @@ public class GeneratorPolynomial {
 	}
 	
 	// Retourne un nouveau polynome résultant du produit de deux polynomes p1 et p2
-	public AlphaPolynom multiply(AlphaPolynom p1, AlphaPolynom p2)
+	private AlphaPolynom multiply(AlphaPolynom p1, AlphaPolynom p2)
 	{
 		AlphaPolynom result = new AlphaPolynom();
 		TermeAlpha ta_1;
@@ -88,7 +88,7 @@ public class GeneratorPolynomial {
 	
 	
 	// Retourne un nouveau Polynome où les termes adjacents de degrés identiques sont combinés
-	public AlphaPolynom combineSameDegreesTerms(AlphaPolynom p) throws Exception
+	private AlphaPolynom combineSameDegreesTerms(AlphaPolynom p) throws Exception
 	{
 		AlphaPolynom ap_result = new AlphaPolynom();	// Polynom résultat
 		TermeAlpha ta_curr;	// Le terme alpha courant
@@ -126,6 +126,27 @@ public class GeneratorPolynomial {
 				ap_result.addNewTerme(ta_curr.getExposantAlpha(), ta_curr.getExposant());
 				i++;	// Ne pas oublier d'incrémenter pour arreter la boucle
 			}
+		}
+		
+		return ap_result;
+	}
+	
+	// Crée un générateur polynomial ayant le nombre d'octets de correction demandés
+	public AlphaPolynom createGeneratorPolynomial(int nbOctetsDeCorrection) throws Exception
+	{
+		AlphaPolynom ap_result = m_basePolynom;	// ap_result = a^0.x^1 + a^0.x^0
+		
+		// Initialisation	
+		AlphaPolynom current = new AlphaPolynom();
+		current.addNewTerme(0, 1);
+		current.addNewTerme(1, 0);					// current = a^0.x^1 + a^1.x^0
+		
+		// Multiplication du polynome de base par étapes (n-1 étapes)
+		for (int i=0; i<nbOctetsDeCorrection-1; i++)
+		{
+			ap_result = multiply(ap_result, current);
+			ap_result = combineSameDegreesTerms(ap_result);
+			current.setTermeAt(1, new TermeAlpha(i+2, 0));
 		}
 		
 		return ap_result;
