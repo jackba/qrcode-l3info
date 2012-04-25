@@ -26,4 +26,5 @@ public class IntegerPolynom extends Polynom {
 		
 		return ap;
 	}
+	
 }

@@ -18,7 +18,7 @@ public abstract class Polynom {
 	}
 	
 	// Trie les termes du polynome par exposants décroissants
-	protected void sortByExposants()
+	public void sortByExposants()
 	{
 		Collections.sort(m_vectTermes, new TermeExponantComparator());
 	}

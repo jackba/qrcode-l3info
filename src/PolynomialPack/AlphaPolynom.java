@@ -26,4 +26,5 @@ public class AlphaPolynom extends Polynom {
 		
 		return ip;
 	}
+	
 }

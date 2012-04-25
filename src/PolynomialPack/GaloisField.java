@@ -65,6 +65,12 @@ public class GaloisField {
 		m_log[1] = 0;
 	}
 	
+	
+	public int XOR(int a, int b)
+	{
+		return (a ^ b);
+	}
+	
 	public int Somme(int a, int b)
 	{
 		return (a ^ b);	// XOR binaire des deux entiers
@@ -141,5 +147,11 @@ public class GaloisField {
 			System.err.println("GaloisField -> getLog(int entier) : " + e.toString());
 			return -1;
 		}
+	}
+	
+	// Retourne la taille du champs de Galois
+	public int getFieldSize()
+	{
+		return m_gfsize;
 	}
 }
