@@ -6,4 +6,5 @@ http://www.swetake.com/qr/qr1_en.html
 http://www.thonky.com/qr-code-tutorial/
 
 norme ISO :
+
 raidenii.net/files/datasheets/misc/qr_code.pdf
