@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!ELEMENT iso(version+) >
+<!ELEMENT version(correction_level+) >
+
+<!ELEMENT correction_level (numberBits, dataCapacity) >
+<!ELEMENT number_bits (#PCDATA) >
+<!ELEMENT data_capacity(numeric, alphanumeric, 8_bits_byte, kanji) >
+<!ELEMENT numeric (#PCDATA)>
+<!ELEMENT alphanumeric (#PCDATA)>
+<!ELEMENT 8_bits_byte (#PCDATA)>
+<!ELEMENT kanji (#PCDATA)>
