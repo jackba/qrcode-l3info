@@ -1,11 +1,16 @@
-package Model;
+package PolynomialPack;
 
 /* 
  * Implémente des opérations de base pour un champs de Galois d'une taille et d'un polynôme premier donné
  * La classe est basée sur une vulgarisation mathématique pour application à l'informatique:
  * http://www.aimglobal.org/technologies/barcode/Galois_Math.pdf
+ * 
+ * La classe est basée sur le design pattern singleton.
+ * Pour obtenir une instance il faut donc passer par la méthode statique getInstance().
  */
 public class GaloisField {
+	
+    private static GaloisField m_instance;	// Instance unique de notre classe
 	
 	public static int GFSIZE_deuxExpHuit = 256; // Taille du champs de Galois (valeurs de 0 à 255)
 	public static int PP_QRcode = 285;	// Polynome premier utilisé dans le codage QRcode (x^8 + x^4 + x^3 +1)
@@ -16,8 +21,17 @@ public class GaloisField {
 	private int m_gfsize;	// Taille du champs de Galois
 	private int m_pPremier;	// Polynome premier du champs de Galois
 	
+	// Fournit une instance unique du champs de gallois GF(256) appliqué au QRcode
+	public static GaloisField getInstance() {
+        if (m_instance == null)
+        {
+        	m_instance = new GaloisField();
+        }
+        return m_instance;
+    }
+	
 	// Instancie un nouveau champs de galois appliqué au QRcode
-	public GaloisField()
+	private GaloisField()
 	{
 		m_gfsize = GFSIZE_deuxExpHuit;
 		m_pPremier = PP_QRcode;
@@ -27,7 +41,7 @@ public class GaloisField {
 	}
 	
 	// Instancie un nouveau champs de galois quelconque
-	public GaloisField(int taille, int polynomePremier)
+	private GaloisField(int taille, int polynomePremier)
 	{
 		m_gfsize = taille;
 		m_pPremier = polynomePremier;
