@@ -1,0 +1,6 @@
+#labels tutoriaux,QrCode
+Ressources :
+
+http://www.swetake.com/qr/qr1_en.html
+
+http://www.thonky.com/qr-code-tutorial/
