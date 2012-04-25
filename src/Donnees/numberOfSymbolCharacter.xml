@@ -1,0 +1,1524 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE iso SYSTEM "numberOfSymbolCharacter.dtd">
+<iso>
+	<version numero="1">
+		<correction_level level="L">
+			<number_bits>152</number_bits>
+			<data_capacity>
+				<numeric>41</numeric>
+				<alphanumeric>25</alphanumeric>
+				<byte>17</byte>
+				<kanji>10</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>128</number_bits>
+			<data_capacity>
+				<numeric>34</numeric>
+				<alphanumeric>20</alphanumeric>
+				<byte>14</byte>
+				<kanji>8</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>104</number_bits>
+			<data_capacity>
+				<numeric>27</numeric>
+				<alphanumeric>16</alphanumeric>
+				<byte>11</byte>
+				<kanji>7</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>72</number_bits>
+			<data_capacity>
+				<numeric>17</numeric>
+				<alphanumeric>10</alphanumeric>
+				<byte>7</byte>
+				<kanji>4</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="2">
+		<correction_level level="L">
+			<number_bits>272</number_bits>
+			<data_capacity>
+				<numeric>77</numeric>
+				<alphanumeric>47</alphanumeric>
+				<byte>32</byte>
+				<kanji>20</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>224</number_bits>
+			<data_capacity>
+				<numeric>63</numeric>
+				<alphanumeric>38</alphanumeric>
+				<byte>26</byte>
+				<kanji>16</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>176</number_bits>
+			<data_capacity>
+				<numeric>48</numeric>
+				<alphanumeric>29</alphanumeric>
+				<byte>20</byte>
+				<kanji>12</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>128</number_bits>
+			<data_capacity>
+				<numeric>34</numeric>
+				<alphanumeric>20</alphanumeric>
+				<byte>14</byte>
+				<kanji>8</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="3">
+		<correction_level level="L">
+			<number_bits>440</number_bits>
+			<data_capacity>
+				<numeric>127</numeric>
+				<alphanumeric>77</alphanumeric>
+				<byte>53</byte>
+				<kanji>32</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>352</number_bits>
+			<data_capacity>
+				<numeric>101</numeric>
+				<alphanumeric>61</alphanumeric>
+				<byte>42</byte>
+				<kanji>26</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>272</number_bits>
+			<data_capacity>
+				<numeric>77</numeric>
+				<alphanumeric>47</alphanumeric>
+				<byte>32</byte>
+				<kanji>20</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>208</number_bits>
+			<data_capacity>
+				<numeric>58</numeric>
+				<alphanumeric>35</alphanumeric>
+				<byte>24</byte>
+				<kanji>15</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="4">
+		<correction_level level="L">
+			<number_bits>640</number_bits>
+			<data_capacity>
+				<numeric>187</numeric>
+				<alphanumeric>114</alphanumeric>
+				<byte>78</byte>
+				<kanji>48</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>512</number_bits>
+			<data_capacity>
+				<numeric>149</numeric>
+				<alphanumeric>90</alphanumeric>
+				<byte>62</byte>
+				<kanji>38</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>384</number_bits>
+			<data_capacity>
+				<numeric>111</numeric>
+				<alphanumeric>67</alphanumeric>
+				<byte>46</byte>
+				<kanji>28</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>288</number_bits>
+			<data_capacity>
+				<numeric>82</numeric>
+				<alphanumeric>50</alphanumeric>
+				<byte>34</byte>
+				<kanji>21</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="5">
+		<correction_level level="L">
+			<number_bits>864</number_bits>
+			<data_capacity>
+				<numeric>255</numeric>
+				<alphanumeric>154</alphanumeric>
+				<byte>106</byte>
+				<kanji>65</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>688</number_bits>
+			<data_capacity>
+				<numeric>202</numeric>
+				<alphanumeric>122</alphanumeric>
+				<byte>84</byte>
+				<kanji>52</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>496</number_bits>
+			<data_capacity>
+				<numeric>144</numeric>
+				<alphanumeric>87</alphanumeric>
+				<byte>60</byte>
+				<kanji>37</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>468</number_bits>
+			<data_capacity>
+				<numeric>106</numeric>
+				<alphanumeric>64</alphanumeric>
+				<byte>44</byte>
+				<kanji>27</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="6">
+		<correction_level level="L">
+			<number_bits>1088</number_bits>
+			<data_capacity>
+				<numeric>322</numeric>
+				<alphanumeric>195</alphanumeric>
+				<byte>134</byte>
+				<kanji>82</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>864</number_bits>
+			<data_capacity>
+				<numeric>255</numeric>
+				<alphanumeric>154</alphanumeric>
+				<byte>106</byte>
+				<kanji>65</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>608</number_bits>
+			<data_capacity>
+				<numeric>178</numeric>
+				<alphanumeric>108</alphanumeric>
+				<byte>74</byte>
+				<kanji>45</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>480</number_bits>
+			<data_capacity>
+				<numeric>139</numeric>
+				<alphanumeric>84</alphanumeric>
+				<byte>58</byte>
+				<kanji>36</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="7">
+		<correction_level level="L">
+			<number_bits>1248</number_bits>
+			<data_capacity>
+				<numeric>370</numeric>
+				<alphanumeric>224</alphanumeric>
+				<byte>154</byte>
+				<kanji>95</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>992</number_bits>
+			<data_capacity>
+				<numeric>293</numeric>
+				<alphanumeric>178</alphanumeric>
+				<byte>122</byte>
+				<kanji>75</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>704</number_bits>
+			<data_capacity>
+				<numeric>207</numeric>
+				<alphanumeric>125</alphanumeric>
+				<byte>86</byte>
+				<kanji>53</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>528</number_bits>
+			<data_capacity>
+				<numeric>154</numeric>
+				<alphanumeric>93</alphanumeric>
+				<byte>64</byte>
+				<kanji>39</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="8">
+		<correction_level level="L">
+			<number_bits>1552</number_bits>
+			<data_capacity>
+				<numeric>461</numeric>
+				<alphanumeric>279</alphanumeric>
+				<byte>192</byte>
+				<kanji>118</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>1232</number_bits>
+			<data_capacity>
+				<numeric>365</numeric>
+				<alphanumeric>221</alphanumeric>
+				<byte>152</byte>
+				<kanji>93</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>880</number_bits>
+			<data_capacity>
+				<numeric>259</numeric>
+				<alphanumeric>157</alphanumeric>
+				<byte>108</byte>
+				<kanji>66</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>688</number_bits>
+			<data_capacity>
+				<numeric>202</numeric>
+				<alphanumeric>122</alphanumeric>
+				<byte>84</byte>
+				<kanji>52</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="9">
+		<correction_level level="L">
+			<number_bits>1856</number_bits>
+			<data_capacity>
+				<numeric>552</numeric>
+				<alphanumeric>335</alphanumeric>
+				<byte>230</byte>
+				<kanji>141</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>1456</number_bits>
+			<data_capacity>
+				<numeric>432</numeric>
+				<alphanumeric>262</alphanumeric>
+				<byte>180</byte>
+				<kanji>111</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>1056</number_bits>
+			<data_capacity>
+				<numeric>312</numeric>
+				<alphanumeric>189</alphanumeric>
+				<byte>130</byte>
+				<kanji>80</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>800</number_bits>
+			<data_capacity>
+				<numeric>235</numeric>
+				<alphanumeric>143</alphanumeric>
+				<byte>98</byte>
+				<kanji>60</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="10">
+		<correction_level level="L">
+			<number_bits>2192</number_bits>
+			<data_capacity>
+				<numeric>652</numeric>
+				<alphanumeric>395</alphanumeric>
+				<byte>271</byte>
+				<kanji>167</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>1728</number_bits>
+			<data_capacity>
+				<numeric>513</numeric>
+				<alphanumeric>311</alphanumeric>
+				<byte>213</byte>
+				<kanji>131</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>1232</number_bits>
+			<data_capacity>
+				<numeric>364</numeric>
+				<alphanumeric>221</alphanumeric>
+				<byte>151</byte>
+				<kanji>93</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>976</number_bits>
+			<data_capacity>
+				<numeric>288</numeric>
+				<alphanumeric>174</alphanumeric>
+				<byte>119</byte>
+				<kanji>74</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="11">
+		<correction_level level="L">
+			<number_bits>2592</number_bits>
+			<data_capacity>
+				<numeric>772</numeric>
+				<alphanumeric>468</alphanumeric>
+				<byte>321</byte>
+				<kanji>198</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>2032</number_bits>
+			<data_capacity>
+				<numeric>604</numeric>
+				<alphanumeric>366</alphanumeric>
+				<byte>251</byte>
+				<kanji>155</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>1440</number_bits>
+			<data_capacity>
+				<numeric>427</numeric>
+				<alphanumeric>259</alphanumeric>
+				<byte>177</byte>
+				<kanji>109</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>1120</number_bits>
+			<data_capacity>
+				<numeric>331</numeric>
+				<alphanumeric>200</alphanumeric>
+				<byte>137</byte>
+				<kanji>85</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="12">
+		<correction_level level="L">
+			<number_bits>2960</number_bits>
+			<data_capacity>
+				<numeric>883</numeric>
+				<alphanumeric>535</alphanumeric>
+				<byte>367</byte>
+				<kanji>226</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>2320</number_bits>
+			<data_capacity>
+				<numeric>691</numeric>
+				<alphanumeric>419</alphanumeric>
+				<byte>287</byte>
+				<kanji>177</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>1648</number_bits>
+			<data_capacity>
+				<numeric>489</numeric>
+				<alphanumeric>296</alphanumeric>
+				<byte>203</byte>
+				<kanji>125</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>1264</number_bits>
+			<data_capacity>
+				<numeric>374</numeric>
+				<alphanumeric>227</alphanumeric>
+				<byte>155</byte>
+				<kanji>96</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="13">
+		<correction_level level="L">
+			<number_bits>3424</number_bits>
+			<data_capacity>
+				<numeric>1022</numeric>
+				<alphanumeric>619</alphanumeric>
+				<byte>425</byte>
+				<kanji>262</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>2672</number_bits>
+			<data_capacity>
+				<numeric>796</numeric>
+				<alphanumeric>483</alphanumeric>
+				<byte>331</byte>
+				<kanji>204</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>1952</number_bits>
+			<data_capacity>
+				<numeric>580</numeric>
+				<alphanumeric>352</alphanumeric>
+				<byte>241</byte>
+				<kanji>149</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>1440</number_bits>
+			<data_capacity>
+				<numeric>427</numeric>
+				<alphanumeric>259</alphanumeric>
+				<byte>177</byte>
+				<kanji>109</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="14">
+		<correction_level level="L">
+			<number_bits>3688</number_bits>
+			<data_capacity>
+				<numeric>1101</numeric>
+				<alphanumeric>667</alphanumeric>
+				<byte>458</byte>
+				<kanji>282</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>2920</number_bits>
+			<data_capacity>
+				<numeric>871</numeric>
+				<alphanumeric>528</alphanumeric>
+				<byte>362</byte>
+				<kanji>223</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>2088</number_bits>
+			<data_capacity>
+				<numeric>621</numeric>
+				<alphanumeric>376</alphanumeric>
+				<byte>258</byte>
+				<kanji>159</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>1576</number_bits>
+			<data_capacity>
+				<numeric>468</numeric>
+				<alphanumeric>283</alphanumeric>
+				<byte>194</byte>
+				<kanji>120</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="15">
+		<correction_level level="L">
+			<number_bits>4184</number_bits>
+			<data_capacity>
+				<numeric>1250</numeric>
+				<alphanumeric>758</alphanumeric>
+				<byte>520</byte>
+				<kanji>320</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>3320</number_bits>
+			<data_capacity>
+				<numeric>991</numeric>
+				<alphanumeric>600</alphanumeric>
+				<byte>412</byte>
+				<kanji>254</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>2360</number_bits>
+			<data_capacity>
+				<numeric>703</numeric>
+				<alphanumeric>426</alphanumeric>
+				<byte>292</byte>
+				<kanji>180</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>1784</number_bits>
+			<data_capacity>
+				<numeric>530</numeric>
+				<alphanumeric>321</alphanumeric>
+				<byte>220</byte>
+				<kanji>136</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="16">
+		<correction_level level="L">
+			<number_bits>4712</number_bits>
+			<data_capacity>
+				<numeric>1408</numeric>
+				<alphanumeric>854</alphanumeric>
+				<byte>586</byte>
+				<kanji>361</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>3624</number_bits>
+			<data_capacity>
+				<numeric>1082</numeric>
+				<alphanumeric>656</alphanumeric>
+				<byte>450</byte>
+				<kanji>277</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>2600</number_bits>
+			<data_capacity>
+				<numeric>775</numeric>
+				<alphanumeric>470</alphanumeric>
+				<byte>322</byte>
+				<kanji>198</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>2024</number_bits>
+			<data_capacity>
+				<numeric>602</numeric>
+				<alphanumeric>365</alphanumeric>
+				<byte>250</byte>
+				<kanji>154</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="17">
+		<correction_level level="L">
+			<number_bits>5176</number_bits>
+			<data_capacity>
+				<numeric>1548</numeric>
+				<alphanumeric>938</alphanumeric>
+				<byte>644</byte>
+				<kanji>397</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>4056</number_bits>
+			<data_capacity>
+				<numeric>1212</numeric>
+				<alphanumeric>734</alphanumeric>
+				<byte>504</byte>
+				<kanji>310</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>2936</number_bits>
+			<data_capacity>
+				<numeric>876</numeric>
+				<alphanumeric>531</alphanumeric>
+				<byte>364</byte>
+				<kanji>224</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>2264</number_bits>
+			<data_capacity>
+				<numeric>674</numeric>
+				<alphanumeric>408</alphanumeric>
+				<byte>280</byte>
+				<kanji>173</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="18">
+		<correction_level level="L">
+			<number_bits>5768</number_bits>
+			<data_capacity>
+				<numeric>1725</numeric>
+				<alphanumeric>1046</alphanumeric>
+				<byte>718</byte>
+				<kanji>442</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>4504</number_bits>
+			<data_capacity>
+				<numeric>1346</numeric>
+				<alphanumeric>816</alphanumeric>
+				<byte>560</byte>
+				<kanji>345</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>3176</number_bits>
+			<data_capacity>
+				<numeric>948</numeric>
+				<alphanumeric>574</alphanumeric>
+				<byte>394</byte>
+				<kanji>243</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>2504</number_bits>
+			<data_capacity>
+				<numeric>746</numeric>
+				<alphanumeric>452</alphanumeric>
+				<byte>310</byte>
+				<kanji>191</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="19">
+		<correction_level level="L">
+			<number_bits>6360</number_bits>
+			<data_capacity>
+				<numeric>1903</numeric>
+				<alphanumeric>1153</alphanumeric>
+				<byte>792</byte>
+				<kanji>488</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>5016</number_bits>
+			<data_capacity>
+				<numeric>1500</numeric>
+				<alphanumeric>909</alphanumeric>
+				<byte>624</byte>
+				<kanji>384</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>3560</number_bits>
+			<data_capacity>
+				<numeric>1063</numeric>
+				<alphanumeric>644</alphanumeric>
+				<byte>442</byte>
+				<kanji>272</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>2728</number_bits>
+			<data_capacity>
+				<numeric>813</numeric>
+				<alphanumeric>493</alphanumeric>
+				<byte>338</byte>
+				<kanji>208</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="20">
+		<correction_level level="L">
+			<number_bits>6888</number_bits>
+			<data_capacity>
+				<numeric>2061</numeric>
+				<alphanumeric>1249</alphanumeric>
+				<byte>858</byte>
+				<kanji>528</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>5352</number_bits>
+			<data_capacity>
+				<numeric>1600</numeric>
+				<alphanumeric>970</alphanumeric>
+				<byte>666</byte>
+				<kanji>410</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>3880</number_bits>
+			<data_capacity>
+				<numeric>1159</numeric>
+				<alphanumeric>702</alphanumeric>
+				<byte>482</byte>
+				<kanji>297</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>3080</number_bits>
+			<data_capacity>
+				<numeric>919</numeric>
+				<alphanumeric>557</alphanumeric>
+				<byte>382</byte>
+				<kanji>235</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="21">
+		<correction_level level="L">
+			<number_bits>7456</number_bits>
+			<data_capacity>
+				<numeric>2232</numeric>
+				<alphanumeric>1352</alphanumeric>
+				<byte>929</byte>
+				<kanji>572</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>5712</number_bits>
+			<data_capacity>
+				<numeric>1708</numeric>
+				<alphanumeric>1035</alphanumeric>
+				<byte>711</byte>
+				<kanji>438</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>4096</number_bits>
+			<data_capacity>
+				<numeric>1224</numeric>
+				<alphanumeric>742</alphanumeric>
+				<byte>509</byte>
+				<kanji>314</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>3248</number_bits>
+			<data_capacity>
+				<numeric>969</numeric>
+				<alphanumeric>587</alphanumeric>
+				<byte>403</byte>
+				<kanji>248</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="22">
+		<correction_level level="L">
+			<number_bits>8048</number_bits>
+			<data_capacity>
+				<numeric>2409</numeric>
+				<alphanumeric>1460</alphanumeric>
+				<byte>1003</byte>
+				<kanji>618</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>6256</number_bits>
+			<data_capacity>
+				<numeric>1872</numeric>
+				<alphanumeric>1134</alphanumeric>
+				<byte>779</byte>
+				<kanji>480</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>4544</number_bits>
+			<data_capacity>
+				<numeric>1872</numeric>
+				<alphanumeric>1134</alphanumeric>
+				<byte>779</byte>
+				<kanji>480</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>3536</number_bits>
+			<data_capacity>
+				<numeric>1056</numeric>
+				<alphanumeric>640</alphanumeric>
+				<byte>439</byte>
+				<kanji>270</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="23">
+		<correction_level level="L">
+			<number_bits>8752</number_bits>
+			<data_capacity>
+				<numeric>2620</numeric>
+				<alphanumeric>1588</alphanumeric>
+				<byte>1091</byte>
+				<kanji>672</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>6880</number_bits>
+			<data_capacity>
+				<numeric>2059</numeric>
+				<alphanumeric>1248</alphanumeric>
+				<byte>857</byte>
+				<kanji>528</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>4912</number_bits>
+			<data_capacity>
+				<numeric>1468</numeric>
+				<alphanumeric>890</alphanumeric>
+				<byte>611</byte>
+				<kanji>376</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>3712</number_bits>
+			<data_capacity>
+				<numeric>1108</numeric>
+				<alphanumeric>672</alphanumeric>
+				<byte>461</byte>
+				<kanji>284</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="24">
+		<correction_level level="L">
+			<number_bits>9392</number_bits>
+			<data_capacity>
+				<numeric>2812</numeric>
+				<alphanumeric>1704</alphanumeric>
+				<byte>1171</byte>
+				<kanji>721</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>7312</number_bits>
+			<data_capacity>
+				<numeric>2188</numeric>
+				<alphanumeric>1326</alphanumeric>
+				<byte>911</byte>
+				<kanji>561</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>5312</number_bits>
+			<data_capacity>
+				<numeric>1588</numeric>
+				<alphanumeric>963</alphanumeric>
+				<byte>661</byte>
+				<kanji>407</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>4112</number_bits>
+			<data_capacity>
+				<numeric>1228</numeric>
+				<alphanumeric>744</alphanumeric>
+				<byte>511</byte>
+				<kanji>315</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="25">
+		<correction_level level="L">
+			<number_bits>10208</number_bits>
+			<data_capacity>
+				<numeric>3057</numeric>
+				<alphanumeric>1853</alphanumeric>
+				<byte>1273</byte>
+				<kanji>784</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>8000</number_bits>
+			<data_capacity>
+				<numeric>2395</numeric>
+				<alphanumeric>1451</alphanumeric>
+				<byte>997</byte>
+				<kanji>614</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>5744</number_bits>
+			<data_capacity>
+				<numeric>1718</numeric>
+				<alphanumeric>1041</alphanumeric>
+				<byte>715</byte>
+				<kanji>440</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>4304</number_bits>
+			<data_capacity>
+				<numeric>1286</numeric>
+				<alphanumeric>779</alphanumeric>
+				<byte>535</byte>
+				<kanji>330</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="26">
+		<correction_level level="L">
+			<number_bits>10960</number_bits>
+			<data_capacity>
+				<numeric>3283</numeric>
+				<alphanumeric>1990</alphanumeric>
+				<byte>1367</byte>
+				<kanji>842</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>8496</number_bits>
+			<data_capacity>
+				<numeric>2544</numeric>
+				<alphanumeric>1542</alphanumeric>
+				<byte>1059</byte>
+				<kanji>652</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>6032</number_bits>
+			<data_capacity>
+				<numeric>1804</numeric>
+				<alphanumeric>1094</alphanumeric>
+				<byte>751</byte>
+				<kanji>462</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>4768</number_bits>
+			<data_capacity>
+				<numeric>1425</numeric>
+				<alphanumeric>864</alphanumeric>
+				<byte>593</byte>
+				<kanji>365</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="27">
+		<correction_level level="L">
+			<number_bits>11744</number_bits>
+			<data_capacity>
+				<numeric>3517</numeric>
+				<alphanumeric>2132</alphanumeric>
+				<byte>1465</byte>
+				<kanji>902</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>9024</number_bits>
+			<data_capacity>
+				<numeric>2701</numeric>
+				<alphanumeric>1637</alphanumeric>
+				<byte>1125</byte>
+				<kanji>692</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>6464</number_bits>
+			<data_capacity>
+				<numeric>1933</numeric>
+				<alphanumeric>1172</alphanumeric>
+				<byte>805</byte>
+				<kanji>496</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>5024</number_bits>
+			<data_capacity>
+				<numeric>1501</numeric>
+				<alphanumeric>910</alphanumeric>
+				<byte>625</byte>
+				<kanji>385</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="28">
+		<correction_level level="L">
+			<number_bits>12248</number_bits>
+			<data_capacity>
+				<numeric>3669</numeric>
+				<alphanumeric>2223</alphanumeric>
+				<byte>1528</byte>
+				<kanji>940</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>9544</number_bits>
+			<data_capacity>
+				<numeric>2857</numeric>
+				<alphanumeric>1732</alphanumeric>
+				<byte>1190</byte>
+				<kanji>732</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>6968</number_bits>
+			<data_capacity>
+				<numeric>2085</numeric>
+				<alphanumeric>1263</alphanumeric>
+				<byte>868</byte>
+				<kanji>534</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>5288</number_bits>
+			<data_capacity>
+				<numeric>1581</numeric>
+				<alphanumeric>958</alphanumeric>
+				<byte>658</byte>
+				<kanji>405</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="29">
+		<correction_level level="L">
+			<number_bits>13048</number_bits>
+			<data_capacity>
+				<numeric>3909</numeric>
+				<alphanumeric>2369</alphanumeric>
+				<byte>1628</byte>
+				<kanji>1002</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>10136</number_bits>
+			<data_capacity>
+				<numeric>3035</numeric>
+				<alphanumeric>1839</alphanumeric>
+				<byte>1264</byte>
+				<kanji>778</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>7288</number_bits>
+			<data_capacity>
+				<numeric>2181</numeric>
+				<alphanumeric>1322</alphanumeric>
+				<byte>908</byte>
+				<kanji>559</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>5608</number_bits>
+			<data_capacity>
+				<numeric>1677</numeric>
+				<alphanumeric>1016</alphanumeric>
+				<byte>698</byte>
+				<kanji>430</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="30">
+		<correction_level level="L">
+			<number_bits>13880</number_bits>
+			<data_capacity>
+				<numeric>4158</numeric>
+				<alphanumeric>2520</alphanumeric>
+				<byte>1732</byte>
+				<kanji>1066</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>10984</number_bits>
+			<data_capacity>
+				<numeric>3289</numeric>
+				<alphanumeric>1994</alphanumeric>
+				<byte>1370</byte>
+				<kanji>843</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>7880</number_bits>
+			<data_capacity>
+				<numeric>2358</numeric>
+				<alphanumeric>1429</alphanumeric>
+				<byte>982</byte>
+				<kanji>604</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>5960</number_bits>
+			<data_capacity>
+				<numeric>1782</numeric>
+				<alphanumeric>1080</alphanumeric>
+				<byte>742</byte>
+				<kanji>457</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="31">
+		<correction_level level="L">
+			<number_bits>14744</number_bits>
+			<data_capacity>
+				<numeric>4417</numeric>
+				<alphanumeric>2677</alphanumeric>
+				<byte>1840</byte>
+				<kanji>1132</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>11640</number_bits>
+			<data_capacity>
+				<numeric>3486</numeric>
+				<alphanumeric>2113</alphanumeric>
+				<byte>1452</byte>
+				<kanji>894</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>8264</number_bits>
+			<data_capacity>
+				<numeric>2473</numeric>
+				<alphanumeric>1499</alphanumeric>
+				<byte>1030</byte>
+				<kanji>634</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>6344</number_bits>
+			<data_capacity>
+				<numeric>1897</numeric>
+				<alphanumeric>1150</alphanumeric>
+				<byte>790</byte>
+				<kanji>486</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="32">
+		<correction_level level="L">
+			<number_bits>15640</number_bits>
+			<data_capacity>
+				<numeric>4686</numeric>
+				<alphanumeric>2840</alphanumeric>
+				<byte>1952</byte>
+				<kanji>1201</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>12328</number_bits>
+			<data_capacity>
+				<numeric>3693</numeric>
+				<alphanumeric>2238</alphanumeric>
+				<byte>1538</byte>
+				<kanji>947</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>8920</number_bits>
+			<data_capacity>
+				<numeric>2670</numeric>
+				<alphanumeric>1618</alphanumeric>
+				<byte>1112</byte>
+				<kanji>684</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>6760</number_bits>
+			<data_capacity>
+				<numeric>2022</numeric>
+				<alphanumeric>1226</alphanumeric>
+				<byte>842</byte>
+				<kanji>518</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="33">
+		<correction_level level="L">
+			<number_bits>16568</number_bits>
+			<data_capacity>
+				<numeric>4965</numeric>
+				<alphanumeric>3009</alphanumeric>
+				<byte>2068</byte>
+				<kanji>1273</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>13048</number_bits>
+			<data_capacity>
+				<numeric>3909</numeric>
+				<alphanumeric>2369</alphanumeric>
+				<byte>1628</byte>
+				<kanji>1002</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>9368</number_bits>
+			<data_capacity>
+				<numeric>2805</numeric>
+				<alphanumeric>1700</alphanumeric>
+				<byte>1168</byte>
+				<kanji>719</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>7208</number_bits>
+			<data_capacity>
+				<numeric>2157</numeric>
+				<alphanumeric>1307</alphanumeric>
+				<byte>898</byte>
+				<kanji>553</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="34">
+		<correction_level level="L">
+			<number_bits>17528</number_bits>
+			<data_capacity>
+				<numeric>5253</numeric>
+				<alphanumeric>3183</alphanumeric>
+				<byte>2188</byte>
+				<kanji>1347</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>13800</number_bits>
+			<data_capacity>
+				<numeric>4134</numeric>
+				<alphanumeric>2506</alphanumeric>
+				<byte>1722</byte>
+				<kanji>1060</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>9848</number_bits>
+			<data_capacity>
+				<numeric>2949</numeric>
+				<alphanumeric>1787</alphanumeric>
+				<byte>1228</byte>
+				<kanji>756</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>7688</number_bits>
+			<data_capacity>
+				<numeric>2301</numeric>
+				<alphanumeric>1394</alphanumeric>
+				<byte>958</byte>
+				<kanji>590</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="35">
+		<correction_level level="L">
+			<number_bits>18448</number_bits>
+			<data_capacity>
+				<numeric>5529</numeric>
+				<alphanumeric>3351</alphanumeric>
+				<byte>2303</byte>
+				<kanji>1417</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>14496</number_bits>
+			<data_capacity>
+				<numeric>4343</numeric>
+				<alphanumeric>2632</alphanumeric>
+				<byte>1809</byte>
+				<kanji>1113</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>10288</number_bits>
+			<data_capacity>
+				<numeric>3081</numeric>
+				<alphanumeric>1867</alphanumeric>
+				<byte>1283</byte>
+				<kanji>790</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>7888</number_bits>
+			<data_capacity>
+				<numeric>2361</numeric>
+				<alphanumeric>1431</alphanumeric>
+				<byte>983</byte>
+				<kanji>605</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="36">
+		<correction_level level="L">
+			<number_bits>19472</number_bits>
+			<data_capacity>
+				<numeric>5836</numeric>
+				<alphanumeric>3537</alphanumeric>
+				<byte>2431</byte>
+				<kanji>1496</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>15312</number_bits>
+			<data_capacity>
+				<numeric>4588</numeric>
+				<alphanumeric>2780</alphanumeric>
+				<byte>1911</byte>
+				<kanji>1176</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>10832</number_bits>
+			<data_capacity>
+				<numeric>3244</numeric>
+				<alphanumeric>1966</alphanumeric>
+				<byte>1351</byte>
+				<kanji>832</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>8432</number_bits>
+			<data_capacity>
+				<numeric>2524</numeric>
+				<alphanumeric>1530</alphanumeric>
+				<byte>1051</byte>
+				<kanji>647</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="37">
+		<correction_level level="L">
+			<number_bits>20528</number_bits>
+			<data_capacity>
+				<numeric>6153</numeric>
+				<alphanumeric>3729</alphanumeric>
+				<byte>2563</byte>
+				<kanji>1577</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>15936</number_bits>
+			<data_capacity>
+				<numeric>4775</numeric>
+				<alphanumeric>2894</alphanumeric>
+				<byte>1989</byte>
+				<kanji>1224</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>11408</number_bits>
+			<data_capacity>
+				<numeric>3417</numeric>
+				<alphanumeric>2071</alphanumeric>
+				<byte>1423</byte>
+				<kanji>876</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>8768</number_bits>
+			<data_capacity>
+				<numeric>2625</numeric>
+				<alphanumeric>1591</alphanumeric>
+				<byte>1093</byte>
+				<kanji>673</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="38">
+		<correction_level level="L">
+			<number_bits>21616</number_bits>
+			<data_capacity>
+				<numeric>6479</numeric>
+				<alphanumeric>3927</alphanumeric>
+				<byte>2699</byte>
+				<kanji>1661</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>16816</number_bits>
+			<data_capacity>
+				<numeric>5039</numeric>
+				<alphanumeric>3054</alphanumeric>
+				<byte>2099</byte>
+				<kanji>1292</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>12016</number_bits>
+			<data_capacity>
+				<numeric>3599</numeric>
+				<alphanumeric>2181</alphanumeric>
+				<byte>1499</byte>
+				<kanji>923</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>9136</number_bits>
+			<data_capacity>
+				<numeric>2735</numeric>
+				<alphanumeric>1658</alphanumeric>
+				<byte>1139</byte>
+				<kanji>701</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="39">
+		<correction_level level="L">
+			<number_bits>22496</number_bits>
+			<data_capacity>
+				<numeric>6743</numeric>
+				<alphanumeric>4087</alphanumeric>
+				<byte>2809</byte>
+				<kanji>1729</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>17728</number_bits>
+			<data_capacity>
+				<numeric>5313</numeric>
+				<alphanumeric>3220</alphanumeric>
+				<byte>2213</byte>
+				<kanji>1362</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>12656</number_bits>
+			<data_capacity>
+				<numeric>3791</numeric>
+				<alphanumeric>2298</alphanumeric>
+				<byte>1579</byte>
+				<kanji>972</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>9776</number_bits>
+			<data_capacity>
+				<numeric>2927</numeric>
+				<alphanumeric>1774</alphanumeric>
+				<byte>1219</byte>
+				<kanji>750</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+	<version numero="40">
+		<correction_level level="L">
+			<number_bits>23648</number_bits>
+			<data_capacity>
+				<numeric>7089</numeric>
+				<alphanumeric>4296</alphanumeric>
+				<byte>2953</byte>
+				<kanji>1817</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="M">
+			<number_bits>18672</number_bits>
+			<data_capacity>
+				<numeric>5596</numeric>
+				<alphanumeric>3391</alphanumeric>
+				<byte>2331</byte>
+				<kanji>1435</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="Q">
+			<number_bits>13328</number_bits>
+			<data_capacity>
+				<numeric>3993</numeric>
+				<alphanumeric>2420</alphanumeric>
+				<byte>1663</byte>
+				<kanji>1024</kanji>
+			</data_capacity>
+		</correction_level>
+		<correction_level level="H">
+			<number_bits>10208</number_bits>
+			<data_capacity>
+				<numeric>3057</numeric>
+				<alphanumeric>1852</alphanumeric>
+				<byte>1273</byte>
+				<kanji>784</kanji>
+			</data_capacity>
+		</correction_level>
+	</version>
+</iso>

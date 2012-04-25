@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
-<!ELEMENT iso(version+) >
-<!ELEMENT version(correction_level+) >
+<!ELEMENT iso (version+) >
+<!ELEMENT version (correction_level+) >
+<!ATTLIST version numero CDATA #REQUIRED> 
 
-<!ELEMENT correction_level (numberBits, dataCapacity) >
+<!ELEMENT correction_level (number_bits, data_capacity) >
+<!ATTLIST correction_level level (L|M|Q|H) #REQUIRED> 
+
 <!ELEMENT number_bits (#PCDATA) >
-<!ELEMENT data_capacity(numeric, alphanumeric, 8_bits_byte, kanji) >
+
+<!ELEMENT data_capacity (numeric, alphanumeric, byte, kanji) >
 <!ELEMENT numeric (#PCDATA)>
 <!ELEMENT alphanumeric (#PCDATA)>
-<!ELEMENT 8_bits_byte (#PCDATA)>
+<!ELEMENT byte (#PCDATA)>
 <!ELEMENT kanji (#PCDATA)>
