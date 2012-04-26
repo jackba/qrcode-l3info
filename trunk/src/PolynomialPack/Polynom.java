@@ -74,4 +74,17 @@ public abstract class Polynom {
 		}
 		return p;
 	}
+	
+	public abstract Polynom clone();
+	
+	protected void setTermes(Vector<Terme> termes)
+	{
+		m_vectTermes = termes;
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected Vector<Terme> getTermes()
+	{
+		return (Vector<Terme>) m_vectTermes.clone();
+	}
 }

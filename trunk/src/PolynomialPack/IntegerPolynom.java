@@ -27,4 +27,11 @@ public class IntegerPolynom extends Polynom {
 		return ap;
 	}
 	
+	public Polynom clone()
+	{	
+		IntegerPolynom ip = new IntegerPolynom();
+		ip.setTermes(this.getTermes());
+		return ip;
+	}	
+	
 }
