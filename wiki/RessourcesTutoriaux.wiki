@@ -7,3 +7,6 @@ http://www.thonky.com/qr-code-tutorial/
 
 norme ISO :
 http://raidenii.net/files/datasheets/misc/qr_code.pdf
+
+Champs de Galois (champs fini) :
+http://www.aimglobal.org/technologies/barcode/Galois_Math.pdf
