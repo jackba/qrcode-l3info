@@ -19,7 +19,7 @@ public class CodeGenerator {
 
 	public CodeGenerator(String texte, int mode, char level, int version)
 	{
-		
+		//Initialisation des variable de classe.
 		if(mode == 0){
 			this.mode="numeric";
 		}else if(mode == 1){
@@ -35,7 +35,6 @@ public class CodeGenerator {
 		this.longueur = texte.length();
 		this.resultBinaire = new String("");
 
-		//mode();
 		
 		if(version==0){
 			this.version = searchVersion();
@@ -44,30 +43,16 @@ public class CodeGenerator {
 		}else{
 			this.version=version;
 		}
-
-		/*	resultBinaire = new String("0010"); // On l'initialise a 0010 car on veux de l'alpha numérique (sera ammené à évolué ...) 
-											// On traite uniquement le texte pour l'instant
-
-		String intermediaire = new String(Integer.toBinaryString(texte.length()));
-		while (intermediaire.length()<9){
-			intermediaire = "0"+intermediaire;
-		}
-
-		System.out.println("Intermediaire = "+intermediaire);
-
-		for(int i = 0; i < texte.length(); i++){
-			System.out.println(Integer.toBinaryString(convertChar(texte.charAt(i))));
-
-		}*/
 	}
 
+	//Methode qui permet de trouver quelle est la meilleure version QRCode avec les paramètres données.
+	//Cette méthode utilise le fichier XML numberOfSymbolCharacter.xml
 	private int searchVersion(){
 		org.jdom.Document document = null;
 		Element racine;
 
 		SAXBuilder sxb = new SAXBuilder();
 
-		//On crée un nouveau document JDOM avec en argument le fichier XML
 		try {
 			document = sxb.build(new File("/home/kbeutier/workspace/QrCode_Generator/src/Donnees/numberOfSymbolCharacter.xml"));
 		} catch (JDOMException e) {
