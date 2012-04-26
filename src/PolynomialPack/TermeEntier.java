@@ -68,4 +68,8 @@ public class TermeEntier extends Terme {
 			return null;
 		}
 	}
+	
+	public Terme clone() {
+		return new TermeEntier(this.getCoefficient(),this.getExposant());
+	}
 }

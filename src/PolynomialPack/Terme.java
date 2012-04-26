@@ -33,6 +33,12 @@ public abstract class Terme {
 		return false;
 	}
 	
+	// Empeche l'exposant de sortir du champs de Gallois
+	public void fixGreaterExponent()
+	{
+		m_exposant = m_exposant % (m_galoisField.getFieldSize() - 1);
+	}
+	
 	/*
 	// Version simplifiant l'affichage
 	public String toString()
@@ -44,6 +50,8 @@ public abstract class Terme {
 		return "x^" + m_exposant;
 	}
 	*/
+	
+	public abstract Terme clone();
 	
 	// Version affichant tout
 	public String toString()

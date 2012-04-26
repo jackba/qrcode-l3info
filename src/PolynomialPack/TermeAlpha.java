@@ -63,4 +63,8 @@ public class TermeAlpha extends Terme {
 		int coefficient = m_galoisField.getAlphaValue(m_exposantAlpha);
 		return new TermeEntier(coefficient, m_exposant);
 	}
+	
+	public Terme clone() {
+		return new TermeAlpha(this.getExposantAlpha(), this.getExposant());
+	}
 }

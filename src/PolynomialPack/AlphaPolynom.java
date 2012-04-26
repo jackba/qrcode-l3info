@@ -27,4 +27,10 @@ public class AlphaPolynom extends Polynom {
 		return ip;
 	}
 	
+	public Polynom clone()
+	{	
+		AlphaPolynom ap = new AlphaPolynom();
+		ap.setTermes(this.getTermes());
+		return ap;
+	}	
 }
