@@ -26,7 +26,7 @@ public class CorrectionLevel {
 	
 	public String toString()
 	{
-		String result = "level = \"" + m_level + "; total words = " + m_totalWords +"\n";
+		String result = "level " + m_level + " : total corrections words = " + m_totalWords +"\n";
 		for (int i=0; i<m_blocks.size(); i++)
 			result += "\t - " + m_blocks.get(i).toString() + "\n";
 		return result;
@@ -39,4 +39,5 @@ public class CorrectionLevel {
 			cl.addBlock(m_blocks.get(i));
 		return cl;
 	}
+	
 }

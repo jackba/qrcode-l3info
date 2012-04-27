@@ -311,12 +311,13 @@ public class CodeGenerator {
 		return this.getVersion();
 	}
 
+	/*
 	public static void main(String[] args)
 	{
 		CodeGenerator cg1 = new CodeGenerator("0123456789012345", 0, 'H', 0);
 		cg1.generer();
 		System.out.println(cg1.getResultBinaire());
 	}
-
+	*/
 }
 
