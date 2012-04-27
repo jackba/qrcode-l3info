@@ -41,4 +41,20 @@ public class Specification {
 			sp.addCorrectionLevel(m_correctionLevels.get(i));
 		return sp;
 	}
+	
+	// Vérifie la validité des chiffres de la spécification
+	public Boolean isValid()
+	{
+		
+		for (int i=0; i<m_correctionLevels.size(); i++)
+		{
+			if (m_correctionLevels.get(i).getTotalCorrectionWords() != m_correctionLevels.get(i).getTotalWords()
+				|| m_correctionLevels.get(i).getTotalDataWords() + m_correctionLevels.get(i).getTotalCorrectionWords() != this.m_totalWords)
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
 }

@@ -40,4 +40,33 @@ public class CorrectionLevel {
 		return cl;
 	}
 	
+	public int getTotalTotalWords()
+	{
+		int allTotalWords = 0;
+		
+		for (int i=0; i<m_blocks.size(); i++)
+			allTotalWords += m_blocks.get(i).getTotalTotalWords();
+
+		return allTotalWords;
+	}
+	
+	public int getTotalDataWords()
+	{
+		int allDataWords = 0;
+		
+		for (int i=0; i<m_blocks.size(); i++)
+			allDataWords += m_blocks.get(i).getTotalDataWords();
+
+		return allDataWords;
+	}
+	
+	public int getTotalCorrectionWords()
+	{
+		int allCorrectionWords = 0;
+		
+		for (int i=0; i<m_blocks.size(); i++)
+			allCorrectionWords += m_blocks.get(i).getTotalCorrectionWords();
+
+		return allCorrectionWords;
+	}
 }

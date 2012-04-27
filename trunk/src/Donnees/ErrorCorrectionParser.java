@@ -160,9 +160,17 @@ public class ErrorCorrectionParser {
 		initParser();
 	}
 	
+	/*
 	public static void main(String[] args)
 	{
 		ErrorCorrectionParser ecp = ErrorCorrectionParser.getInstance();
-		System.out.println(ecp.getSpecification(23));
+		for (int i=1; i<=40; i++)
+		{
+			if (ecp.getSpecification(i).isValid()) 
+				System.out.println("v " + i + "\t[VALIDE]");
+			else
+				System.out.println("v " + i + "\t[NON-VALIDE]");
+		}
 	}
+	*/
 }
