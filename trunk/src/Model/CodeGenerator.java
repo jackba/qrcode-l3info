@@ -54,7 +54,7 @@ public class CodeGenerator {
 		SAXBuilder sxb = new SAXBuilder();
 
 		try {
-			document = sxb.build(new File("/home/kbeutier/workspace/QrCode_Generator/src/Donnees/numberOfSymbolCharacter.xml"));
+			document = sxb.build(new File("src/Donnees/numberOfSymbolCharacter.xml"));
 		} catch (JDOMException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
