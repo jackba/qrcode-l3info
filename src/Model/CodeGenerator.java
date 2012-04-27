@@ -4,9 +4,7 @@ import java.io.*;
 
 import org.jdom.*;
 import org.jdom.input.*;
-import org.jdom.filter.*;
 import java.util.List;
-import java.util.Iterator;
 
 public class CodeGenerator {
 
@@ -48,6 +46,7 @@ public class CodeGenerator {
 
 	//Methode qui permet de trouver quelle est la meilleure version QRCode avec les paramètres données.
 	//Cette méthode utilise le fichier XML numberOfSymbolCharacter.xml
+	@SuppressWarnings("unchecked")
 	private int searchVersion(){
 		org.jdom.Document document = null;
 		Element racine;
@@ -69,10 +68,10 @@ public class CodeGenerator {
 		racine = document.getRootElement();
 
 		//On crée une List contenant tous les noeuds "etudiant" de l'Element racine
-		List listVersion = racine.getChildren("version");
+		List<Element> listVersion = racine.getChildren("version");
 
 		Element version;
-		List listLevel;
+		List<Element> listLevel;
 		Element level;
 		Element capacite;
 		for (int i = 0; i < listVersion.size(); i++){
