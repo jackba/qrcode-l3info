@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!ELEMENT iso (version+) >
+<!ELEMENT version (correction+) >
+<!ATTLIST version number CDATA #REQUIRED>
+<!ATTLIST version total_words CDATA #REQUIRED>
+
+<!ELEMENT correction (block+) >
+<!ATTLIST correction level (L|M|Q|H) #REQUIRED>
+<!ATTLIST correction correction_words CDATA #REQUIRED>
+
+<!ELEMENT block EMPTY >
+<!ATTLIST block number CDATA #REQUIRED>
+<!ATTLIST block total_words CDATA #REQUIRED>
+<!ATTLIST block data_words CDATA #REQUIRED>
+<!ATTLIST block error_words CDATA #REQUIRED>
