@@ -32,4 +32,17 @@ public class Block {
 	{
 		return new Block(this.getNumber(),this.getTotalWords(),this.getDataWords());
 	}
+	
+	public int getTotalCorrectionWords()
+	{
+		return m_number*m_correctionWords;
+	}
+	public int getTotalDataWords()
+	{
+		return m_number*m_dataWords;
+	}
+	public int getTotalTotalWords()
+	{
+		return m_number*m_totalWords;
+	}
 }

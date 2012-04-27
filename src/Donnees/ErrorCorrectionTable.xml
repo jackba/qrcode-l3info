@@ -140,7 +140,7 @@
 	<version number="10" total_words="346">
 		<correction level="L" correction_words="72">
 			<block number="2" total_words="86" data_words="68" error_words="9"/>
-			<block number="2" total_words="" data_words="69" error_words="9"/>
+			<block number="2" total_words="87" data_words="69" error_words="9"/>
 		</correction>
 		<correction level="M" correction_words="130">
 			<block number="4" total_words="69" data_words="43" error_words="13"/>
@@ -394,12 +394,12 @@
 			<block number="14" total_words="74" data_words="46" error_words="14"/>
 		</correction>
 		<correction level="Q" correction_words="810">
-			<block number="11" total_words="46" data_words="24" error_words="15"/>
-			<block number="16" total_words="47" data_words="25" error_words="15"/>
+			<block number="11" total_words="54" data_words="24" error_words="15"/>
+			<block number="16" total_words="55" data_words="25" error_words="15"/>
 		</correction>
 		<correction level="H" correction_words="960">
-			<block number="30" total_words="132" data_words="16" error_words="15"/>
-			<block number="2" total_words="133" data_words="17" error_words="15"/>
+			<block number="30" total_words="46" data_words="16" error_words="15"/>
+			<block number="2" total_words="47" data_words="17" error_words="15"/>
 		</correction>
 	</version>
 	<version number="25" total_words="1588">
@@ -487,7 +487,7 @@
 			<block number="1" total_words="53" data_words="23" error_words="15"/>
 			<block number="37" total_words="54" data_words="24" error_words="15"/>
 		</correction>
-		<correction level="H" correction_words="">
+		<correction level="H" correction_words="1350">
 			<block number="19" total_words="45" data_words="15" error_words="15"/>
 			<block number="26" total_words="46" data_words="16" error_words="15"/>
 		</correction>
@@ -617,7 +617,7 @@
 			<block number="64" total_words="46" data_words="16" error_words="15"/>
 		</correction>
 	</version>
-	<version number="37" total_words="">
+	<version number="37" total_words="3196">
 		<correction level="L" correction_words="630">
 			<block number="17" total_words="152" data_words="122" error_words="15"/>
 			<block number="4" total_words="153" data_words="123" error_words="15"/>
