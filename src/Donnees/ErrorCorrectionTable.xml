@@ -266,15 +266,15 @@
 			<block number="1" total_words="135" data_words="107" error_words="14"/>
 			<block number="5" total_words="136" data_words="108" error_words="14"/>
 		</correction>
-		<correction level="M" correction_words="">
+		<correction level="M" correction_words="308">
 			<block number="10" total_words="74" data_words="46" error_words="14"/>
 			<block number="1" total_words="75" data_words="47" error_words="14"/>
 		</correction>
-		<correction level="Q" correction_words="">
+		<correction level="Q" correction_words="448">
 			<block number="1" total_words="50" data_words="22" error_words="14"/>
 			<block number="15" total_words="51" data_words="23" error_words="14"/>
 		</correction>
-		<correction level="H" correction_words="">
+		<correction level="H" correction_words="532">
 			<block number="2" total_words="42" data_words="14" error_words="14"/>
 			<block number="17" total_words="43" data_words="15" error_words="14"/>
 		</correction>
