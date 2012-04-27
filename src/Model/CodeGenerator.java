@@ -9,11 +9,12 @@ import java.util.List;
 import java.util.Iterator;
 
 public class CodeGenerator {
-	
+
 	private int longueur;
 	private String resultBinaire;
 	private String texte;
 	private int version;
+	private int bits_max;
 	private String mode; // 0->Numérique - 1->Alphanumérique - 2->Byte - 3->Kanji
 	private char level; // L - M - Q - H
 
@@ -29,13 +30,13 @@ public class CodeGenerator {
 		}else if(mode == 3){
 			this.mode="kanji";				
 		}
-		
+
 		this.level = level;
 		this.texte = texte;
 		this.longueur = texte.length();
 		this.resultBinaire = new String("");
 
-		
+
 		if(version==0){
 			this.version = searchVersion();
 		}else if(version==-1){
@@ -81,7 +82,8 @@ public class CodeGenerator {
 				level = (Element) listLevel.get(j);
 				if(level.getAttributeValue("level").charAt(0)==this.level){
 					capacite = level.getChild("data_capacity");
-					if(Integer.parseInt(capacite.getChild("byte").getValue())>this.longueur){
+					if(Integer.parseInt(capacite.getChild(this.mode).getValue())>this.longueur){
+						this.bits_max = Integer.parseInt(level.getChild("number_bits").getValue());
 						return Integer.parseInt(version.getAttributeValue("numero"));
 					}
 				}
@@ -89,20 +91,97 @@ public class CodeGenerator {
 		}
 		return -1; // Retourne -1 si aucune version existe pour le nombre de caractère données.
 	}
-	
+
 	public void generer(){
 		// Selon le mode sélectionné on assigne les 4 premiers bits.
 		if(this.mode == "byte"){
 			genererByte();
+		}else if (this.mode=="alphanumeric"){
+			genererAlphanumeric();
+		}else if (this.mode=="numeric"){
+			genererNumeric();
 		}else{
 			System.out.println("La génération de ce mode est en cours de dévelopement.");
 		}
+
+		// TERMINAISON 
+		for(int i = 0; i < 4 && this.resultBinaire.length()<this.bits_max; i++){
+			this.resultBinaire = this.resultBinaire+"0";
+		}
+
+		//On ajoute des 0 pour avoir des paquets de 8 bits
+		while(this.resultBinaire.length()%8!=0 && this.resultBinaire.length()<this.bits_max){
+			this.resultBinaire = this.resultBinaire+"0";
+		}
+
+		//On ajoute les bytes 11101100 et 00010001 pour avoir le nombre de bits voulu dans la version.
+
+		boolean alternance = true;
+		while(this.resultBinaire.length() < this.bits_max){
+			if(alternance){
+				this.resultBinaire = this.resultBinaire +"11101100";
+				alternance = false;
+			}else{
+				this.resultBinaire = this.resultBinaire +"00010001";
+				alternance = true;				
+			}
+		}
+
+
 	}
-	
+
+	private void genererNumeric() {
+		// Mode Indicator
+		this.resultBinaire = "0001"; // Mode indicator
+
+		// Count Indicator
+		String countIndic = new String(Integer.toBinaryString(this.longueur));
+		if(this.version>=1 && this.version <=9){
+			while (countIndic.length()<10){
+				countIndic = "0"+countIndic;
+			}
+		}else if(this.version>=10 && this.version <=26){
+			while (countIndic.length()<12){
+				countIndic = "0"+countIndic;
+			}
+		}else if(this.version>=27 && this.version <=40){
+			while (countIndic.length()<14){
+				countIndic = "0"+countIndic;
+			}
+		}else{
+			System.out.println("Version non gérer");
+		}
+		this.resultBinaire = this.resultBinaire+countIndic;
+
+		// Texte
+		String chiffres;
+		for (int i = 0; i < this.longueur; i=i+3){
+			if(i+2<this.longueur){
+				chiffres = Integer.toBinaryString(Integer.parseInt(texte.substring(i, i+3)));
+				while(chiffres.length()<10){
+					chiffres = "0"+chiffres;
+				}
+			}else if(i+1 < this.longueur){
+				chiffres = Integer.toBinaryString(Integer.parseInt(texte.substring(i, i+2)));
+				while(chiffres.length()<7){
+					chiffres = "0"+chiffres;
+				}
+			}else{
+				chiffres = Integer.toBinaryString(Integer.parseInt(texte.substring(i)));
+				while(chiffres.length()<4){
+					chiffres = "0"+chiffres;
+				}
+			}
+			this.resultBinaire = this.resultBinaire+chiffres;
+		}
+
+	}
+
+	//Generer la String de bits pour le mode Byte
 	private void genererByte(){
 		// Mode Indicator
 		this.resultBinaire = "0100"; // Mode indicator
-		
+
 		// Count Indicator
 		String countIndic = new String(Integer.toBinaryString(this.longueur));
 		if(this.version>=1 && this.version <=9){
@@ -117,13 +196,56 @@ public class CodeGenerator {
 			System.out.println("Version non gérer");
 		}
 		this.resultBinaire = this.resultBinaire+countIndic;
-		
+
 		// Texte
 		String lettre;
 		for (int i = 0; i < this.longueur; i++){
 			lettre = Integer.toBinaryString(texte.charAt(i));
 			while(lettre.length()<8){
 				lettre = "0"+lettre;
+			}
+			this.resultBinaire = this.resultBinaire+lettre;
+		}
+	}
+
+
+	// Generer la String de bits pour le mode Alphanumeric
+	private void genererAlphanumeric(){
+		// Mode Indicator
+		this.resultBinaire = "0010"; // Mode indicator
+
+		// Count Indicator
+		String countIndic = new String(Integer.toBinaryString(this.longueur));
+		if(this.version>=1 && this.version <=9){
+			while (countIndic.length()<9){
+				countIndic = "0"+countIndic;
+			}
+		}else if(this.version>=10 && this.version <=26){
+			while (countIndic.length()<11){
+				countIndic = "0"+countIndic;
+			}
+		}else if(this.version>=27 && this.version <=40){
+			while (countIndic.length()<13){
+				countIndic = "0"+countIndic;
+			}
+		}else{
+			System.out.println("Version non gérer");
+		}
+		this.resultBinaire = this.resultBinaire+countIndic;
+
+		// Texte
+		String lettre;
+		for (int i = 0; i < this.longueur; i=i+2){
+			if(i+1<this.longueur){
+				lettre = Integer.toBinaryString(convertCharAlphanum(texte.charAt(i))*45+convertCharAlphanum(texte.charAt(i+1)));
+				while(lettre.length()<11){
+					lettre = "0"+lettre;
+				}
+			}else{
+				lettre = Integer.toBinaryString(convertCharAlphanum(texte.charAt(i)));
+				while(lettre.length()<6){
+					lettre = "0"+lettre;
+				}
 			}
 			this.resultBinaire = this.resultBinaire+lettre;
 		}
@@ -181,14 +303,18 @@ public class CodeGenerator {
 		}
 		return 0;
 	}
-	
+
 	public String getResultBinaire(){
 		return this.resultBinaire;
 	}
-	
+
+	public int getVersion(){
+		return this.getVersion();
+	}
+
 	public static void main(String[] args)
 	{
-		CodeGenerator cg1 = new CodeGenerator("totto", 2, 'H', 0);
+		CodeGenerator cg1 = new CodeGenerator("0123456789012345", 0, 'H', 0);
 		cg1.generer();
 		System.out.println(cg1.getResultBinaire());
 	}
