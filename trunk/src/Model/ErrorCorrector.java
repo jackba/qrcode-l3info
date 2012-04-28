@@ -84,7 +84,7 @@ public class ErrorCorrector {
 		// Remplissage des matrices
 		
 		// Remplissage de la matrice de données
-		int current = 0;	// Indice courant dans la chaine de données binaires
+		int curWord = 0;	// Indice courant dans la chaine de données binaires
 		int curLine = 0;	// Colonne courante dans la matrice de données
 		for (int i=0; i<corrLvl.getBlocks().size(); i++)	// Pour chaque spécification de bloc
 		{
@@ -92,8 +92,34 @@ public class ErrorCorrector {
 			{
 				for (int k=0; k<corrLvl.getBlocks().get(i).getDataWords(); k++)	// Créer un nouvel octet à partir de la chaine de données et l'assigner dans la matrice
 				{
-					matriceData[curLine][k] = donneesBinaires.substring(current, current+8);
-					current += 8;
+					matriceData[curLine][k] = donneesBinaires.substring(curWord, curWord+8);
+					curWord += 8;
+				}
+				curLine ++;
+			}
+		}
+		
+		// Remplissage de la matrice de correction
+		curWord = 0;	// Indice courant dans la chaine de données binaires
+		curLine = 0;	// Colonne courante dans la matrice de correction
+		String curData;	// Chaine de données pour le bloc courant
+		String curCorrection;	// Chaine de correction pour le bloc courant
+		for (int i=0; i<corrLvl.getBlocks().size(); i++)	// Pour chaque spécification de bloc
+		{
+			for (int j=0; j<corrLvl.getBlocks().get(i).getNumber(); j++)	// Créer un nouveau bloc de cette spécification "number" fois
+			{
+				// Créer la chaine de données pour le bloc courant
+				curData = donneesBinaires.substring(curWord, curWord + (corrLvl.getBlocks().get(i).getDataWords()*8));
+				curWord += corrLvl.getBlocks().get(i).getDataWords()*8;
+				
+				// Créer la chaine de correction pour le bloc courant
+				curCorrection = getCorrectionString(curData,corrLvl.getBlocks().get(i).getCorrectionWords());
+				
+				// Pour tous les mots de la chaine de correction
+				for (int k=0; k<curCorrection.length(); k++)
+				{
+					// Créer un nouvel octet (=mot) à partir de la chaine de correction et l'assigner dans la matrice
+					matriceCorrection[curLine][k] = curCorrection.substring(k*8, k*8+8);
 				}
 				curLine ++;
 			}

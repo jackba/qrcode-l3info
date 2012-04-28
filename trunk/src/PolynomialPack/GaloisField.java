@@ -139,12 +139,16 @@ public class GaloisField {
 	{
 		try
 		{
-			if (alphaValue == 0) throw new Exception("alphaValue must be greater than zero.");	// Erreur sur log null
+			if (alphaValue == 0)
+			{
+				throw new Exception("alphaValue must be greater than zero.");	// Erreur sur log null
+			}
 			return m_log[alphaValue];
 		}
 		catch (Exception e)
 		{
 			System.err.println("GaloisField -> getLog(int entier) : " + e.toString());
+			e.printStackTrace();
 			return -1;
 		}
 	}
