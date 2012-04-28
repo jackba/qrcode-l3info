@@ -22,8 +22,8 @@ public class GeneratorPolynomial {
 	// Retourne un exposant compris dans le champs de Galois 256 (entre 0 inclus et 255 inclus)
 	private int fixGreaterExponent(int exponent)
 	{
-		return ((exponent % 255) + (int)Math.floor( (double)exponent / (double)255));
-		//return exponent % 255;
+		//return ((exponent % 255) + (int)Math.floor( (double)exponent / (double)255));
+		return exponent % 255;
 	}
 	
 	// Retourne un nouveau TermeAlpha résultant du produit de t1 et t2
