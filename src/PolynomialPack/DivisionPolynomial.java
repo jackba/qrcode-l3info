@@ -213,9 +213,6 @@ public class DivisionPolynomial {
 		// On retire les termes nuls du résultat
 		result = removeFirstZerosTerms(result);
 		
-		// On trie le polynome
-		result.sortByExposants();
-		
 		// On répète l'opération tant que le dernier terme du polynome résultat n'a pas un terme de degré 1 (exposant à 0)
 		while (result.getTermeAt(result.getNbTermes()-1).getExposant() != 0)
 		{
@@ -241,9 +238,6 @@ public class DivisionPolynomial {
 			
 			// On retire les termes nuls du résultat
 			result = removeFirstZerosTerms(result);
-			
-			// On trie le polynome résultat de cette étape
-			result.sortByExposants();
 		}
 		
 		// Le résultat contient un dernier terme de degré 1, le résultat est prêt
