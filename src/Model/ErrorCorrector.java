@@ -1,4 +1,8 @@
-package PolynomialPack;
+package Model;
+
+import PolynomialPack.DivisionPolynomial;
+import PolynomialPack.IntegerPolynom;
+import PolynomialPack.TermeEntier;
 
 /*
  *  Classe de correction d'erreur pour un message binaire QRcode
