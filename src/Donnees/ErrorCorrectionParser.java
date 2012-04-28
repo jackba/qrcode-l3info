@@ -62,7 +62,8 @@ public class ErrorCorrectionParser {
 					if (m_specifications.get(i).getVersion() == version) return m_specifications.get(i);
 		
 		// La spécification n'est pas dans la liste, on va la créer à partir du fichier xml
-		return getSpecificationFromXML(version);	
+		m_specifications.add(getSpecificationFromXML(version));	// Ajout de la spécification dans la liste
+		return m_specifications.get(m_specifications.size()-1);	// Retour de la spécification
 	}
 	
 	// Retourne un objet Specification pour la version demandée,
