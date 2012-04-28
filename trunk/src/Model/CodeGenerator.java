@@ -40,7 +40,8 @@ public class CodeGenerator {
 		}else if(version==-1){
 			System.out.println("nombre de caractères trop importants");
 		}else{
-			this.version=version;
+			//this.version=version;
+			this.version = initVersion(version);
 		}
 	}
 
@@ -89,6 +90,57 @@ public class CodeGenerator {
 			}
 		}
 		return -1; // Retourne -1 si aucune version existe pour le nombre de caractère données.
+	}
+	
+	@SuppressWarnings("unchecked")
+	private int initVersion(int version){
+		org.jdom.Document document = null;
+		Element racine;
+
+		SAXBuilder sxb = new SAXBuilder();
+
+		try {
+			document = sxb.build(new File("src/Donnees/numberOfSymbolCharacter.xml"));
+		} catch (JDOMException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+		//On initialise un nouvel élément racine avec l'élément racine du document.
+		racine = document.getRootElement();
+
+		//On crée une List contenant tous les noeuds "etudiant" de l'Element racine
+		List<Element> listVersion = racine.getChildren("version");
+
+		Element mVersion;
+		List<Element> listLevel;
+		Element level;
+		for (int i = 0; i < listVersion.size(); i++)
+		{
+			mVersion = (Element) listVersion.get(i);
+			
+			// La version est celle recherchée
+			if (Integer.parseInt(mVersion.getAttribute("numero").getValue()) == version)
+			{
+				// Remplissage des attributs de l'instance par les valeurs de la version recherchée
+				listLevel = mVersion.getChildren("correction_level");
+				for(int j = 0; j < listLevel.size(); j++)
+				{
+					level = (Element) listLevel.get(j);
+					if(level.getAttributeValue("level").charAt(0) == this.level)
+					{
+						this.bits_max = Integer.parseInt(level.getChild("number_bits").getValue());
+						this.version = version;
+						return Integer.parseInt(mVersion.getAttributeValue("numero"));
+					}
+				}
+			}
+		}
+		return -1; // Retourne -1 si la version n'existe pas
 	}
 
 	public void generer(){
