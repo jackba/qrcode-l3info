@@ -9,12 +9,12 @@ public class MainController {
 	
 	private Fenetre m_fenetre;	// Instance de la fenêtre de l'application
 	
-	private InputController m_contr_TF_url;	// Controleur du champs de saisie de l'url
-	private InputController m_contr_TF_tel;	// Controleur du champs de saisie du numéro de téléphone
-	private InputController m_contr_TF_smsTel;	// Controleur du champs de saisie du numéro de téléphone pour le sms
-	private InputController m_contr_TA_smsMsg;	// Controleur du champs de saisie du message pour le sms
-	private InputController m_contr_TA_txt;	// Controleur du champs de saisie du texte libre
-	private ButtonController m_contr_B_generer;	// Controleur du bouton générer
+	private TFurlController m_TFurlController;
+	private TAtxtController m_TAtxtController;
+	private TFtelController m_TFtelController;
+	private TFsmsTelController m_TFsmsTelController;
+	private TAsmsMsgController m_TAsmsMsgController;
+	private BgenererController m_BgenererController;
 	
 	// Lance l'application
 	public void runApplication()
@@ -32,22 +32,21 @@ public class MainController {
 		// Instanciation d'une nouvelle fenêtre
 		m_fenetre = new Fenetre();
 		
-		// Création des controleurs subsidiaires
-		m_contr_TF_url = new InputControllerTFurl(m_fenetre);
-		m_contr_TF_tel = new InputControllerTFtel(m_fenetre);
-		m_contr_TF_smsTel = new InputControllerTFsmsTel(m_fenetre);
-		m_contr_TA_smsMsg = new InputControllerTAsmsMsg(m_fenetre);
-		m_contr_TA_txt = new InputControllerTAtxt(m_fenetre);	
-		m_contr_B_generer = new ButtonControllerGenerate(m_fenetre);
+		// Instanciation des listeners/controleurs
+		m_TFurlController = new TFurlController(m_fenetre);
+		m_TAtxtController = new TAtxtController(m_fenetre);
+		m_TFtelController = new TFtelController(m_fenetre);
+		m_TFsmsTelController = new TFsmsTelController(m_fenetre);
+		m_TAsmsMsgController = new TAsmsMsgController(m_fenetre);
+		m_BgenererController = new BgenererController(m_fenetre);
 		
-		// Assignation des controleurs subsidiaires aux listeners pour que ces derniers effectuent une redirection vers les controleurs
-		m_fenetre.getListener_TF_url().setController(m_contr_TF_url);
-		m_fenetre.getListener_TF_urlValidate().setController(m_contr_TF_url);
-		m_fenetre.getListener_TF_tel().setController(m_contr_TF_tel);
-		m_fenetre.getListener_TF_smsTel().setController(m_contr_TF_smsTel);
-		m_fenetre.getListener_TA_smsMsg().setController(m_contr_TA_smsMsg);
-		m_fenetre.getListener_TA_txt().setController(m_contr_TA_txt);
-		m_fenetre.getListener_B_generer().setController(m_contr_B_generer);
+		// Assignation des listeners aux composants de la fenetre
+		m_fenetre.getTF_url().addFocusListener(m_TFurlController);	// Listener sur le focus
+		m_fenetre.getTA_txt().getDocument().addDocumentListener(m_TAtxtController);	// listener sur le changement du texte
+		m_fenetre.getTF_tel().getDocument().addDocumentListener(m_TFtelController);
+		m_fenetre.getTF_smsTel().getDocument().addDocumentListener(m_TFsmsTelController);
+		m_fenetre.getTA_smsMsg().getDocument().addDocumentListener(m_TAsmsMsgController);
+		m_fenetre.getB_generer().addActionListener(m_BgenererController);	// Listener sur le click
 		
 		// Affichage de la fenêtre
 		m_fenetre.setVisible(true);
