@@ -10,9 +10,9 @@ public class ButtonControllerGenerate extends ButtonController {
 		super(f);
 	}
 
-	public void performAction(ActionEvent event)
+	public void onClick(ActionEvent event)
 	{
-		
+		System.out.println("Button Generate clicked");
 	}
 
 }
