@@ -2,6 +2,8 @@ package Controller;
 
 import Vue.Fenetre;
 
+// Classe de base des controleurs subsidiaires de l'application.
+// Elle possède une référence sur la vue pour permettre aux controleurs d'interragir avec.
 public abstract class AbstractController {
 	
 	private Fenetre m_fenetre;
