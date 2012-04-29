@@ -1,5 +1,4 @@
 package PolynomialPack;
-
 /* 
  * Implémente des opérations de base pour un champs de Galois d'une taille et d'un polynôme premier donné
  * La classe est basée sur une vulgarisation mathématique pour application à l'informatique:
@@ -139,15 +138,17 @@ public class GaloisField {
 	{
 		try
 		{
+			/*
 			if (alphaValue == 0)
 			{
 				throw new Exception("alphaValue must be greater than zero.");	// Erreur sur log null
 			}
+			*/
 			return m_log[alphaValue];
 		}
 		catch (Exception e)
 		{
-			System.err.println("GaloisField -> getLog(int entier) : " + e.toString());
+			System.err.println("GaloisField -> getExponantValue(int alphaValue) : ");
 			e.printStackTrace();
 			return -1;
 		}

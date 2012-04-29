@@ -30,7 +30,11 @@ public class GeneratorPolynomial {
 	public TermeAlpha multiplyTerms(TermeAlpha t1, TermeAlpha t2) {
 			
 		// Somme des exposants
-		int expAlpha = t1.getExposantAlpha() + t2.getExposantAlpha();
+		int expAlpha;
+		if (t1.getExposantAlpha() == -255 || t2.getExposantAlpha() == -255)	// L'un des deux coefficients est nul
+			expAlpha = -255;
+		else	// Aucun coefficient n'est nul
+			expAlpha = t1.getExposantAlpha() + t2.getExposantAlpha();
 		int expX = t1.getExposant() + t2.getExposant();
 		
 		// Attribution d'un exposant entre 0 et 255 si l'exposant est > 255
