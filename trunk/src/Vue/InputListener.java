@@ -17,18 +17,18 @@ public class InputListener implements DocumentListener{
 	// Le texte a changé - jamais appelé dans la réalité
 	public void changedUpdate(DocumentEvent event)
 	{
-		m_controller.onTextChanged(event);
+		if (m_controller != null) m_controller.onTextChanged(event);
 	}
 	
 	// Du texte a été inséré
 	public void insertUpdate(DocumentEvent event)
 	{
-		m_controller.onTextChanged(event);
+		if (m_controller != null) m_controller.onTextChanged(event);
 	}
 	
 	// Du texte a été supprimé
 	public void removeUpdate(DocumentEvent event)
 	{
-		m_controller.onTextChanged(event);
+		if (m_controller != null) m_controller.onTextChanged(event);
 	}
 }
