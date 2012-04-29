@@ -32,6 +32,7 @@ public class BinaryStringGenerator {
 	public static void main(String[] args)
 	{
 		BinaryStringGenerator bsg = new BinaryStringGenerator();
-		bsg.getBinaryString("0123456789012345", 0, 4, "H");
+		String maChaine = bsg.getBinaryString("0123456789012345", 0, 4, "H");
+		System.out.println(maChaine);
 	}
 }

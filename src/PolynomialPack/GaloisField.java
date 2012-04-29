@@ -12,7 +12,7 @@ public class GaloisField {
     private static GaloisField m_instance;	// Instance unique de notre classe
 	
 	public static int GFSIZE_deuxExpHuit = 256; // Taille du champs de Galois (valeurs de 0 à 255)
-	public static int PP_QRcode = 285;	// Polynome premier utilisé dans le codage QRcode (x^8 + x^4 + x^3 +1)
+	public static int PP_QRcode = 285;	// Polynome premier utilisé dans le codage QRcode (x^8 + x^4 + x^3 + x^2 +1) <=> 100011101
 	public static int PP_All = 301;	// Polynome premier utilisé dans le codage des autres codes de taille 256 (x^8 + x^5 + x^3 + x^2 +1)
 	
 	private int[] m_log;	// Tableau des logs

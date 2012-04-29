@@ -46,17 +46,17 @@ public class ErrorCorrector {
 		// Création des matrices 2D de données et de corrections
 		
 		// Récupération du plus grand nombre de mots (= octets) de données dans un bloc du niveau de correction
-		int line = 0;
-		int column = 0;
+		int lineData = 0;
+		int columnData = 0;
 		for (int i=0; i<corrLvl.getBlocks().size(); i++)
 		{
-			line += corrLvl.getBlocks().get(i).getNumber();
-			if (corrLvl.getBlocks().get(i).getDataWords() > column)
-				column = corrLvl.getBlocks().get(i).getDataWords();
+			lineData += corrLvl.getBlocks().get(i).getNumber();
+			if (corrLvl.getBlocks().get(i).getDataWords() > columnData)
+				columnData = corrLvl.getBlocks().get(i).getDataWords();
 		}
 		
 		// Création de la matrice 2D de données (largeur / hauteur)
-		String[][] matriceData = new String[line][column];
+		String[][] matriceData = new String[lineData][columnData];
 		
 		// Initialisation de la matrice de données
 		/*
@@ -66,13 +66,14 @@ public class ErrorCorrector {
 		*/
 		
 		// Récupération du plus grand nombre de mots (= octets) de corrections dans un bloc du niveau de correction
-		column = 0;
+		int lineCorr = lineData;
+		int columnCorr = 0;
 		for (int i=0; i<corrLvl.getBlocks().size(); i++)
-			if (corrLvl.getBlocks().get(i).getCorrectionWords() > column)
-				column = corrLvl.getBlocks().get(i).getCorrectionWords();
+			if (corrLvl.getBlocks().get(i).getCorrectionWords() > columnCorr)
+				columnCorr = corrLvl.getBlocks().get(i).getCorrectionWords();
 		
 		// Création de la matrice 2D de correction (largeur / hauteur)
-		String[][] matriceCorrection = new String[line][column];
+		String[][] matriceCorrection = new String[lineCorr][columnCorr];
 		
 		// Initialisation de la matrice de correction
 		/*
@@ -121,13 +122,26 @@ public class ErrorCorrector {
 					// Créer un nouvel octet (=mot) à partir de la chaine de correction et l'assigner dans la matrice
 					matriceCorrection[curLine][k] = curCorrection.substring(k*8, k*8+8);
 				}
-				curLine ++;
+				curLine ++;	// On passe à la ligne suivante de la matrice qui sera remplie par un nouveau bloc de données
 			}
 		}
 		
-		System.out.println("Hello");
+		// Création de la chaine finale
+		String result = "";
 		
-		return null;
+		// Ajout des données binaires
+		for (int i=0; i<columnData; i++)	// Pour toutes les colonnes de la matrice de données
+			for (int j=0; j<lineData; j++)	// Parcourir la colonne en partant de la case du haut puis en descendant
+				if (matriceData[j][i] != null)	// Lorsque la case actuelle contient des données, concaténer les mots (=octets)
+					result += matriceData[j][i];
+		
+		// Ajout des corrections binaires
+		for (int i=0; i<columnCorr; i++)	// Pour toutes les colonnes de la matrice de données
+			for (int j=0; j<lineCorr; j++)	// Parcourir la colonne en partant de la case du haut puis en descendant
+				if (matriceCorrection[j][i] != null)	// Lorsque la case actuelle contient des données, concaténer les mots (=octets)
+					result += matriceCorrection[j][i];
+		
+		return result;
 	}
 	
 	/*
