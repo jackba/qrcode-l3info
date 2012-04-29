@@ -64,7 +64,8 @@ public class TermeEntier extends Terme {
 			int alphaExposant = m_galoisField.getExponantValue(m_coefficient);
 			return new TermeAlpha(alphaExposant, m_exposant);
 		} catch (Exception e) {
-			System.err.println("TermeEntier -> getTermeAlpha() : " + e.toString());
+			System.err.println("TermeEntier -> getTermeAlpha() : ");
+			e.printStackTrace();
 			return null;
 		}
 	}

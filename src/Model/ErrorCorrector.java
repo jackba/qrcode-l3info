@@ -110,13 +110,13 @@ public class ErrorCorrector {
 			{
 				// Créer la chaine de données pour le bloc courant
 				curData = donneesBinaires.substring(curWord, curWord + (corrLvl.getBlocks().get(i).getDataWords()*8));
-				curWord += corrLvl.getBlocks().get(i).getDataWords()*8;
+				curWord += (corrLvl.getBlocks().get(i).getDataWords()*8);
 				
 				// Créer la chaine de correction pour le bloc courant
 				curCorrection = getCorrectionString(curData,corrLvl.getBlocks().get(i).getCorrectionWords());
 				
 				// Pour tous les mots de la chaine de correction
-				for (int k=0; k<curCorrection.length(); k++)
+				for (int k=0; k<(curCorrection.length()/8); k++)
 				{
 					// Créer un nouvel octet (=mot) à partir de la chaine de correction et l'assigner dans la matrice
 					matriceCorrection[curLine][k] = curCorrection.substring(k*8, k*8+8);

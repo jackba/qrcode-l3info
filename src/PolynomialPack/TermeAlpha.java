@@ -24,6 +24,11 @@ public class TermeAlpha extends Terme {
 		m_exposantAlpha = exposantAlpha;
 	}
 	
+	public void setTermeAsNull()
+	{
+		m_exposantAlpha = -255;
+	}
+	
 	public int getExposantAlpha()
 	{
 		return m_exposantAlpha;
@@ -54,13 +59,20 @@ public class TermeAlpha extends Terme {
 	// Version affichant tout
 	public String toString()
 	{
-		return "a^" + m_exposantAlpha + "." + super.toString();
+		if (m_exposantAlpha != -255)
+			return "a^" + m_exposantAlpha + "." + super.toString();
+		else
+			return "a." + super.toString();
 	}
 	
 	// Retourne le terme alpha transformé en terme entier
 	public TermeEntier toTermeEntier()
 	{
-		int coefficient = m_galoisField.getAlphaValue(m_exposantAlpha);
+		int coefficient;
+		if(m_exposantAlpha != -255)
+			coefficient = m_galoisField.getAlphaValue(m_exposantAlpha);
+		else
+			coefficient = 0;
 		return new TermeEntier(coefficient, m_exposant);
 	}
 	
