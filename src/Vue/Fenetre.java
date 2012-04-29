@@ -36,6 +36,7 @@ public class Fenetre extends JFrame{
 	private InputListener m_Listener_TF_smsTel;
 	private InputListener m_Listener_TA_smsMsg;
 	
+	private ValidationListener m_Listener_TF_urlValidate;
 	private ButtonListener m_Listener_B_generer;
 	
 	public Fenetre()
@@ -95,7 +96,9 @@ public class Fenetre extends JFrame{
 		
 		// Champs texte URL
 		m_TF_url = new JTextField(Short.MAX_VALUE);
-		m_Listener_TF_url = new InputListener();
+		m_Listener_TF_url = new InputListener();	// Création d'un listener de changement de texte
+		m_Listener_TF_urlValidate = new ValidationListener();	// Création d'un listener de validation
+		m_TF_url.addFocusListener(m_Listener_TF_urlValidate);	// Ajout d'un listener sur le champs pour détecter la validation
 		m_TF_url.getDocument().addDocumentListener(m_Listener_TF_url);	// Ajout d'un listener sur le document pour savoir lorsque le texte change
 		m_TF_url.setMaximumSize(new Dimension(Short.MAX_VALUE,m_TF_url.getPreferredSize().height));	// Largeur du champs infinie
 		Box hB_textfieldUrl = Box.createHorizontalBox();
@@ -122,6 +125,7 @@ public class Fenetre extends JFrame{
 		m_Listener_TA_txt = new InputListener();	// Création du listener
 		m_TA_txt.getDocument().addDocumentListener(m_Listener_TA_txt);	// Ajout d'un listener sur le document pour savoir lorsque le texte change
 		m_TA_txt.setLineWrap(true);	// Découpe la ligne lorsqu'on arrive au bout
+		m_TA_txt.setWrapStyleWord(true);	// Effectue un retour à la ligne si le mot est trop long pour être affiché en bout de ligne
 		m_TA_txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); // Ajoute une bordure grise d'1 pixel autour de la zone de texte
 		m_TA_txt.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));	// Largeur et hauteur de la zone de texte infinie
 		m_TA_txt.setMinimumSize(new Dimension(0,0));	// Largeur et hauteur de la zone de texte infinie
@@ -185,6 +189,7 @@ public class Fenetre extends JFrame{
 		m_Listener_TA_smsMsg = new InputListener();
 		m_TA_smsMsg.getDocument().addDocumentListener(m_Listener_TA_smsMsg);	// Ajout d'un listener sur le document
 		m_TA_smsMsg.setLineWrap(true);	// Découpe la ligne lorsqu'on arrive au bout
+		m_TA_smsMsg.setWrapStyleWord(true);	// Effectue un retour à la ligne si le mot est trop long pour être affiché en bout de ligne
 		m_TA_smsMsg.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); // Ajoute une bordure grise d'1 pixel autour de la zone de texte
 		m_TA_smsMsg.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));	// Largeur et hauteur de la zone de texte infinie
 		m_TA_smsMsg.setMinimumSize(new Dimension(0,0));	// Largeur et hauteur minimum de la zone de texte nulle
@@ -363,5 +368,9 @@ public class Fenetre extends JFrame{
 	
 	public ButtonListener getListener_B_generer() {
 		return m_Listener_B_generer;
+	}
+	
+	public ValidationListener getListener_TF_urlValidate() {
+		return m_Listener_TF_urlValidate;
 	}
 }

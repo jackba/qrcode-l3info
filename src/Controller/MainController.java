@@ -42,6 +42,7 @@ public class MainController {
 		
 		// Assignation des controleurs subsidiaires aux listeners pour que ces derniers effectuent une redirection vers les controleurs
 		m_fenetre.getListener_TF_url().setController(m_contr_TF_url);
+		m_fenetre.getListener_TF_urlValidate().setController(m_contr_TF_url);
 		m_fenetre.getListener_TF_tel().setController(m_contr_TF_tel);
 		m_fenetre.getListener_TF_smsTel().setController(m_contr_TF_smsTel);
 		m_fenetre.getListener_TA_smsMsg().setController(m_contr_TA_smsMsg);
