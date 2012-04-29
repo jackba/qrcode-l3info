@@ -5,6 +5,9 @@ import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.*;
 
+import Controller.ButtonControllerGenerate;
+import Controller.ButtonListener;
+
 @SuppressWarnings("serial")
 public class Fenetre extends JFrame{
 	
@@ -202,7 +205,7 @@ public class Fenetre extends JFrame{
         
         // Générer (Bouton)
         m_B_generer = new JButton("Générer");
-        m_B_generer.addActionListener(new BoutonGenererListener(this));	// Ajout d'un listener sur le bouton
+        m_B_generer.addActionListener(new ButtonListener(new ButtonControllerGenerate(this)));	// Ajout d'un listener sur le bouton
         
         Box hB_generer = Box.createHorizontalBox();
         hB_generer.add(m_B_generer);
