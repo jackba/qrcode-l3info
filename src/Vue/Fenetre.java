@@ -21,6 +21,22 @@ public class Fenetre extends JFrame{
 	private JButton m_B_generer;
 	
 	private JTextField m_TF_url;
+	private JTextField m_TF_tel;
+	private JTextField m_TF_smsTel;
+	
+	private JTextArea m_TA_txt;
+	private JTextArea m_TA_smsMsg;
+	
+	private JLabel m_L_txtCount;
+	private JLabel m_L_smsMsgCount;
+	
+	private InputListener m_Listener_TF_url;
+	private InputListener m_Listener_TA_txt;
+	private InputListener m_Listener_TF_tel;
+	private InputListener m_Listener_TF_smsTel;
+	private InputListener m_Listener_TA_smsMsg;
+	
+	private ButtonListener m_Listener_B_generer;
 	
 	public Fenetre()
 	{
@@ -79,7 +95,8 @@ public class Fenetre extends JFrame{
 		
 		// Champs texte URL
 		m_TF_url = new JTextField(Short.MAX_VALUE);
-		m_TF_url.getDocument().addDocumentListener(new InputListener());	// Ajout d'un listener sur le document pour savoir lorsque le texte change
+		m_Listener_TF_url = new InputListener();
+		m_TF_url.getDocument().addDocumentListener(m_Listener_TF_url);	// Ajout d'un listener sur le document pour savoir lorsque le texte change
 		m_TF_url.setMaximumSize(new Dimension(Short.MAX_VALUE,m_TF_url.getPreferredSize().height));	// Largeur du champs infinie
 		Box hB_textfieldUrl = Box.createHorizontalBox();
 		hB_textfieldUrl.add(m_TF_url);
@@ -94,20 +111,22 @@ public class Fenetre extends JFrame{
 		 */
 		// Label Texte libre - caracteres restants
 		JLabel L_txt = new JLabel("Texte libre:");
-		JLabel L_txtCount = new JLabel("250 caractères restants");
+		m_L_txtCount = new JLabel("250 caractères restants");
 		Box hB_labelTxt = Box.createHorizontalBox();
 		hB_labelTxt.add(L_txt);
 		hB_labelTxt.add(Box.createHorizontalGlue());
-		hB_labelTxt.add(L_txtCount);
+		hB_labelTxt.add(m_L_txtCount);
 		
 		// Champs Texte libre
-		JTextArea TA_txt = new JTextArea(Short.MAX_VALUE,Short.MAX_VALUE);
-		TA_txt.setLineWrap(true);	// Découpe la ligne lorsqu'on arrive au bout
-		TA_txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); // Ajoute une bordure grise d'1 pixel autour de la zone de texte
-		TA_txt.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));	// Largeur et hauteur de la zone de texte infinie
-		TA_txt.setMinimumSize(new Dimension(0,0));	// Largeur et hauteur de la zone de texte infinie
+		m_TA_txt = new JTextArea(Short.MAX_VALUE,Short.MAX_VALUE);
+		m_Listener_TA_txt = new InputListener();	// Création du listener
+		m_TA_txt.getDocument().addDocumentListener(m_Listener_TA_txt);	// Ajout d'un listener sur le document pour savoir lorsque le texte change
+		m_TA_txt.setLineWrap(true);	// Découpe la ligne lorsqu'on arrive au bout
+		m_TA_txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); // Ajoute une bordure grise d'1 pixel autour de la zone de texte
+		m_TA_txt.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));	// Largeur et hauteur de la zone de texte infinie
+		m_TA_txt.setMinimumSize(new Dimension(0,0));	// Largeur et hauteur de la zone de texte infinie
 		Box hB_textareaTxt = Box.createHorizontalBox();
-		hB_textareaTxt.add(TA_txt);
+		hB_textareaTxt.add(m_TA_txt);
 		
 		// Saisie Texte libre (Label1, Label2 - TextArea)
 		m_vB_txt = Box.createVerticalBox();
@@ -124,10 +143,12 @@ public class Fenetre extends JFrame{
 		hB_labelTel.add(Box.createHorizontalGlue());
 		
 		// Champs texte Num de Tel
-		JTextField TF_tel = new JTextField(Short.MAX_VALUE);
-		TF_tel.setMaximumSize(new Dimension(Short.MAX_VALUE,TF_tel.getPreferredSize().height));	// Largeur du champs infinie
+		m_TF_tel = new JTextField(Short.MAX_VALUE);
+		m_Listener_TF_tel = new InputListener();
+		m_TF_tel.getDocument().addDocumentListener(m_Listener_TF_tel);	// Ajout d'un listener sur le document pour savoir lorsque le texte change
+		m_TF_tel.setMaximumSize(new Dimension(Short.MAX_VALUE, m_TF_tel.getPreferredSize().height));	// Largeur du champs infinie
 		Box hB_textfieldTel = Box.createHorizontalBox();
-		hB_textfieldTel.add(TF_tel);
+		hB_textfieldTel.add(m_TF_tel);
 		
 		// Saisie Num de Tel (Label - TextField)
 		m_vB_tel = Box.createVerticalBox();
@@ -144,27 +165,31 @@ public class Fenetre extends JFrame{
 		hB_labelSmsTel.add(Box.createHorizontalGlue());
 		
 		// Champs texte SMS - Num de Tel
-		JTextField TF_smsTel = new JTextField(Short.MAX_VALUE);
-		TF_smsTel.setMaximumSize(new Dimension(Short.MAX_VALUE,TF_smsTel.getPreferredSize().height));	// Largeur du champs infinie
+		m_TF_smsTel = new JTextField(Short.MAX_VALUE);
+		m_Listener_TF_smsTel = new InputListener();
+		m_TF_smsTel.getDocument().addDocumentListener(m_Listener_TF_smsTel);	// Ajout d'un listener sur le document
+		m_TF_smsTel.setMaximumSize(new Dimension(Short.MAX_VALUE,m_TF_smsTel.getPreferredSize().height));	// Largeur du champs infinie
 		Box hB_textfieldSmsTel = Box.createHorizontalBox();
-		hB_textfieldSmsTel.add(TF_smsTel);
+		hB_textfieldSmsTel.add(m_TF_smsTel);
 		
 		// Label Message - caracteres restants
 		JLabel L_smsMsg = new JLabel("Message:");
-		JLabel L_smsMsgCount = new JLabel("160 caractères restants");
+		m_L_smsMsgCount = new JLabel("160 caractères restants");
 		Box hB_labelSmsMsg = Box.createHorizontalBox();
 		hB_labelSmsMsg.add(L_smsMsg);
 		hB_labelSmsMsg.add(Box.createHorizontalGlue());
-		hB_labelSmsMsg.add(L_smsMsgCount);
+		hB_labelSmsMsg.add(m_L_smsMsgCount);
 		
 		// Champs Texte libre
-		JTextArea TA_smsMsg = new JTextArea(Short.MAX_VALUE,Short.MAX_VALUE);
-		TA_smsMsg.setLineWrap(true);	// Découpe la ligne lorsqu'on arrive au bout
-		TA_smsMsg.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); // Ajoute une bordure grise d'1 pixel autour de la zone de texte
-		TA_smsMsg.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));	// Largeur et hauteur de la zone de texte infinie
-		TA_smsMsg.setMinimumSize(new Dimension(0,0));	// Largeur et hauteur minimum de la zone de texte nulle
+		m_TA_smsMsg = new JTextArea(Short.MAX_VALUE,Short.MAX_VALUE);
+		m_Listener_TA_smsMsg = new InputListener();
+		m_TA_smsMsg.getDocument().addDocumentListener(m_Listener_TA_smsMsg);	// Ajout d'un listener sur le document
+		m_TA_smsMsg.setLineWrap(true);	// Découpe la ligne lorsqu'on arrive au bout
+		m_TA_smsMsg.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); // Ajoute une bordure grise d'1 pixel autour de la zone de texte
+		m_TA_smsMsg.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));	// Largeur et hauteur de la zone de texte infinie
+		m_TA_smsMsg.setMinimumSize(new Dimension(0,0));	// Largeur et hauteur minimum de la zone de texte nulle
 		Box hB_textAreaSmsMsg = Box.createHorizontalBox();
-		hB_textAreaSmsMsg.add(TA_smsMsg);
+		hB_textAreaSmsMsg.add(m_TA_smsMsg);
 		
 		// Saisie SMS - Num de Tel (Label - TextField) - Message (Label1, Label2 - TextArea)
 		m_vB_sms = Box.createVerticalBox();
@@ -205,7 +230,8 @@ public class Fenetre extends JFrame{
         
         // Générer (Bouton)
         m_B_generer = new JButton("Générer");
-        m_B_generer.addActionListener(new ButtonListener());	// Ajout d'un listener sur le bouton
+        m_Listener_B_generer = new ButtonListener();
+        m_B_generer.addActionListener(m_Listener_B_generer);	// Ajout d'un listener sur le bouton
         
         Box hB_generer = Box.createHorizontalBox();
         hB_generer.add(m_B_generer);
@@ -263,4 +289,79 @@ public class Fenetre extends JFrame{
 	public void showTxtBox() {m_vB_txt.setVisible(true);}
 	public void showTelBox() {m_vB_tel.setVisible(true);}
 	public void showSmsBox() {m_vB_sms.setVisible(true);}
+	
+	/*
+	 *  GETTERS
+	 */
+	public JRadioButton getRB_url() {
+		return m_RB_url;
+	}
+
+	public JRadioButton getRB_txt() {
+		return m_RB_txt;
+	}
+
+	public JRadioButton getRB_tel() {
+		return m_RB_tel;
+	}
+
+	public JRadioButton getRB_sms() {
+		return m_RB_sms;
+	}
+
+	public JButton getB_generer() {
+		return m_B_generer;
+	}
+
+	public JTextField getTF_url() {
+		return m_TF_url;
+	}
+
+	public JTextField getTF_tel() {
+		return m_TF_tel;
+	}
+
+	public JTextField getTF_smsTel() {
+		return m_TF_smsTel;
+	}
+
+	public JTextArea getTA_txt() {
+		return m_TA_txt;
+	}
+
+	public JTextArea getTA_smsMsg() {
+		return m_TA_smsMsg;
+	}
+
+	public JLabel getL_txtCount() {
+		return m_L_txtCount;
+	}
+
+	public JLabel getL_smsMsgCount() {
+		return m_L_smsMsgCount;
+	}
+
+	public InputListener getListener_TF_url() {
+		return m_Listener_TF_url;
+	}
+
+	public InputListener getListener_TA_txt() {
+		return m_Listener_TA_txt;
+	}
+
+	public InputListener getListener_TF_tel() {
+		return m_Listener_TF_tel;
+	}
+
+	public InputListener getListener_TF_smsTel() {
+		return m_Listener_TF_smsTel;
+	}
+
+	public InputListener getListener_TA_smsMsg() {
+		return m_Listener_TA_smsMsg;
+	}
+	
+	public ButtonListener getListener_B_generer() {
+		return m_Listener_B_generer;
+	}
 }

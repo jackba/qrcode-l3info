@@ -16,7 +16,7 @@ public class ButtonListener implements ActionListener {
 	
 	public void actionPerformed(ActionEvent event)
 	{
-		m_controller.onClick(event);
+		if (m_controller != null) m_controller.onClick(event);
 	}
 
 }
