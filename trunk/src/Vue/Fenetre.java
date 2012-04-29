@@ -5,9 +5,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.*;
 
-import Controller.ButtonControllerGenerate;
-import Controller.ButtonListener;
-
 @SuppressWarnings("serial")
 public class Fenetre extends JFrame{
 	
@@ -22,6 +19,8 @@ public class Fenetre extends JFrame{
 	private Box m_vB_sms;
 	
 	private JButton m_B_generer;
+	
+	private JTextField m_TF_url;
 	
 	public Fenetre()
 	{
@@ -79,10 +78,11 @@ public class Fenetre extends JFrame{
 		hB_labelUrl.add(Box.createHorizontalGlue());
 		
 		// Champs texte URL
-		JTextField TF_url = new JTextField(Short.MAX_VALUE);
-		TF_url.setMaximumSize(new Dimension(Short.MAX_VALUE,TF_url.getPreferredSize().height));	// Largeur du champs infinie
+		m_TF_url = new JTextField(Short.MAX_VALUE);
+		m_TF_url.getDocument().addDocumentListener(new InputListener());	// Ajout d'un listener sur le document pour savoir lorsque le texte change
+		m_TF_url.setMaximumSize(new Dimension(Short.MAX_VALUE,m_TF_url.getPreferredSize().height));	// Largeur du champs infinie
 		Box hB_textfieldUrl = Box.createHorizontalBox();
-		hB_textfieldUrl.add(TF_url);
+		hB_textfieldUrl.add(m_TF_url);
 		
 		// Saisie URL (Label - TextField)
 		m_vB_url = Box.createVerticalBox();
@@ -205,7 +205,7 @@ public class Fenetre extends JFrame{
         
         // Générer (Bouton)
         m_B_generer = new JButton("Générer");
-        m_B_generer.addActionListener(new ButtonListener(new ButtonControllerGenerate(this)));	// Ajout d'un listener sur le bouton
+        m_B_generer.addActionListener(new ButtonListener());	// Ajout d'un listener sur le bouton
         
         Box hB_generer = Box.createHorizontalBox();
         hB_generer.add(m_B_generer);

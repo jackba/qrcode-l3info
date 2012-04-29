@@ -12,6 +12,6 @@ public abstract class ButtonController {
 		m_fenetre = f;
 	}
 	
-	public abstract void performAction(ActionEvent event);
+	public abstract void onClick(ActionEvent event);
 
 }

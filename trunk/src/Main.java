@@ -1,15 +1,10 @@
-import javax.swing.SwingUtilities;
-import Vue.Fenetre;
+import Controller.MainController;
 
 public class Main {
 
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable(){
-			public void run(){
-				Fenetre f = new Fenetre();
-				f.setVisible(true);
-			}
-		});
+		MainController controller = new MainController();
+		controller.runApplication();
 	}
 	
 }
