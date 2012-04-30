@@ -22,6 +22,8 @@ public class QRcode {
 	}
 	
 	// Remplit la matrice du QRcode en se basant sur la version, le niveau de correction et la chaine binaire
+	// False = carré blanc
+	// True = carré noir
 	public void fillQRmatrix()
 	{
 		fillFinderPatterns();
@@ -49,6 +51,12 @@ public class QRcode {
 			for (int col=2; col<thirdBlackSquare+2; col++)
 				m_matrice[line][col] = true;
 		
+		for (int i=0; i<=firstBlackSquare; i++)
+		{
+			m_matrice[firstBlackSquare][i] = false;	// Remplissage ligne blanche
+			m_matrice[i][firstBlackSquare] = false;	// Remplissage colonne blanche
+		}
+		
 		// Second patron
 		for (int line=0; line<firstBlackSquare; line ++)
 			for (int col=m_matriceSize-firstBlackSquare; col<m_matriceSize; col++)
@@ -62,6 +70,17 @@ public class QRcode {
 			for (int col=m_matriceSize-thirdBlackSquare-2; col<m_matriceSize-2; col++)
 				m_matrice[line][col] = true;
 		
+		/*for (int i=m_matriceSize-firstBlackSquare-1; i<m_matriceSize; i++)
+		{
+			m_matrice[firstBlackSquare][i] = false;	// Remplissage ligne blanche
+			m_matrice[i+firstBlackSquare+1-m_matriceSize][m_matriceSize-firstBlackSquare-1] = false;	// Remplissage colonne blanche
+		}*/
+		for (int i=0; i<=firstBlackSquare; i++)
+		{
+			m_matrice[firstBlackSquare][m_matriceSize-1-i] = false;	// Remplissage ligne blanche
+			m_matrice[i][m_matriceSize-1-firstBlackSquare] = false;	// Remplissage colonne blanche
+		}
+		
 		// Troisième patron
 		for (int line=m_matriceSize-firstBlackSquare; line<m_matriceSize; line ++)
 			for (int col=0; col<firstBlackSquare; col++)
@@ -74,6 +93,12 @@ public class QRcode {
 		for (int line=m_matriceSize-thirdBlackSquare-2; line<m_matriceSize-2; line ++)
 			for (int col=2; col<thirdBlackSquare+2; col++)
 				m_matrice[line][col] = true;
+		
+		for (int i=0; i<=firstBlackSquare; i++)
+		{
+			m_matrice[m_matriceSize-firstBlackSquare-1][i] = false;	// Remplissage ligne blanche
+			m_matrice[m_matriceSize-1-i][firstBlackSquare] = false;	// Remplissage colonne blanche
+		}
 	}
 	
 	// Retourne le nombre de modules nécessaires pour un côté
