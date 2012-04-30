@@ -7,7 +7,7 @@ public class QRcode {
 	private String m_correcLevel;
 	private Boolean[][] m_matrice;
 	private int m_matriceSize;
-
+	
 	public static void main(String[] args) {
 		QRcode code = new QRcode(1,"H","01010210");
 		code.fillQRmatrix();
@@ -28,8 +28,16 @@ public class QRcode {
 	{
 		fillFinderPatterns();
 		fillTimingPatterns();
+		fillBlackModulePattern();
 	}
 
+	// Ajoute un module noir toujours situé au même emplacement
+	// c.a.d juqte à coté du patron de positionnement carré situé en bas à gauche
+	private void fillBlackModulePattern()
+	{
+		m_matrice[m_matriceSize-8][8] = true;	// Patron horizontal
+	}
+	
 	// Ajoute la ligne et la colonne composés d'une alternance de modules noirs et blanc
 	// et situés entre les Finders pattern (les 3 gros carrés de détection de position).
 	private void fillTimingPatterns()
@@ -91,11 +99,6 @@ public class QRcode {
 			for (int col=m_matriceSize-thirdBlackSquare-2; col<m_matriceSize-2; col++)
 				m_matrice[line][col] = true;
 
-		/*for (int i=m_matriceSize-firstBlackSquare-1; i<m_matriceSize; i++)
-		{
-			m_matrice[firstBlackSquare][i] = false;	// Remplissage ligne blanche
-			m_matrice[i+firstBlackSquare+1-m_matriceSize][m_matriceSize-firstBlackSquare-1] = false;	// Remplissage colonne blanche
-		}*/
 		for (int i=0; i<=firstBlackSquare; i++)
 		{
 			m_matrice[firstBlackSquare][m_matriceSize-1-i] = false;	// Remplissage ligne blanche
