@@ -32,7 +32,7 @@ class QRcodeComponent extends JPanel implements ComponentListener {
 	{
 		// Ajout d'un écouteur sur le redimensionnement
 		// Qui pointe sur cette classe
-		// On implémente donc le listener correspondant
+		// On implémente donc le listener ComponentListener
 		this.addComponentListener(this);
 		m_previousWidth = getPreferredSize().width;
 		m_previousHeight = getPreferredSize().height;
@@ -107,6 +107,7 @@ class QRcodeComponent extends JPanel implements ComponentListener {
 			m_image = createImage(tempWidth,tempHeight);
 			m_buffer = m_image.getGraphics();
 
+			// Assignation des nouvelles dimensions comme étant les plus grandes dimensions atteintes jusqu'ici par le composant
 			m_previousWidth = tempWidth;
 			m_previousHeight = tempHeight;
 

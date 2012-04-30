@@ -3,10 +3,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+
 import javax.swing.*;
 
 @SuppressWarnings("serial")
-public class Fenetre extends JFrame{
+public class Fenetre extends JFrame {
 	
 	private JRadioButton m_RB_url;
 	private JRadioButton m_RB_txt;
@@ -36,6 +37,7 @@ public class Fenetre extends JFrame{
 		build();
 	}
 	
+	// Initialise et place les composants graphiques
 	private void build()
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -200,18 +202,70 @@ public class Fenetre extends JFrame{
 		vB_saisie.add(Box.createHorizontalGlue());	// Etend la boite sur toute la largeur
 		vB_saisie.setBorder(BorderFactory.createTitledBorder("Saisie"));	// Définit la bordure et le titre
 		
-		// Taille (Label - ComboBox)
+		/*
+		 *  PANEL PARAMETRES 
+		 */
+		
+		// Composants de correction d'erreur
+		// Correction (Label)
+		JLabel L_correct = new JLabel("Correction : ");
+
+		// Boutons-radios de version
+		JRadioButton m_RB_correctionL = new JRadioButton("L (7%)");
+		JRadioButton m_RB_correctionM = new JRadioButton("M (15%)");
+		JRadioButton m_RB_correctionQ = new JRadioButton("Q (25%)");
+		JRadioButton m_RB_correctionH = new JRadioButton("H (30%)");
+
+		// Ajout des boutons dans un même groupe
+		ButtonGroup BG_correction = new ButtonGroup();
+		BG_correction.add(m_RB_correctionL);
+		BG_correction.add(m_RB_correctionM);
+		BG_correction.add(m_RB_correctionQ);
+		BG_correction.add(m_RB_correctionH);
+		
+		// Ajout des listeners sur les boutons
+		// TODO add listeners RadioButtons
+
+		// Ajout des composants dans une boîte horizontale
+		Box hB_correction = Box.createHorizontalBox();
+		hB_correction.add(L_correct);
+		hB_correction.add(m_RB_correctionL);
+		hB_correction.add(m_RB_correctionM);
+		hB_correction.add(m_RB_correctionQ);
+		hB_correction.add(m_RB_correctionH);
+		hB_correction.add(Box.createHorizontalGlue());
+
+		// Composants de taille
+		// Version (Label)
 		JLabel L_taille = new JLabel("Taille : ");
-		String comboBoxItems[] = { "S","M", "L", "XL" };
-		JComboBox CmB_taille = new JComboBox(comboBoxItems);
+
+		// Combo-box pour les niveaux de correction d'erreur
+		String itemsTaille[] = new String[41];	// items pour peupler la combo-box
+		itemsTaille[0] = "Auto";
+		for (int i=1; i<41; i++)	// Remplissage des items
+			itemsTaille[i] = Integer.toString(i);
+		JComboBox CmB_taille = new JComboBox(itemsTaille);	// Création de la combo box
+		
+		// Attribution d'une taille max et d'un alignement horizontal centré
 		CmB_taille.setMaximumSize(CmB_taille.getPreferredSize());
 		CmB_taille.setAlignmentX(CENTER_ALIGNMENT);
-       
-        Box hB_taille = Box.createHorizontalBox();
-        hB_taille.add(L_taille);
-        hB_taille.add(CmB_taille);
-        hB_taille.add(Box.createHorizontalGlue());
-        
+		
+		// Ajout des composants dans une boîte horizontale
+		Box hB_taille = Box.createHorizontalBox();
+		hB_taille.add(L_taille);
+		hB_taille.add(CmB_taille);
+		hB_taille.add(Box.createHorizontalGlue());
+		
+		Box vB_params = Box.createVerticalBox();
+		vB_params.add(hB_correction);
+		vB_params.add(hB_taille);
+
+		// Boite parametres
+		Box hB_parametre = Box.createHorizontalBox();
+		hB_parametre.add(vB_params);
+		hB_parametre.add(Box.createHorizontalGlue());	// Etend la boite sur toute la largeur
+		hB_parametre.setBorder(BorderFactory.createTitledBorder("Paramètres"));	// Définit la bordure et le titre
+		
         // Générer (Bouton)
         m_B_generer = new JButton("Générer");
         
@@ -219,9 +273,9 @@ public class Fenetre extends JFrame{
         hB_generer.add(m_B_generer);
         hB_generer.add(Box.createHorizontalGlue());
         
-        // Taille - Générer (VerticalBox)
+        // Paramètres - Générer (VerticalBox)
         Box vB_tailleGenerer = Box.createVerticalBox();
-        vB_tailleGenerer.add(hB_taille);
+        vB_tailleGenerer.add(hB_parametre);
         vB_tailleGenerer.add(Box.createVerticalStrut(5));
         vB_tailleGenerer.add(hB_generer);
 
@@ -254,7 +308,8 @@ public class Fenetre extends JFrame{
         Container c = getContentPane();	// Récupère la zone cliente de la frame (zone dans laquelle on peut placer des composants/conteneurs)
         c.add(hB_principale,BorderLayout.CENTER);	// Place la boite principale dans la fenêtre
         pack();	// Ajuste la taille de la frame de manière à ce que tous les composants soient visibles
-        setMinimumSize(getPreferredSize());	// Définit la taille minimale de la frame comme étant la taille après l'opération pack (tous les composants visibles)
+        setMinimumSize(new Dimension(615,325));	// Définit la taille minimale de la frame de manière à ce que tous les composants soient bien visibles
+        // setMinimumSize(getPreferredSize());	// Définit la taille minimale de la frame comme étant la taille après l'opération pack (tous les composants visibles)
 	}
 	
 	// Masque les panels de saisie affichés (en théorie un seul est affiché)
