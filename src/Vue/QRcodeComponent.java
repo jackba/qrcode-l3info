@@ -30,26 +30,17 @@ class QRcodeComponent extends JPanel implements ComponentListener {
 	// Constructeur
 	public QRcodeComponent()
 	{
+		// Définition d'une taille par défaut
+		this.setPreferredSize(new Dimension(200,200));
+		
+		// initialisation des dernières plus grandes dimensions qu'a pris le composant
+		m_previousWidth = getPreferredSize().width;
+		m_previousHeight = getPreferredSize().height;
+		
 		// Ajout d'un écouteur sur le redimensionnement
 		// Qui pointe sur cette classe
 		// On implémente donc le listener ComponentListener
 		this.addComponentListener(this);
-		m_previousWidth = getPreferredSize().width;
-		m_previousHeight = getPreferredSize().height;
-	}
-
-	// Fournit une taille préférée pour permettre aux conteneurs supérieurs
-	// d'adapter leur taille à ce composant
-	public Dimension getPreferredSize() {
-		return new Dimension(250,250);
-	}
-
-	public Dimension getMaximumSize() {
-		return new Dimension(Short.MAX_VALUE,Short.MAX_VALUE);
-	}
-
-	public Dimension getMinimumSize() {
-		return getPreferredSize();
 	}
 
 	// OnPaint
@@ -64,9 +55,11 @@ class QRcodeComponent extends JPanel implements ComponentListener {
 
 		// Dessin sur le buffer
 		m_buffer.setColor(Color.white);
-		m_buffer.fillRect(0, 0, getWidth(), getHeight());
+		m_buffer.fillRect(0, 0, getWidth(), getHeight());	// Rectangle blanc
+		/*
 		m_buffer.setColor(Color.black);
-		m_buffer.drawString("Ceci est mon panel personnalisé",10,20);
+		m_buffer.drawString("Ceci est mon panel personnalisé",10,20);	// Texte noir
+		*/
 
 		// Recopie du buffer mémoire dans le buffer d'affichage
 		g.drawImage(m_image, 0, 0, this);
