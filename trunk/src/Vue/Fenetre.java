@@ -287,17 +287,16 @@ public class Fenetre extends JFrame {
         vB_commandes.add(vB_tailleGenerer);
         
         // Panel de l'image QRcode (taille fixée à 200x200 pixels)
-        JPanel P_image = new JPanel();
-        P_image.setMaximumSize(new Dimension(200,200));
-        P_image.setMinimumSize(new Dimension(200,200));
-        P_image.setPreferredSize(new Dimension(200,200));
-        P_image.setSize(200, 200);
-        P_image.setBackground(Color.WHITE);
+        QRcodeComponent qrPanel = new QRcodeComponent();
+        qrPanel.setPreferredSize(new Dimension(200,200));
+        qrPanel.setMaximumSize(new Dimension(200,200));
+        qrPanel.setMinimumSize(new Dimension(200,200));
+        qrPanel.setSize(200, 200);
         
         // Boite de l'image QRcode
         Box vB_image = Box.createVerticalBox();
         vB_image.add(Box.createVerticalGlue());
-        vB_image.add(P_image);
+        vB_image.add(qrPanel);
         vB_image.add(Box.createVerticalGlue());
         
         // Boite principale
