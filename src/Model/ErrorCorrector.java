@@ -16,7 +16,7 @@ import PolynomialPack.TermeEntier;
  *  String msg = "00100000010110110000101101111000110100010111001011011100010011010100001101000000111011000001000111101100";
  *  
  *  ErrorCorrector ec = new ErrorCorrector();
- *  String correction = ec.getErrorCorrectionString(msg, 13);
+ *  String correction = ec.getCorrectionString(msg, 13);
  *  System.out.println(correction);
  *  // Affiche la chaine de correction suivante :
  *  // 10101000010010000001011001010010110110010011011010011100000000000010111000001111101101000111101000010000
@@ -148,7 +148,7 @@ public class ErrorCorrector {
 	 *  Retourne une chaine binaire de correction d'erreur QRcode et
 	 *  comportant nbOctetsCorrection pour le messageBinaire spécifié
 	 */
-	private String getCorrectionString(String messageBinaire, int nbOctetsCorrection)
+	protected String getCorrectionString(String messageBinaire, int nbOctetsCorrection)
 	{
 		m_divPolynomial = new DivisionPolynomial(messageBinaire, nbOctetsCorrection);
 		IntegerPolynom myErrorCorrector = m_divPolynomial.createErrorCorrectorPolynom();

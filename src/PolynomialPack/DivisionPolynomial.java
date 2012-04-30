@@ -7,7 +7,10 @@ public class DivisionPolynomial {
 	private MessagePolynomial m_msgP;
 	private AlphaPolynom m_generatedPolynomial;
 	private IntegerPolynom m_messagePolynomial;
-	private GaloisField m_galoisF;
+	
+	public DivisionPolynomial()
+	{
+	}
 	
 	public DivisionPolynomial(String msgBinaire, int nbOctetsDeCorrection)
 	{
@@ -21,7 +24,6 @@ public class DivisionPolynomial {
 		
 		m_msgP = new MessagePolynomial();
 		m_messagePolynomial  = m_msgP.createMessagePolynomial(msgBinaire, nbOctetsDeCorrection);
-		m_galoisF = GaloisField.getInstance();
 	}
 	
 	// Multiplie un polynome (alpha ou entier) par x^exposant
@@ -127,6 +129,12 @@ public class DivisionPolynomial {
 		return result;
 	}
 	
+	// Effectue un OU-EXCLUSIF entre deux entiers
+	public int XOR(int a, int b)
+	{
+		return (a ^ b);
+	}
+	
 	// Retourne un polynome entier résultant d'un OU-EXCLUSIF entre deux polynomes entiers p1 et p2
 	private IntegerPolynom combinePolynoms(IntegerPolynom p1, IntegerPolynom p2)
 	{
@@ -164,7 +172,7 @@ public class DivisionPolynomial {
 			coeff1 = ((TermeEntier)p1.getTermeAt(i)).getCoefficient();	// récupère le premier coefficient
 			coeff2 = ((TermeEntier)p2.getTermeAt(i)).getCoefficient();	// récupère le second coefficient
 			// Ajoute un nouveau terme au résultat avec pour coefficient le XOR de coeff1 et coeff2
-			result.addNewTerme(m_galoisF.XOR(coeff1, coeff2), p1.getTermeAt(i).getExposant()) ;
+			result.addNewTerme(XOR(coeff1, coeff2), p1.getTermeAt(i).getExposant()) ;
 		}
 		
 		if (!isP1equalP2)	// Un des deux polynomes a plus de termes que l'autre
@@ -242,6 +250,68 @@ public class DivisionPolynomial {
 		
 		// Le résultat contient un dernier terme de degré 1, le résultat est prêt
 		return result;
+	}
+	
+	// Retourne le polynome du reste entier de la division polynomiale du dividende par le diviseur.
+	// NOTE IMPORTANTE: le diviseur comme le dividende doivent avoir tous leurs coefficients égaux à 1 ou 0.
+	public IntegerPolynom createRemainderPolynom(IntegerPolynom diviseur, IntegerPolynom dividende)
+	{
+		// Initialisation
+		IntegerPolynom previousResteInteger;
+		
+		IntegerPolynom myDiviseur = (IntegerPolynom)diviseur.clone();	// Copie locale du diviseur polynomial
+		IntegerPolynom myDividende = (IntegerPolynom)dividende.clone();	// Copie locale du dividende polynomial
+		
+		// Tri des polynomes par degrés décroissants
+		myDiviseur.sortByExposants();
+		myDividende.sortByExposants();
+		
+		// Création d'un diviseur intermédiaire qui servira uniquement à l'initialisation
+		IntegerPolynom interDiviseur = (IntegerPolynom) myDiviseur.clone();
+		
+		// Le diviseur est déjà supérieur au dividende, le reste de la division polynomiale entière est donc le dividende (ce cas ne devrait jamais se produire)
+		if (myDiviseur.getTermeAt(0).getExposant() > myDividende.getTermeAt(0).getExposant())
+			return myDividende;
+		
+		// On récupère l'exposant du premier terme du quotient
+		int expQuotientInter = myDividende.getTermeAt(0).getExposant() - myDiviseur.getTermeAt(0).getExposant();
+		
+		// Le diviseur intermédiaire est ramené au même degré que le dividende
+		uniformisePolynoms(interDiviseur,myDividende);
+		
+		// l'application d'un OU-EXCLUSIF entre le diviseur intermédiaire et le dividende nous donne le reste intermédiaire
+		// Cette opération est valable uniquement parce que nous travaillons exclusivement avec des coefficients binaires (0 ou 1)
+		IntegerPolynom resteInter = combinePolynoms(interDiviseur,myDividende);
+		
+		// On retire les termes nuls du reste intermédiaire
+		resteInter = removeFirstZerosTerms(resteInter);
+		
+		// On continue de diviser tant que le degré du quotient intermédiaire (le terme du quotient pour être plus précis) est strictement positif
+		while (expQuotientInter > 0)
+		{
+			// Sauvegarde du reste intermédiaire précédent pour le calcul de ce reste intermédiaire
+			previousResteInteger = (IntegerPolynom) resteInter.clone();
+			
+			// On récupère l'exposant du terme courant du quotient
+			expQuotientInter = resteInter.getTermeAt(0).getExposant() - myDiviseur.getTermeAt(0).getExposant();
+			
+			// Si l'exposant est strictement positif,on continue la division.
+			if (expQuotientInter >= 0)
+			{
+				// Le diviseur intermédiaire est ramené au même degré que le reste précédent
+				uniformisePolynoms(interDiviseur, resteInter);
+				
+				// l'application d'un OU-EXCLUSIF entre le diviseur intermédiaire et le reste précédent nous donne le reste intermédiaire
+				// Cette opération est valable uniquement parce que nous travaillons exclusivement avec des coefficients binaires (0 ou 1)
+				resteInter = combinePolynoms(interDiviseur,previousResteInteger);
+				
+				// On retire les termes nuls du reste intermédiaire
+				resteInter = removeFirstZerosTerms(resteInter);
+			}
+		}
+		
+		// Le reste est retourné
+		return resteInter;
 	}
 	
 	/*

@@ -81,10 +81,14 @@ public abstract class Polynom {
 	{
 		m_vectTermes = termes;
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	protected Vector<Terme> getTermes()
 	{
-		return (Vector<Terme>) m_vectTermes.clone();
+		Vector<Terme> t = new Vector<Terme>();
+		for (int i=0; i<m_vectTermes.size(); i++)
+			t.add(m_vectTermes.get(i).clone());
+		
+		//return (Vector<Terme>) m_vectTermes.clone();
+		return t;
 	}
 }
