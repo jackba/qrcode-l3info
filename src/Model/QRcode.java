@@ -8,6 +8,7 @@ public class QRcode {
 	private Boolean[][] m_matrice;
 	private int m_matriceSize;
 	
+	// DEBUG
 	public static void main(String[] args) {
 		QRcode code = new QRcode(1,"H","01010210");
 		code.fillQRmatrix();
