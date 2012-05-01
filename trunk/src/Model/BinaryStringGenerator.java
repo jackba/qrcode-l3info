@@ -2,6 +2,7 @@ package Model;
 
 import Donnees.ErrorCorrectionParser;
 
+// Classe générant la chaine binaire de données et les corrections d'erreurs associées
 public class BinaryStringGenerator {
 
 	private CodeGenerator m_dataGenerator;
