@@ -1,5 +1,7 @@
 package Model;
 
+import Donnees.AlignmentPatternsParser;
+
 // génère une matrice booléenne représentant le dessin du QRcode
 public class QRcode {
 
@@ -11,7 +13,7 @@ public class QRcode {
 	
 	// DEBUG
 	public static void main(String[] args) {
-		QRcode code = new QRcode(1,"H","01010210");
+		QRcode code = new QRcode(7,"H","01010210");
 		code.fillQRmatrix();
 		System.out.println(code);
 	}
@@ -31,8 +33,55 @@ public class QRcode {
 		fillFinderPatterns();
 		fillTimingPatterns();
 		fillBlackModulePattern();
+		fillAlignmentPatterns();
 	}
-
+	
+	// Ajoute les patrons d'alignements. Les patrons d'alignements sont les carrés
+	// de taille plus réduite par rapport aux patrons de positionnements.
+	// Les patrons d'alignements ne sont ajoutés qu'à partir de la deuxième version de QRcode
+	private void fillAlignmentPatterns()
+	{
+		// Récupération de la position centrale des patrons
+		int[] positions = AlignmentPatternsParser.getInstance().getPositions(m_version);
+		
+		// Placement d'un patron à chaque position sauf:
+		// - le premier de la première ligne
+		// - le dernier de la première ligne
+		// - le premier de la dernière ligne
+		for (int i=0; i<positions.length; i++)
+		{
+			for (int j=0; j<positions.length; j++)
+			{
+				if (!(i == 0 && j == 0) &&	// S'il ne s'agit pas du premier de la première ligne
+						!(i == 0 && j == positions.length-1) &&	// Ni du dernier de la première ligne
+						!(i == positions.length-1 && j == 0))	// ni du premier de la dernière ligne
+				drawAnAlignmentPattern(positions[i],positions[j]);	// On ajoute le patron
+			}
+		}
+	}
+	
+	// Dessine un patron d'alignement aux coordonnées spécifiées
+	private void drawAnAlignmentPattern(int line, int column)
+	{
+		// Carré noir le plus à l'extérieur
+		for (int i=line-2; i<=line+2; i++)
+			if (i>=0 && i <m_matriceSize)
+				for (int j=column-2; j<=column+2; j++)
+					if (j>=0 && j<m_matriceSize)
+						m_matrice[i][j] = true;
+		
+		// Carré blanc intermédiaire
+		for (int i=line-1; i<=line+1; i++)
+			if (i>=0 && i <m_matriceSize)
+				for (int j=column-1; j<=column+1; j++)
+					if (j>=0 && j<m_matriceSize)
+						m_matrice[i][j] = false;
+		
+		// Point noir central
+		if (line>=0 && line<m_matriceSize && column>=0 && column<m_matriceSize)
+			m_matrice[line][column] = true;
+	}
+	
 	// Ajoute un module noir toujours situé au même emplacement
 	// c.a.d juqte à coté du patron de positionnement carré situé en bas à gauche
 	private void fillBlackModulePattern()
