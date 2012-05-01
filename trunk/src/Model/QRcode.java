@@ -10,18 +10,22 @@ public class QRcode {
 	private String m_correcLevel;
 	private Boolean[][] m_matrice;
 	private int m_matriceSize;
+	private VersionCorrector m_versionCorrector;
+	private Boolean[][] m_matricePatron;
 	
 	// DEBUG
 	public static void main(String[] args) {
-		QRcode code = new QRcode(7,"H","01010210");
+		QRcode code = new QRcode(2,"H","01010210");
 		code.fillQRmatrix();
-		System.out.println(code);
+		System.out.println(code.patronToString() + "\n\n");
+		//System.out.println(code);
 	}
 
 	public QRcode(int version, String correcLevel , String binaryDataEncoded)
 	{
 		m_binaryString = binaryDataEncoded;
 		m_correcLevel = correcLevel;
+		m_versionCorrector = new VersionCorrector();
 		setVersion(version);
 	}
 
@@ -34,6 +38,85 @@ public class QRcode {
 		fillTimingPatterns();
 		fillBlackModulePattern();
 		fillAlignmentPatterns();
+		fillVersionInformation();
+		fillPatternMatrix();
+		fillData();
+	}
+	
+	// Remplit la matrice avec la chaine de données du QRcode
+	private void fillData()
+	{
+		
+	}
+	
+	// Remplit la matrice patron qui servira à insérer les données et appliquer les masques
+	private void fillPatternMatrix()
+	{
+		// Copie de la matrice courante avec tous les patterns remplits
+		m_matricePatron = new Boolean[m_matriceSize][m_matriceSize];
+		for (int i=0; i<m_matriceSize; i++)
+			for (int j=0; j<m_matriceSize; j++)
+				m_matricePatron[i][j] = m_matrice[i][j];
+		
+		// Ajout des bandes horizontales et verticales de format qui ne doivent pas être remplies par des données
+		// et qui seront remplies plus tards dans la matrice finale
+		for (int i=0; i<6; i++)
+		{
+			m_matricePatron[8][i] = false;
+			m_matricePatron[i][8] = false;
+		}
+		m_matricePatron[8][7] = false;
+		m_matricePatron[8][8] = false;
+		m_matricePatron[7][8] = false;
+		
+		for (int i=m_matriceSize-8; i<m_matriceSize; i++)
+			m_matricePatron[8][i] = false;
+		
+		for (int i=m_matriceSize-7; i<m_matriceSize; i++)
+			m_matricePatron[i][8] = false;
+	}
+	
+	// Ajoute les informations de version dans la matrice
+	private void fillVersionInformation()
+	{
+		// Les informations de version sont ajoutées uniquement à partir de la version 7 ou plus
+		if (m_version >= 7)
+		{
+			String version = m_versionCorrector.getVersionBinaryString(m_version);
+			int charCount = 0;
+			int x,y;
+			
+			// Ajout de la version en haut à droite
+			for (int i=0; i<6; i++)
+			{
+				for (int j=0; j<3; j++)
+				{
+					x = 5-i;
+					y = m_matriceSize-9-j;
+					if (version.charAt(charCount) == '1')
+						m_matrice[x][y] = true;
+					else
+						m_matrice[x][y] = false;
+					charCount++;
+				}
+			}
+			
+			// Ajout de la version en bas à gauche
+			charCount = 0;
+			for (int i=0; i<6; i++)
+			{
+				for (int j=0; j<3; j++)
+				{
+					x = m_matriceSize-9-j;
+					y = 5-i;
+					if (version.charAt(charCount) == '1')
+						m_matrice[x][y] = true;
+					else
+						m_matrice[x][y] = false;
+					charCount++;
+				}
+			}
+		}
 	}
 	
 	// Ajoute les patrons d'alignements. Les patrons d'alignements sont les carrés
@@ -203,6 +286,29 @@ public class QRcode {
 					if (m_matrice[line][col] != null)
 					{
 						if (m_matrice[line][col] == true)
+							result += "[X]";
+						else
+							result += "[ ]";
+					}
+					else
+						result += "...";
+				}
+				result += "\n";
+			}
+		return result;
+	}
+	
+	public String patronToString()
+	{
+		String result = "";
+		if (m_matricePatron != null)
+			for (int line=0; line<m_matriceSize; line ++)
+			{
+				for (int col=0; col<m_matriceSize; col++)
+				{
+					if (m_matricePatron[line][col] != null)
+					{
+						if (m_matricePatron[line][col] == true)
 							result += "[X]";
 						else
 							result += "[ ]";
