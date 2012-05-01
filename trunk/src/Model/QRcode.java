@@ -1,5 +1,6 @@
 package Model;
 
+// génère une matrice booléenne représentant le dessin du QRcode
 public class QRcode {
 
 	private int m_version;

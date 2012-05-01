@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE iso SYSTEM "AlignmentPatternsPositions.dtd">
+<iso>
+	<version number="1">
+	</version>
+	<version number="2">
+		<position>6</position>
+		<position>18</position>
+	</version>
+	<version number="3">
+		<position>6</position>
+		<position>22</position>
+	</version>
+	<version number="4">
+		<position>6</position>
+		<position>26</position>
+	</version>
+	<version number="5">
+		<position>6</position>
+		<position>30</position>
+	</version>
+	<version number="6">
+		<position>6</position>
+		<position>34</position>
+	</version>
+	<version number="7">
+		<position>6</position>
+		<position>22</position>
+		<position>38</position>
+	</version>
+	<version number="8">
+		<position>6</position>
+		<position>24</position>
+		<position>42</position>
+	</version>
+	<version number="9">
+		<position>6</position>
+		<position>26</position>
+		<position>46</position>
+	</version>
+	<version number="10">
+		<position>6</position>
+		<position>28</position>
+		<position>50</position>
+	</version>
+	<version number="11">
+		<position>6</position>
+		<position>30</position>
+		<position>54</position>
+	</version>
+	<version number="12">
+		<position>6</position>
+		<position>32</position>
+		<position>58</position>
+	</version>
+	<version number="13">
+		<position>6</position>
+		<position>34</position>
+		<position>62</position>
+	</version>
+	<version number="14">
+		<position>6</position>
+		<position>26</position>
+		<position>46</position>
+		<position>66</position>
+	</version>
+	<version number="15">
+		<position>6</position>
+		<position>26</position>
+		<position>48</position>
+		<position>70</position>
+	</version>
+	<version number="16">
+		<position>6</position>
+		<position>26</position>
+		<position>50</position>
+		<position>74</position>
+	</version>
+	<version number="17">
+		<position>6</position>
+		<position>30</position>
+		<position>54</position>
+		<position>78</position>
+	</version>
+	<version number="18">
+		<position>6</position>
+		<position>30</position>
+		<position>56</position>
+		<position>82</position>
+	</version>
+	<version number="19">
+		<position>6</position>
+		<position>30</position>
+		<position>58</position>
+		<position>86</position>
+	</version>
+	<version number="20">
+		<position>6</position>
+		<position>34</position>
+		<position>62</position>
+		<position>90</position>
+	</version>
+	<version number="21">
+		<position>6</position>
+		<position>28</position>
+		<position>50</position>
+		<position>72</position>
+		<position>94</position>
+	</version>
+	<version number="22">
+		<position>6</position>
+		<position>26</position>
+		<position>50</position>
+		<position>74</position>
+		<position>98</position>
+	</version>
+	<version number="23">
+		<position>6</position>
+		<position>30</position>
+		<position>54</position>
+		<position>78</position>
+		<position>102</position>
+	</version>
+	<version number="24">
+		<position>6</position>
+		<position>28</position>
+		<position>54</position>
+		<position>80</position>
+		<position>106</position>
+	</version>
+	<version number="25">
+		<position>6</position>
+		<position>32</position>
+		<position>58</position>
+		<position>84</position>
+		<position>110</position>
+	</version>
+	<version number="26">
+		<position>6</position>
+		<position>30</position>
+		<position>58</position>
+		<position>86</position>
+		<position>114</position>
+	</version>
+	<version number="27">
+		<position>6</position>
+		<position>34</position>
+		<position>62</position>
+		<position>90</position>
+		<position>118</position>
+	</version>
+	<version number="28">
+		<position>6</position>
+		<position>26</position>
+		<position>50</position>
+		<position>74</position>
+		<position>98</position>
+		<position>122</position>
+	</version>
+	<version number="29">
+		<position>6</position>
+		<position>30</position>
+		<position>54</position>
+		<position>78</position>
+		<position>102</position>
+		<position>126</position>
+	</version>
+	<version number="30">
+		<position>6</position>
+		<position>26</position>
+		<position>52</position>
+		<position>78</position>
+		<position>104</position>
+		<position>130</position>
+	</version>
+	<version number="31">
+		<position>6</position>
+		<position>30</position>
+		<position>56</position>
+		<position>82</position>
+		<position>108</position>
+		<position>134</position>
+	</version>
+	<version number="32">
+		<position>6</position>
+		<position>34</position>
+		<position>60</position>
+		<position>86</position>
+		<position>112</position>
+		<position>138</position>
+	</version>
+	<version number="33">
+		<position>6</position>
+		<position>30</position>
+		<position>58</position>
+		<position>86</position>
+		<position>114</position>
+		<position>142</position>
+	</version>
+	<version number="34">
+		<position>6</position>
+		<position>34</position>
+		<position>62</position>
+		<position>90</position>
+		<position>118</position>
+		<position>146</position>
+	</version>
+	<version number="35">
+		<position>6</position>
+		<position>30</position>
+		<position>54</position>
+		<position>78</position>
+		<position>102</position>
+		<position>126</position>
+		<position>150</position>
+	</version>
+	<version number="36">
+		<position>6</position>
+		<position>24</position>
+		<position>50</position>
+		<position>76</position>
+		<position>102</position>
+		<position>128</position>
+		<position>154</position>
+	</version>
+	<version number="37">
+		<position>6</position>
+		<position>28</position>
+		<position>54</position>
+		<position>80</position>
+		<position>106</position>
+		<position>132</position>
+		<position>158</position>
+	</version>
+	<version number="38">
+		<position>6</position>
+		<position>32</position>
+		<position>58</position>
+		<position>84</position>
+		<position>110</position>
+		<position>136</position>
+		<position>162</position>
+	</version>
+	<version number="39">
+		<position>6</position>
+		<position>24</position>
+		<position>54</position>
+		<position>82</position>
+		<position>110</position>
+		<position>138</position>
+		<position>166</position>
+	</version>
+	<version number="40">
+		<position>6</position>
+		<position>30</position>
+		<position>58</position>
+		<position>86</position>
+		<position>114</position>
+		<position>142</position>
+		<position>170</position>
+	</version>
+</iso>

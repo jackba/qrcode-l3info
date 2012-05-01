@@ -23,7 +23,7 @@ class QRcodeComponent extends JPanel implements ComponentListener {
 	private Graphics m_buffer;
 	// Image mémoire correspondant au buffer
 	private Image m_image;
-	// Dimensions maximum précédente du buffer
+	// Dimensions maximums précédentes du buffer
 	private int m_previousWidth;
 	private int m_previousHeight;
 
