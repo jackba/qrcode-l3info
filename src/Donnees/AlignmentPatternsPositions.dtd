@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!ELEMENT iso (version+) >
+<!ELEMENT version (position+) >
+<!ATTLIST version number CDATA #REQUIRED>
+
+<!ELEMENT position (#PCDATA) >
