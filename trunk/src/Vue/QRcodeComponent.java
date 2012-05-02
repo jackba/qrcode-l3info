@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 // Le panel est géré en double buffering mémoire (c.à.d que le buffer n'est pas traité par la Carte Graphique, mais stocké dans la RAM et géré par le processeur)
 // Elle fournit aussi une méthode de sauvegarde sous forme d'image de son contenu
 @SuppressWarnings("serial")
-class QRcodeComponent extends JPanel implements ComponentListener {
+public class QRcodeComponent extends JPanel implements ComponentListener {
 
 	// Buffer mémoire
 	private Graphics m_buffer;
@@ -146,6 +146,11 @@ class QRcodeComponent extends JPanel implements ComponentListener {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public void drawImageFromMatrix(Boolean[][] matrice)
+	{
+		
 	}
 	
 	/*

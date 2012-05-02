@@ -15,6 +15,7 @@ public class MainController {
 	private TFsmsTelController m_TFsmsTelController;
 	private TAsmsMsgController m_TAsmsMsgController;
 	private BgenererController m_BgenererController;
+	private BenregistrerController m_BenregistrerController;
 	
 	// Lance l'application
 	public void runApplication()
@@ -39,6 +40,7 @@ public class MainController {
 		m_TFsmsTelController = new TFsmsTelController(m_fenetre);
 		m_TAsmsMsgController = new TAsmsMsgController(m_fenetre);
 		m_BgenererController = new BgenererController(m_fenetre);
+		m_BenregistrerController = new BenregistrerController(m_fenetre);
 		
 		// Assignation des listeners aux composants de la fenetre
 		m_fenetre.getTF_url().addFocusListener(m_TFurlController);	// Listener sur le focus
@@ -47,9 +49,9 @@ public class MainController {
 		m_fenetre.getTF_smsTel().getDocument().addDocumentListener(m_TFsmsTelController);
 		m_fenetre.getTA_smsMsg().getDocument().addDocumentListener(m_TAsmsMsgController);
 		m_fenetre.getB_generer().addActionListener(m_BgenererController);	// Listener sur le click
+		m_fenetre.getB_enregistrer().addActionListener(m_BenregistrerController);
 		
 		// Affichage de la fenêtre
 		m_fenetre.setVisible(true);
 	}
-
 }
