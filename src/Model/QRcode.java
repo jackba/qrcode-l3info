@@ -50,6 +50,7 @@ public class QRcode {
 		fillData();
 	}
 
+	// Retourne la matrice masquée complète avec les informations de format
 	public Boolean[][] getMaskedMatrix(int indexOfMask)
 	{
 		Boolean[][] maskedMatrix = new Boolean[m_matriceSize][m_matriceSize];
@@ -172,49 +173,6 @@ public class QRcode {
 			}
 			toTop= !toTop;
 		}
-
-
-		/*
-		boolean isUpwardDirection = true;	// Indicateur pour savoir dans quelle direction on met les données suivantes
-
-		int prev_line = m_matriceSize-1;	// La ligne de la donnée précédente
-		int prev_column = m_matriceSize-1;	// La colonne de la donnée précédente
-
-		int next_line;	// La ligne de la donnée suivante
-		int next_column;	// La colonne de la donnée suivante 
-
-		int curr_firstColumn = m_matriceSize-1;	// La première des deux colonnes dans lesquelles doivent se placer les données lorsqu'il n'y a pas d'obstacles
-
-		// Initialisation
-		m_matrice[prev_line][prev_column] = getBoolAt(m_binaryString, 0);
-
-		// Placement de tous les caractères
-		for (int i=1; i<m_binaryString.length(); i++)
-		{
-			// On place les caractères en montant
-			if (isUpwardDirection)
-			{
-				// Nous sommes sur la colonne de droite
-				// par rapport aux deux colonnes qui nous sont attribuées
-				// On va se placer sur la colonne de gauche
-				if (prev_column == curr_firstColumn)
-				{
-					next_line = prev_line;	// La ligne reste la ligne courante
-					next_column = prev_column-1; // La colonne devient la colonne de gauche
-				}
-				// Nous sommes sur la colonne de gauche
-				// On va donc monter d'une ligne et revenir sur la colonne de droite
-				else
-				{
-					next_line = prev_line-1;	// La ligne devient la ligne du dessus
-					next_column = prev_column+1; // La colonne devient la colonne de droite
-				}
-			}
-			// On place les caractères en descendant
-			else
-			{
-
-			}*/
 	}
 
 	// Retourne la valeur booléenne en fonction du caractère présent dans l'index
@@ -254,6 +212,7 @@ public class QRcode {
 
 		for (int i=m_matriceSize-7; i<m_matriceSize; i++)
 			m_matricePatron[i][8] = false;
+		
 	}
 
 	// Ajoute les informations de version dans la matrice

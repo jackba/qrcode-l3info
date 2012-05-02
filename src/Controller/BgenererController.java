@@ -24,11 +24,11 @@ public class BgenererController extends AbstractController implements ActionList
 	// OnClick
 	public void actionPerformed(ActionEvent event)
 	{
-		String encodedData = m_stringGenerator.getBinaryString("Alors Guild Wars 2 c'est bien ?", 2, 3, "Q");
-		m_qrCode = new QRcode(3,"Q",encodedData);
+		String encodedData = m_stringGenerator.getBinaryString("Alors Guild Wars 2 c'est bien ?", 2, 20, "Q");
+		m_qrCode = new QRcode(20,"Q",encodedData);
 		m_qrCode.fillQRmatrix();
 		//getFenetre().getQrPanel().drawImageFromMatrix(m_qrCode.getQRmatrix());
-		getFenetre().getQrPanel().drawImageFromMatrix(m_qrCode.getMaskedMatrix(0));
+		getFenetre().getQrPanel().drawImageFromMatrix(m_qrCode.getMaskedMatrix(7),1);
 	}
 
 }
