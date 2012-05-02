@@ -20,6 +20,7 @@ public class Fenetre extends JFrame {
 	private Box m_vB_sms;
 	
 	private JButton m_B_generer;
+	private JButton m_B_enregistrer;
 	
 	private JTextField m_TF_url;
 	private JTextField m_TF_tel;
@@ -30,6 +31,8 @@ public class Fenetre extends JFrame {
 	
 	private JLabel m_L_txtCount;
 	private JLabel m_L_smsMsgCount;
+	
+	private QRcodeComponent m_qrPanel;
 	
 	public Fenetre()
 	{
@@ -287,16 +290,20 @@ public class Fenetre extends JFrame {
         vB_commandes.add(vB_tailleGenerer);
         
         // Panel de l'image QRcode (taille fixée à 200x200 pixels)
-        QRcodeComponent qrPanel = new QRcodeComponent();
-        qrPanel.setPreferredSize(new Dimension(200,200));
-        qrPanel.setMaximumSize(new Dimension(200,200));
-        qrPanel.setMinimumSize(new Dimension(200,200));
-        qrPanel.setSize(200, 200);
+        m_qrPanel = new QRcodeComponent();
+        m_qrPanel.setPreferredSize(new Dimension(200,200));
+        m_qrPanel.setMaximumSize(new Dimension(200,200));
+        m_qrPanel.setMinimumSize(new Dimension(200,200));
+        m_qrPanel.setSize(200, 200);
+        
+        m_B_enregistrer = new JButton("Enregistrer");
+        m_B_enregistrer.setAlignmentX(CENTER_ALIGNMENT);
         
         // Boite de l'image QRcode
         Box vB_image = Box.createVerticalBox();
         vB_image.add(Box.createVerticalGlue());
-        vB_image.add(qrPanel);
+        vB_image.add(m_qrPanel);
+        vB_image.add(m_B_enregistrer);
         vB_image.add(Box.createVerticalGlue());
         
         // Boite principale
@@ -348,6 +355,10 @@ public class Fenetre extends JFrame {
 	public JButton getB_generer() {
 		return m_B_generer;
 	}
+	
+	public JButton getB_enregistrer() {
+		return m_B_enregistrer;
+	}
 
 	public JTextField getTF_url() {
 		return m_TF_url;
@@ -375,5 +386,9 @@ public class Fenetre extends JFrame {
 
 	public JLabel getL_smsMsgCount() {
 		return m_L_smsMsgCount;
+	}
+	
+	public QRcodeComponent getQrPanel() {
+		return m_qrPanel;
 	}
 }
