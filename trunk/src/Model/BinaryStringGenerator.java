@@ -16,6 +16,7 @@ public class BinaryStringGenerator {
 	}
 	
 	// Retourne une chaine binaire répondant aux spécifications du QRcode.
+	// mode: 0->Numérique - 1->Alphanumérique - 2->Byte - 3->Kanji
 	public String getBinaryString(String message, int mode, int version, String level)
 	{
 		// Nouvelle instance du générateur binaire de la partie données

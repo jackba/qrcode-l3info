@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 import Donnees.AlignmentPatternsParser;
 
 // génère une matrice booléenne représentant le dessin du QRcode
@@ -12,10 +14,16 @@ public class QRcode {
 	private int m_matriceSize;
 	private VersionCorrector m_versionCorrector;
 	private Boolean[][] m_matricePatron;
+	private ArrayList<int[]> m_listJumpables;	// Liste des positions des éléments sautables (Timing Patterns et Alignment Patterns)
 	
 	// DEBUG
 	public static void main(String[] args) {
-		QRcode code = new QRcode(2,"H","01010210");
+		BinaryStringGenerator bsg = new BinaryStringGenerator();
+		String encodedData = bsg.getBinaryString("HELLO WORLD", 1, 1, "Q");
+		String correction = "0010000001011011000010110111100011010001011100101101110001001101010000110100000011101100000100011110110010101000010010000001011001010010110110010011011010011100000000000010111000001111101101000111101000010000";
+		if (encodedData.equals(correction)) System.out.println("- IDENTIQUES -");
+		else System.out.println("- DIFFERENTS -");
+		QRcode code = new QRcode(1,"Q",encodedData);
 		code.fillQRmatrix();
 		System.out.println(code.patronToString() + "\n\n");
 		//System.out.println(code);
@@ -46,7 +54,55 @@ public class QRcode {
 	// Remplit la matrice avec la chaine de données du QRcode
 	private void fillData()
 	{
+		boolean isUpwardDirection = true;	// Indicateur pour savoir dans quelle direction on met les données suivantes
 		
+		int prev_line = m_matriceSize-1;	// La ligne de la donnée précédente
+		int prev_column = m_matriceSize-1;	// La colonne de la donnée précédente
+		
+		int next_line;	// La ligne de la donnée suivante
+		int next_column;	// La colonne de la donnée suivante 
+		
+		int curr_firstColumn = m_matriceSize-1;	// La première des deux colonnes dans lesquelles doivent se placer les données lorsqu'il n'y a pas d'obstacles
+		
+		// Initialisation
+		m_matrice[prev_line][prev_column] = getBoolAt(m_binaryString, 0);
+		
+		// Placement de tous les caractères
+		for (int i=1; i<m_binaryString.length(); i++)
+		{
+			// On place les caractères en montant
+			if (isUpwardDirection)
+			{
+				// Nous sommes sur la colonne de droite
+				// par rapport aux deux colonnes qui nous sont attribuées
+				// On va se placer sur la colonne de gauche
+				if (prev_column == curr_firstColumn)
+				{
+					next_line = prev_line;	// La ligne reste la ligne courante
+					next_column = prev_column-1; // La colonne devient la colonne de gauche
+				}
+				// Nous sommes sur la colonne de gauche
+				// On va donc monter d'une ligne et revenir sur la colonne de droite
+				else
+				{
+					next_line = prev_line-1;	// La ligne devient la ligne du dessus
+					next_column = prev_column+1; // La colonne devient la colonne de droite
+				}
+			}
+			// On place les caractères en descendant
+			else
+			{
+				
+			}
+		}
+	}
+	
+	// Retourne la valeur booléenne en fonction du caractère présent dans l'index
+	private Boolean getBoolAt(String binaryString, int index)
+	{
+		if (binaryString.charAt(index) == '1')
+			return true;
+		return false;
 	}
 	
 	// Remplit la matrice patron qui servira à insérer les données et appliquer les masques
