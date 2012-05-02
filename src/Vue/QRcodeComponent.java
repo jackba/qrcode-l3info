@@ -13,9 +13,6 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import Model.BinaryStringGenerator;
-import Model.QRcode;
-
 // Cette classe fournit un panel de dessin pour y dessiner le QRcode final
 // Le panel est géré en double buffering mémoire (c.à.d que le buffer n'est pas traité par la Carte Graphique, mais stocké dans la RAM et géré par le processeur)
 // Elle fournit aussi une méthode de sauvegarde sous forme d'image de son contenu
@@ -29,6 +26,9 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 	// Dimensions maximums précédentes du buffer
 	private int m_previousWidth;
 	private int m_previousHeight;
+	
+	private boolean m_mustPaint;
+	private Boolean[][] m_matrix;
 
 	// Constructeur
 	public QRcodeComponent()
@@ -39,6 +39,8 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 		// initialisation des dernières plus grandes dimensions qu'a pris le composant
 		m_previousWidth = getPreferredSize().width;
 		m_previousHeight = getPreferredSize().height;
+		
+		m_mustPaint = false;
 		
 		// Ajout d'un écouteur sur le redimensionnement
 		// Qui pointe sur cette classe
@@ -57,8 +59,16 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 		}
 
 		// Dessin sur le buffer
+		/*
 		m_buffer.setColor(Color.white);
 		m_buffer.fillRect(0, 0, getWidth(), getHeight());	// Rectangle blanc
+		*/
+		
+		if (m_mustPaint)
+		{
+			m_mustPaint = false;
+			paintMatrix();
+		}
 		/*
 		m_buffer.setColor(Color.black);
 		m_buffer.drawString("Ceci est mon panel personnalisé",10,20);	// Texte noir
@@ -151,11 +161,15 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 		}
 	}
 	
+	/*
 	// Dessine l'image correspondante à la matrice booléenne passée en paramètres
 	public void drawImageFromMatrix(Boolean[][] matrice)
 	{
 		// Récupération d'une dimension d'un côté du QRcode
-		int imageSize = matrice.length * 4 + 8;
+		// Dans l'image finale, chaque module (carré) est représenté par un carré de 4 pixels de coté.
+		// On y rajout des marges blanches tout autour de 4 modules (soit 4*4 = 16 pixels pour une marge, soit 32 pixels pour les deux marges)
+		// et on obtient le calcul suivant pour un coté de l'image finale:
+		int imageSize = matrice.length * 4 + 32;
 		
 		// Changement de taille du composant: le buffer sera automatiquement redimensionné
 		this.setPreferredSize(new Dimension(imageSize,imageSize));
@@ -163,8 +177,63 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 		this.setSize(imageSize, imageSize);
 		
 		// Remplit le fond en blanc
-		m_buffer.setColor(Color.white);
+		m_buffer.setColor(Color.red);
 		m_buffer.fillRect(0, 0, getWidth(), getHeight());	// Rectangle blanc
+		
+		// Remplit tous les pixels noirs
+		for (int line=0; line<matrice.length; line++)
+			for (int column=0; column<matrice.length; column++)
+				if (matrice[line][column] != null)
+					if (matrice[line][column] == true)
+					{
+						m_buffer.setColor(Color.BLACK);
+						m_buffer.fillRect(32+4*column, 32+4*line, 4, 4);	// Carré noir de 4 pixels de côté
+					}
+		
+		// Rafraichissement de l'image
+		this.repaint();
+	}
+	*/
+	
+	// Dessine l'image correspondante à la matrice booléenne passée en paramètres
+	public void drawImageFromMatrix(Boolean[][] matrice)
+	{
+		m_matrix = matrice;
+		
+		// Récupération d'une dimension d'un côté du QRcode
+		// Dans l'image finale, chaque module (carré) est représenté par un carré de 4 pixels de coté.
+		// On y rajout des marges blanches tout autour de 4 modules (soit 4*4 = 16 pixels pour une marge, soit 32 pixels pour les deux marges)
+		// et on obtient le calcul suivant pour un coté de l'image finale:
+		int imageSize = matrice.length * 4 + 32;
+		
+		// Changement de taille du composant: le buffer sera automatiquement redimensionné
+		this.setPreferredSize(new Dimension(imageSize,imageSize));
+		this.setMaximumSize(this.getPreferredSize());
+		this.setSize(imageSize, imageSize);
+		
+		this.updateUI();
+		
+		m_mustPaint = true;
+		
+		// Rafraichissement de l'image
+		this.repaint();
+	}
+	
+	public void paintMatrix()
+	{
+		// Remplit le fond en blanc
+		m_buffer.setColor(Color.WHITE);
+		m_buffer.fillRect(0, 0, getWidth(), getHeight());	// Rectangle blanc
+		
+		// Remplit tous les pixels noirs
+		for (int line=0; line<m_matrix.length; line++)
+			for (int column=0; column<m_matrix.length; column++)
+				if (m_matrix[line][column] != null)
+					if (m_matrix[line][column] == true)
+					{
+						m_buffer.setColor(Color.BLACK);
+						m_buffer.fillRect(16+4*column, 16+4*line, 4, 4);	// Carré noir de 4 pixels de côté
+					}
 	}
 	
 	/*
@@ -174,8 +243,4 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 	public void componentMoved(ComponentEvent event) {}
 	public void componentShown(ComponentEvent event) {}
 	
-	public static void main(String[] args)
-	{
-		
-	}
 }
