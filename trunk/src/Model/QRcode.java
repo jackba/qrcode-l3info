@@ -11,17 +11,20 @@ public class QRcode {
 	private Boolean[][] m_matrice;
 	private int m_matriceSize;
 	private VersionCorrector m_versionCorrector;
+	private FormatCorrector m_FormatCorrector;
 	private Boolean[][] m_matricePatron;
 
 	// DEBUG
 	public static void main(String[] args) {
 		BinaryStringGenerator bsg = new BinaryStringGenerator();
-		String encodedData = bsg.getBinaryString("HELLO WORLD", 1, 7, "Q");
-		QRcode code = new QRcode(7,"Q",encodedData);
-		System.out.println(encodedData);
+		String encodedData = bsg.getBinaryString("HELLO WORLD", 1, 1, "Q");
+		QRcode code = new QRcode(1,"Q",encodedData);
+		//System.out.println(encodedData);
 		code.fillQRmatrix();
-		//	System.out.println(code.patronToString() + "\n\n");
-		System.out.println(code);
+		System.out.println(code + "\n\n");
+		//System.out.println(code.patronToString() + "\n\n");
+		//for (int i=0; i<8; i++)
+		System.out.println(code.matriceToString(code.getMaskedMatrix(0)));
 	}
 
 	public QRcode(int version, String correcLevel , String binaryDataEncoded)
@@ -29,6 +32,7 @@ public class QRcode {
 		m_binaryString = binaryDataEncoded;
 		m_correcLevel = correcLevel;
 		m_versionCorrector = new VersionCorrector();
+		m_FormatCorrector = new FormatCorrector();
 		setVersion(version);
 	}
 
@@ -46,6 +50,90 @@ public class QRcode {
 		fillData();
 	}
 
+	public Boolean[][] getMaskedMatrix(int indexOfMask)
+	{
+		Boolean[][] maskedMatrix = new Boolean[m_matriceSize][m_matriceSize];
+
+		// Recopie la matrice initiale dans la matrice masquée
+		for (int i=0; i<m_matriceSize; i++)
+			for (int j=0; j<m_matriceSize; j++)
+				maskedMatrix[i][j] = m_matrice[i][j];
+
+		// Applique la formule sur chaque module de donnée
+		for (int line=0; line<m_matriceSize; line++)
+		{
+			for (int column=0; column<m_matriceSize; column++)
+			{
+				if (m_matricePatron[line][column] == null)
+				{
+					switch(indexOfMask)
+					{
+					case 0:
+						if ( (line + column) % 2 == 0 )
+							maskedMatrix[line][column] = switchBoolean(maskedMatrix[line][column]);
+						break;
+					case 1:
+						if ( line % 2 == 0 )
+							maskedMatrix[line][column] = switchBoolean(maskedMatrix[line][column]);
+						break;
+					case 2:
+						if ( column % 3 == 0 )
+							maskedMatrix[line][column] = switchBoolean(maskedMatrix[line][column]);
+						break;
+					case 3:
+						if ( (line + column) % 3 == 0 )
+							maskedMatrix[line][column] = switchBoolean(maskedMatrix[line][column]);
+						break;
+					case 4:
+						if ( ((line/2) + (column/3)) % 2 == 0 )
+							maskedMatrix[line][column] = switchBoolean(maskedMatrix[line][column]);
+						break;
+					case 5:
+						if ( (line * column) % 2 + (line * column) % 3 == 0 )
+							maskedMatrix[line][column] = switchBoolean(maskedMatrix[line][column]);
+						break;
+					case 6:
+						if ( ((line * column) % 2 + (line * column) % 3) % 2 == 0 )
+							maskedMatrix[line][column] = switchBoolean(maskedMatrix[line][column]);
+						break;
+					case 7:
+						if ( ((line * column) % 3 + (line + column) % 2) % 2 == 0 )
+							maskedMatrix[line][column] = switchBoolean(maskedMatrix[line][column]);
+						break;
+					}
+				}
+			}
+		}
+
+		// Récupération des informations de format
+		String format = m_FormatCorrector.getFormatBinaryString(m_correcLevel, indexOfMask);
+		
+		// Ajout des informations de format
+		for (int i=0; i<=7; i++)
+			maskedMatrix[8][m_matriceSize-1-i] = getBoolAt(format,14-i);
+
+		for (int i=0; i<=5; i++)
+			maskedMatrix[i][8] = getBoolAt(format,14-i);
+		maskedMatrix[7][8] = getBoolAt(format,8);
+		maskedMatrix[8][8] = getBoolAt(format,7);
+
+		for (int i=0; i<=6; i++)
+			maskedMatrix[m_matriceSize-1-i][8] = getBoolAt(format,i);
+
+		for (int i=0; i<=5; i++)
+			maskedMatrix[8][i] = getBoolAt(format,i);
+		maskedMatrix[8][7] = getBoolAt(format,6);
+
+		return maskedMatrix;
+	}
+
+	private Boolean switchBoolean(Boolean b)
+	{
+		if (b!= null)
+			return !b;
+		return null;
+	}
+
 	// Remplit la matrice avec la chaine de données du QRcode
 	private void fillData()
 	{
@@ -58,12 +146,12 @@ public class QRcode {
 			if(toTop){
 				for(int hauteurParc=this.m_matriceSize-1;hauteurParc>=0;hauteurParc--){
 					if(this.m_matricePatron[hauteurParc][largeurParc]==null){
-						this.m_matrice[hauteurParc][largeurParc]= getBoolAt(this.m_binaryString, currentChar);
+						this.m_matrice[hauteurParc][largeurParc] = getBoolAt(this.m_binaryString, currentChar);
 						currentChar++;
 					}
 					if(largeurParc>0){
 						if(this.m_matricePatron[hauteurParc][largeurParc-1]==null){
-							this.m_matrice[hauteurParc][largeurParc-1]= getBoolAt(this.m_binaryString, currentChar);
+							this.m_matrice[hauteurParc][largeurParc-1] = getBoolAt(this.m_binaryString, currentChar);
 							currentChar++;
 						}
 					}
@@ -71,12 +159,12 @@ public class QRcode {
 			}else{
 				for(int hauteurParc=0;hauteurParc<this.m_matriceSize;hauteurParc++){
 					if(this.m_matricePatron[hauteurParc][largeurParc]==null){
-						this.m_matrice[hauteurParc][largeurParc]= getBoolAt(this.m_binaryString, currentChar);
+						this.m_matrice[hauteurParc][largeurParc] = getBoolAt(this.m_binaryString, currentChar);
 						currentChar++;
 					}
 					if(largeurParc>0){
 						if(this.m_matricePatron[hauteurParc][largeurParc-1]==null){
-							this.m_matrice[hauteurParc][largeurParc-1]= getBoolAt(this.m_binaryString, currentChar);
+							this.m_matrice[hauteurParc][largeurParc-1] = getBoolAt(this.m_binaryString, currentChar);
 							currentChar++;
 						}
 					}
@@ -401,6 +489,29 @@ public class QRcode {
 					if (m_matricePatron[line][col] != null)
 					{
 						if (m_matricePatron[line][col] == true)
+							result += "[X]";
+						else
+							result += "[ ]";
+					}
+					else
+						result += "...";
+				}
+				result += "\n";
+			}
+		return result;
+	}
+
+	public String matriceToString(Boolean[][] matrice)
+	{
+		String result = "";
+		if (matrice != null)
+			for (int line=0; line<matrice.length; line ++)
+			{
+				for (int col=0; col<matrice.length; col++)
+				{
+					if (matrice[line][col] != null)
+					{
+						if (matrice[line][col] == true)
 							result += "[X]";
 						else
 							result += "[ ]";
