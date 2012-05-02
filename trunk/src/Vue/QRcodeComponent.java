@@ -29,6 +29,7 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 	
 	private boolean m_mustPaint;
 	private Boolean[][] m_matrix;
+	private int m_scale;
 
 	// Constructeur
 	public QRcodeComponent()
@@ -41,6 +42,7 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 		m_previousHeight = getPreferredSize().height;
 		
 		m_mustPaint = false;
+		m_scale = 1;
 		
 		// Ajout d'un écouteur sur le redimensionnement
 		// Qui pointe sur cette classe
@@ -67,7 +69,7 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 		if (m_mustPaint)
 		{
 			m_mustPaint = false;
-			paintMatrix();
+			paintMatrix(m_scale);
 		}
 		/*
 		m_buffer.setColor(Color.black);
@@ -196,15 +198,16 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 	*/
 	
 	// Dessine l'image correspondante à la matrice booléenne passée en paramètres
-	public void drawImageFromMatrix(Boolean[][] matrice)
+	public void drawImageFromMatrix(Boolean[][] matrice, int scale)
 	{
 		m_matrix = matrice;
+		m_scale = scale;
 		
 		// Récupération d'une dimension d'un côté du QRcode
 		// Dans l'image finale, chaque module (carré) est représenté par un carré de 4 pixels de coté.
 		// On y rajout des marges blanches tout autour de 4 modules (soit 4*4 = 16 pixels pour une marge, soit 32 pixels pour les deux marges)
 		// et on obtient le calcul suivant pour un coté de l'image finale:
-		int imageSize = matrice.length * 4 + 32;
+		int imageSize = matrice.length * 4 * scale + 32 * scale;
 		
 		// Changement de taille du composant: le buffer sera automatiquement redimensionné
 		this.setPreferredSize(new Dimension(imageSize,imageSize));
@@ -219,7 +222,7 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 		this.repaint();
 	}
 	
-	public void paintMatrix()
+	public void paintMatrix(int scale)
 	{
 		// Remplit le fond en blanc
 		m_buffer.setColor(Color.WHITE);
@@ -232,7 +235,7 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 					if (m_matrix[line][column] == true)
 					{
 						m_buffer.setColor(Color.BLACK);
-						m_buffer.fillRect(16+4*column, 16+4*line, 4, 4);	// Carré noir de 4 pixels de côté
+						m_buffer.fillRect(16*scale+4*column*scale, 16*scale+4*line*scale, 4*scale, 4*scale);	// Carré noir de 4 pixels de côté
 					}
 	}
 	
