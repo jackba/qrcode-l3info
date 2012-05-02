@@ -1,7 +1,5 @@
 package Model;
 
-import java.util.ArrayList;
-
 import Donnees.AlignmentPatternsParser;
 
 // génère une matrice booléenne représentant le dessin du QRcode
@@ -14,7 +12,6 @@ public class QRcode {
 	private int m_matriceSize;
 	private VersionCorrector m_versionCorrector;
 	private Boolean[][] m_matricePatron;
-	private ArrayList<int[]> m_listJumpables;	// Liste des positions des éléments sautables (Timing Patterns et Alignment Patterns)
 
 	// DEBUG
 	public static void main(String[] args) {

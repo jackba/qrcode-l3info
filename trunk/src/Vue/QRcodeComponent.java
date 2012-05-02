@@ -13,6 +13,9 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import Model.BinaryStringGenerator;
+import Model.QRcode;
+
 // Cette classe fournit un panel de dessin pour y dessiner le QRcode final
 // Le panel est géré en double buffering mémoire (c.à.d que le buffer n'est pas traité par la Carte Graphique, mais stocké dans la RAM et géré par le processeur)
 // Elle fournit aussi une méthode de sauvegarde sous forme d'image de son contenu
@@ -148,9 +151,20 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 		}
 	}
 	
+	// Dessine l'image correspondante à la matrice booléenne passée en paramètres
 	public void drawImageFromMatrix(Boolean[][] matrice)
 	{
+		// Récupération d'une dimension d'un côté du QRcode
+		int imageSize = matrice.length * 4 + 8;
 		
+		// Changement de taille du composant: le buffer sera automatiquement redimensionné
+		this.setPreferredSize(new Dimension(imageSize,imageSize));
+		this.setMaximumSize(this.getPreferredSize());
+		this.setSize(imageSize, imageSize);
+		
+		// Remplit le fond en blanc
+		m_buffer.setColor(Color.white);
+		m_buffer.fillRect(0, 0, getWidth(), getHeight());	// Rectangle blanc
 	}
 	
 	/*
@@ -159,4 +173,9 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 	public void componentHidden(ComponentEvent event) {}
 	public void componentMoved(ComponentEvent event) {}
 	public void componentShown(ComponentEvent event) {}
+	
+	public static void main(String[] args)
+	{
+		
+	}
 }
