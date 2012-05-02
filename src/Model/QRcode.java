@@ -15,18 +15,16 @@ public class QRcode {
 	private VersionCorrector m_versionCorrector;
 	private Boolean[][] m_matricePatron;
 	private ArrayList<int[]> m_listJumpables;	// Liste des positions des éléments sautables (Timing Patterns et Alignment Patterns)
-	
+
 	// DEBUG
 	public static void main(String[] args) {
 		BinaryStringGenerator bsg = new BinaryStringGenerator();
-		String encodedData = bsg.getBinaryString("HELLO WORLD", 1, 1, "Q");
-		String correction = "0010000001011011000010110111100011010001011100101101110001001101010000110100000011101100000100011110110010101000010010000001011001010010110110010011011010011100000000000010111000001111101101000111101000010000";
-		if (encodedData.equals(correction)) System.out.println("- IDENTIQUES -");
-		else System.out.println("- DIFFERENTS -");
-		QRcode code = new QRcode(1,"Q",encodedData);
+		String encodedData = bsg.getBinaryString("HELLO WORLD", 1, 7, "Q");
+		QRcode code = new QRcode(7,"Q",encodedData);
+		System.out.println(encodedData);
 		code.fillQRmatrix();
-		System.out.println(code.patronToString() + "\n\n");
-		//System.out.println(code);
+		//	System.out.println(code.patronToString() + "\n\n");
+		System.out.println(code);
 	}
 
 	public QRcode(int version, String correcLevel , String binaryDataEncoded)
@@ -50,23 +48,61 @@ public class QRcode {
 		fillPatternMatrix();
 		fillData();
 	}
-	
+
 	// Remplit la matrice avec la chaine de données du QRcode
 	private void fillData()
 	{
+		boolean toTop = true;
+		int currentChar=0;
+		for(int largeurParc=this.m_matriceSize-1; largeurParc>=0; largeurParc=largeurParc-2){
+			if(largeurParc==6){
+				largeurParc=5;
+			}
+			if(toTop){
+				for(int hauteurParc=this.m_matriceSize-1;hauteurParc>=0;hauteurParc--){
+					if(this.m_matricePatron[hauteurParc][largeurParc]==null){
+						this.m_matrice[hauteurParc][largeurParc]= getBoolAt(this.m_binaryString, currentChar);
+						currentChar++;
+					}
+					if(largeurParc>0){
+						if(this.m_matricePatron[hauteurParc][largeurParc-1]==null){
+							this.m_matrice[hauteurParc][largeurParc-1]= getBoolAt(this.m_binaryString, currentChar);
+							currentChar++;
+						}
+					}
+				}
+			}else{
+				for(int hauteurParc=0;hauteurParc<this.m_matriceSize;hauteurParc++){
+					if(this.m_matricePatron[hauteurParc][largeurParc]==null){
+						this.m_matrice[hauteurParc][largeurParc]= getBoolAt(this.m_binaryString, currentChar);
+						currentChar++;
+					}
+					if(largeurParc>0){
+						if(this.m_matricePatron[hauteurParc][largeurParc-1]==null){
+							this.m_matrice[hauteurParc][largeurParc-1]= getBoolAt(this.m_binaryString, currentChar);
+							currentChar++;
+						}
+					}
+				}
+			}
+			toTop= !toTop;
+		}
+
+
+		/*
 		boolean isUpwardDirection = true;	// Indicateur pour savoir dans quelle direction on met les données suivantes
-		
+
 		int prev_line = m_matriceSize-1;	// La ligne de la donnée précédente
 		int prev_column = m_matriceSize-1;	// La colonne de la donnée précédente
-		
+
 		int next_line;	// La ligne de la donnée suivante
 		int next_column;	// La colonne de la donnée suivante 
-		
+
 		int curr_firstColumn = m_matriceSize-1;	// La première des deux colonnes dans lesquelles doivent se placer les données lorsqu'il n'y a pas d'obstacles
-		
+
 		// Initialisation
 		m_matrice[prev_line][prev_column] = getBoolAt(m_binaryString, 0);
-		
+
 		// Placement de tous les caractères
 		for (int i=1; i<m_binaryString.length(); i++)
 		{
@@ -92,19 +128,22 @@ public class QRcode {
 			// On place les caractères en descendant
 			else
 			{
-				
-			}
-		}
+
+			}*/
 	}
-	
+
 	// Retourne la valeur booléenne en fonction du caractère présent dans l'index
 	private Boolean getBoolAt(String binaryString, int index)
 	{
-		if (binaryString.charAt(index) == '1')
-			return true;
-		return false;
+		if(index<binaryString.length()){
+			if (binaryString.charAt(index) == '1')
+				return true;
+			return false;
+		}else{
+			return false;
+		}
 	}
-	
+
 	// Remplit la matrice patron qui servira à insérer les données et appliquer les masques
 	private void fillPatternMatrix()
 	{
@@ -113,7 +152,7 @@ public class QRcode {
 		for (int i=0; i<m_matriceSize; i++)
 			for (int j=0; j<m_matriceSize; j++)
 				m_matricePatron[i][j] = m_matrice[i][j];
-		
+
 		// Ajout des bandes horizontales et verticales de format qui ne doivent pas être remplies par des données
 		// et qui seront remplies plus tards dans la matrice finale
 		for (int i=0; i<6; i++)
@@ -124,14 +163,14 @@ public class QRcode {
 		m_matricePatron[8][7] = false;
 		m_matricePatron[8][8] = false;
 		m_matricePatron[7][8] = false;
-		
+
 		for (int i=m_matriceSize-8; i<m_matriceSize; i++)
 			m_matricePatron[8][i] = false;
-		
+
 		for (int i=m_matriceSize-7; i<m_matriceSize; i++)
 			m_matricePatron[i][8] = false;
 	}
-	
+
 	// Ajoute les informations de version dans la matrice
 	private void fillVersionInformation()
 	{
@@ -141,7 +180,7 @@ public class QRcode {
 			String version = m_versionCorrector.getVersionBinaryString(m_version);
 			int charCount = 0;
 			int x,y;
-			
+
 			// Ajout de la version en haut à droite
 			for (int i=0; i<6; i++)
 			{
@@ -156,7 +195,7 @@ public class QRcode {
 					charCount++;
 				}
 			}
-			
+
 			// Ajout de la version en bas à gauche
 			charCount = 0;
 			for (int i=0; i<6; i++)
@@ -174,7 +213,7 @@ public class QRcode {
 			}
 		}
 	}
-	
+
 	// Ajoute les patrons d'alignements. Les patrons d'alignements sont les carrés
 	// de taille plus réduite par rapport aux patrons de positionnements.
 	// Les patrons d'alignements ne sont ajoutés qu'à partir de la deuxième version de QRcode
@@ -182,7 +221,7 @@ public class QRcode {
 	{
 		// Récupération de la position centrale des patrons
 		int[] positions = AlignmentPatternsParser.getInstance().getPositions(m_version);
-		
+
 		// Placement d'un patron à chaque position sauf:
 		// - le premier de la première ligne
 		// - le dernier de la première ligne
@@ -194,11 +233,11 @@ public class QRcode {
 				if (!(i == 0 && j == 0) &&	// S'il ne s'agit pas du premier de la première ligne
 						!(i == 0 && j == positions.length-1) &&	// Ni du dernier de la première ligne
 						!(i == positions.length-1 && j == 0))	// ni du premier de la dernière ligne
-				drawAnAlignmentPattern(positions[i],positions[j]);	// On ajoute le patron
+					drawAnAlignmentPattern(positions[i],positions[j]);	// On ajoute le patron
 			}
 		}
 	}
-	
+
 	// Dessine un patron d'alignement aux coordonnées spécifiées
 	private void drawAnAlignmentPattern(int line, int column)
 	{
@@ -208,26 +247,26 @@ public class QRcode {
 				for (int j=column-2; j<=column+2; j++)
 					if (j>=0 && j<m_matriceSize)
 						m_matrice[i][j] = true;
-		
+
 		// Carré blanc intermédiaire
 		for (int i=line-1; i<=line+1; i++)
 			if (i>=0 && i <m_matriceSize)
 				for (int j=column-1; j<=column+1; j++)
 					if (j>=0 && j<m_matriceSize)
 						m_matrice[i][j] = false;
-		
+
 		// Point noir central
 		if (line>=0 && line<m_matriceSize && column>=0 && column<m_matriceSize)
 			m_matrice[line][column] = true;
 	}
-	
+
 	// Ajoute un module noir toujours situé au même emplacement
 	// c.a.d juqte à coté du patron de positionnement carré situé en bas à gauche
 	private void fillBlackModulePattern()
 	{
 		m_matrice[m_matriceSize-8][8] = true;	// Patron horizontal
 	}
-	
+
 	// Ajoute la ligne et la colonne composés d'une alternance de modules noirs et blanc
 	// et situés entre les Finders pattern (les 3 gros carrés de détection de position).
 	private void fillTimingPatterns()
@@ -353,7 +392,7 @@ public class QRcode {
 			}
 		return result;
 	}
-	
+
 	public String patronToString()
 	{
 		String result = "";
