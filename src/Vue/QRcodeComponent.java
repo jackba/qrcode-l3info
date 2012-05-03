@@ -30,6 +30,8 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 	private boolean m_mustPaint;
 	private Boolean[][] m_matrix;
 	private int m_scale;
+	
+	private int m_imageSize;
 
 	// Constructeur
 	public QRcodeComponent()
@@ -40,6 +42,8 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 		// initialisation des dernières plus grandes dimensions qu'a pris le composant
 		m_previousWidth = getPreferredSize().width;
 		m_previousHeight = getPreferredSize().height;
+		
+		m_imageSize = m_previousHeight;
 		
 		m_mustPaint = false;
 		m_scale = 1;
@@ -120,7 +124,7 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 			m_previousHeight = tempHeight;
 
 			// Demander au composant de se redessiner
-			this.repaint();
+			//this.repaint();
 		}
 	}
 
@@ -208,13 +212,13 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 		// On y rajout des marges blanches tout autour de 4 modules (soit 4*4 = 16 pixels pour une marge, soit 32 pixels pour les deux marges)
 		// et on obtient le calcul suivant pour un coté de l'image finale:
 		int imageSize = matrice.length * 4 * scale + 32 * scale;
+		m_imageSize = imageSize;
 		
 		// Changement de taille du composant: le buffer sera automatiquement redimensionné
 		this.setPreferredSize(new Dimension(imageSize,imageSize));
 		this.setMaximumSize(this.getPreferredSize());
+		this.setMinimumSize(this.getPreferredSize());
 		this.setSize(imageSize, imageSize);
-		
-		this.updateUI();
 		
 		m_mustPaint = true;
 		
@@ -237,6 +241,11 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 						m_buffer.setColor(Color.BLACK);
 						m_buffer.fillRect(16*scale+4*column*scale, 16*scale+4*line*scale, 4*scale, 4*scale);	// Carré noir de 4 pixels de côté
 					}
+	}
+	
+	public int getImageSize()
+	{
+		return m_imageSize;
 	}
 	
 	/*
