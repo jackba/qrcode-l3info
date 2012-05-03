@@ -54,7 +54,6 @@ public class VersionCorrector extends AbstractCorrector {
 			binaryReste = "0" + binaryReste;
 			
 		String result = nbrConverti + binaryReste;	// Création de la chaine de correction d'erreurs pour la version
-		
 		return result;
 	}
 

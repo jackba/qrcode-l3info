@@ -24,11 +24,19 @@ public class BgenererController extends AbstractController implements ActionList
 	// OnClick
 	public void actionPerformed(ActionEvent event)
 	{
-		String encodedData = m_stringGenerator.getBinaryString("HELLO WORLD", 1, 1, "Q");
-		m_qrCode = new QRcode(1,"Q",encodedData);
+		String level = "";
+		if (getFenetre().getRB_correctionL().isSelected()) level = "L";
+		else if (getFenetre().getRB_correctionM().isSelected()) level = "M";
+		else if (getFenetre().getRB_correctionQ().isSelected()) level = "Q";
+		else if (getFenetre().getRB_correctionH().isSelected()) level = "H";
+		
+		int version = Integer.parseInt(getFenetre().getCmB_taille().getSelectedItem().toString());
+		
+		String encodedData = m_stringGenerator.getBinaryString("A test.", 2, version, level);
+		m_qrCode = new QRcode(version,level,encodedData);
 		m_qrCode.fillQRmatrix();
 		//getFenetre().getQrPanel().drawImageFromMatrix(m_qrCode.getQRmatrix());
-		getFenetre().getQrPanel().drawImageFromMatrix(m_qrCode.getMaskedMatrix(7),1);
+		getFenetre().getQrPanel().drawImageFromMatrix(m_qrCode.getMaskedMatrix(3),1);
 	}
 
 }

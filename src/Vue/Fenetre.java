@@ -13,6 +13,12 @@ public class Fenetre extends JFrame {
 	private JRadioButton m_RB_txt;
 	private JRadioButton m_RB_tel;
 	private JRadioButton m_RB_sms;
+	private JRadioButton m_RB_correctionL;
+	private JRadioButton m_RB_correctionM;
+	private JRadioButton m_RB_correctionQ;
+	private JRadioButton m_RB_correctionH;
+	
+	private JComboBox m_CmB_taille;
 	
 	private Box m_vB_url;
 	private Box m_vB_txt;
@@ -214,10 +220,10 @@ public class Fenetre extends JFrame {
 		JLabel L_correct = new JLabel("Correction : ");
 
 		// Boutons-radios de version
-		JRadioButton m_RB_correctionL = new JRadioButton("L (7%)");
-		JRadioButton m_RB_correctionM = new JRadioButton("M (15%)");
-		JRadioButton m_RB_correctionQ = new JRadioButton("Q (25%)");
-		JRadioButton m_RB_correctionH = new JRadioButton("H (30%)");
+		m_RB_correctionL = new JRadioButton("L (7%)");
+		m_RB_correctionM = new JRadioButton("M (15%)");
+		m_RB_correctionQ = new JRadioButton("Q (25%)");
+		m_RB_correctionH = new JRadioButton("H (30%)");
 
 		// Ajout des boutons dans un même groupe
 		ButtonGroup BG_correction = new ButtonGroup();
@@ -247,16 +253,16 @@ public class Fenetre extends JFrame {
 		itemsTaille[0] = "Auto";
 		for (int i=1; i<41; i++)	// Remplissage des items
 			itemsTaille[i] = Integer.toString(i);
-		JComboBox CmB_taille = new JComboBox(itemsTaille);	// Création de la combo box
+		m_CmB_taille = new JComboBox(itemsTaille);	// Création de la combo box
 		
 		// Attribution d'une taille max et d'un alignement horizontal centré
-		CmB_taille.setMaximumSize(CmB_taille.getPreferredSize());
-		CmB_taille.setAlignmentX(CENTER_ALIGNMENT);
+		m_CmB_taille.setMaximumSize(m_CmB_taille.getPreferredSize());
+		m_CmB_taille.setAlignmentX(CENTER_ALIGNMENT);
 		
 		// Ajout des composants dans une boîte horizontale
 		Box hB_taille = Box.createHorizontalBox();
 		hB_taille.add(L_taille);
-		hB_taille.add(CmB_taille);
+		hB_taille.add(m_CmB_taille);
 		hB_taille.add(Box.createHorizontalGlue());
 		
 		Box vB_params = Box.createVerticalBox();
@@ -390,5 +396,25 @@ public class Fenetre extends JFrame {
 	
 	public QRcodeComponent getQrPanel() {
 		return m_qrPanel;
+	}
+
+	public JRadioButton getRB_correctionL() {
+		return m_RB_correctionL;
+	}
+
+	public JRadioButton getRB_correctionM() {
+		return m_RB_correctionM;
+	}
+
+	public JRadioButton getRB_correctionQ() {
+		return m_RB_correctionQ;
+	}
+
+	public JRadioButton getRB_correctionH() {
+		return m_RB_correctionH;
+	}
+
+	public JComboBox getCmB_taille() {
+		return m_CmB_taille;
 	}
 }
