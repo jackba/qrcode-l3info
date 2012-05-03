@@ -5,7 +5,7 @@ import javax.swing.event.DocumentListener;
 
 import Vue.Fenetre;
 
-public class TAtxtController extends AbstractController implements DocumentListener{
+public class TAtxtController extends AbstractTextController implements DocumentListener{
 
 	private int m_maxLength;	// Nombre de caractères maximum pour le champs
 	private int m_difference;	// Nombre de caractères restants

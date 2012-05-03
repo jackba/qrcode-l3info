@@ -5,7 +5,7 @@ import java.awt.event.FocusListener;
 
 import Vue.Fenetre;
 
-public class TFurlController extends AbstractController implements FocusListener {
+public class TFurlController extends AbstractTextController implements FocusListener {
 
 	private static String HTTP = "http://";
 	

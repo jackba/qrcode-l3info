@@ -6,5 +6,4 @@ public class Main {
 		MainController controller = new MainController();
 		controller.runApplication();
 	}
-	
 }

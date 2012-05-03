@@ -5,7 +5,7 @@ import javax.swing.event.DocumentListener;
 
 import Vue.Fenetre;
 
-public class TFsmsTelController extends AbstractController implements DocumentListener{
+public class TFsmsTelController extends AbstractTextController implements DocumentListener{
 
 	public TFsmsTelController(Fenetre f)
 	{

@@ -1,7 +1,5 @@
 package Model;
 
-import Controller.MainController;
-
 public class PenaltyRules {
 	
 	private QRcode m_qrcode;
