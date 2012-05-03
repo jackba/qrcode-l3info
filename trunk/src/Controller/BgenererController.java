@@ -36,7 +36,7 @@ public class BgenererController extends AbstractController implements ActionList
 		m_qrCode = new QRcode(version,level,encodedData);
 		m_qrCode.fillQRmatrix();
 		//getFenetre().getQrPanel().drawImageFromMatrix(m_qrCode.getQRmatrix());
-		getFenetre().getQrPanel().drawImageFromMatrix(m_qrCode.getMaskedMatrix(3),1);
+		getFenetre().getQrPanel().drawImageFromMatrix(m_qrCode.getMaskedMatrix(0),1);
 	}
 
 }
