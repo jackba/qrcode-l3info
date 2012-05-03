@@ -26,7 +26,7 @@ public class MessagePolynomial {
 	// Crée un polynome avec coefficients entiers à partir de la chaine binaire spécifiée
 	public IntegerPolynom createMessagePolynomial(String msgBinaire, int nbMotsDeCorrection)
 	{
-		if (!isBinaryString(msgBinaire)) return null;	// La chaine n'est pas une chaine binaire
+		//if (!isBinaryString(msgBinaire)) return null;	// La chaine n'est pas une chaine binaire
 		
 		if (msgBinaire.length() % 8 != 0) return null;	// La chaine n'est pas formée de blocs de 8 bits complets
 		
@@ -76,7 +76,7 @@ public class MessagePolynomial {
 	
 	public Boolean setMsgBinaire(String msgBinaire)
 	{
-		if (!isBinaryString(msgBinaire)) return false;	// La chaine n'est pas une chaine binaire
+		//if (!isBinaryString(msgBinaire)) return false;	// La chaine n'est pas une chaine binaire
 		m_msgBinaire = msgBinaire;
 		return true;
 	}
