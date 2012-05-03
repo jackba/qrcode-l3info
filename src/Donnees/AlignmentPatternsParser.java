@@ -101,11 +101,4 @@ public class AlignmentPatternsParser {
 		initParser();
 	}
 	
-	public static void main(String[] args)
-	{
-		AlignmentPatternsParser app = new AlignmentPatternsParser();
-		int[] result = app.getPositions(80);
-		for (int i=0; i<result.length; i++)
-			System.out.println("[" + i + "] = " + result[i]);
-	}
 }
