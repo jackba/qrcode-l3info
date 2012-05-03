@@ -287,26 +287,35 @@ public class DivisionPolynomial {
 		resteInter = removeFirstZerosTerms(resteInter);
 		
 		// On continue de diviser tant que le degré du quotient intermédiaire (le terme du quotient pour être plus précis) est strictement positif
-		while (expQuotientInter > 0)
+		while (expQuotientInter > 0 && resteInter.getNbTermes() > 0)
 		{
 			// Sauvegarde du reste intermédiaire précédent pour le calcul de ce reste intermédiaire
 			previousResteInteger = (IntegerPolynom) resteInter.clone();
 			
+			//System.out.println("[AVANT] ResteInter =\n" + resteInter);
+			//System.out.println("[AVANT] myDiviseur =\n" + myDiviseur);
+			
 			// On récupère l'exposant du terme courant du quotient
 			expQuotientInter = resteInter.getTermeAt(0).getExposant() - myDiviseur.getTermeAt(0).getExposant();
+			
+			//System.out.println("[APRES] ResteInter =\n" + resteInter);
+			//System.out.println("[APRES] myDiviseur =\n" + myDiviseur);
 			
 			// Si l'exposant est strictement positif,on continue la division.
 			if (expQuotientInter >= 0)
 			{
 				// Le diviseur intermédiaire est ramené au même degré que le reste précédent
 				uniformisePolynoms(interDiviseur, resteInter);
+				//System.out.println("[1] ResteInter =\n" + resteInter);
 				
 				// l'application d'un OU-EXCLUSIF entre le diviseur intermédiaire et le reste précédent nous donne le reste intermédiaire
 				// Cette opération est valable uniquement parce que nous travaillons exclusivement avec des coefficients binaires (0 ou 1)
 				resteInter = combinePolynoms(interDiviseur,previousResteInteger);
+				//System.out.println("[2] ResteInter =\n" + resteInter);
 				
 				// On retire les termes nuls du reste intermédiaire
 				resteInter = removeFirstZerosTerms(resteInter);
+				//System.out.println("[3] ResteInter =\n" + resteInter);
 			}
 		}
 		

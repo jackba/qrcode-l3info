@@ -32,18 +32,21 @@ public abstract class AbstractCorrector {
 		// Tri du polynome par degrés décroissant (même si en théorie il est déjà trié)
 		p.sortByExposants();
 
-		// On récupère l'exposant du plus petit degré (qui n'est pas forcément le degré 0) présent dans le polynome
-		int smallerExp = p.getTermeAt(p.getNbTermes()-1).getExposant();
-
-		// Le dernier terme du polynome n'est pas de degré 0
-		if (smallerExp > 0)
+		if (p.getNbTermes()>0)
 		{
-			// On rajoute tous les termes nuls depuis le terme de
-			// plus petit degré déjà présent dans le polynome jusqu'au
-			// degré 0
-			for (int i=smallerExp-1; i>=0; i--)
+			// On récupère l'exposant du plus petit degré (qui n'est pas forcément le degré 0) présent dans le polynome
+			int smallerExp = p.getTermeAt(p.getNbTermes()-1).getExposant();
+
+			// Le dernier terme du polynome n'est pas de degré 0
+			if (smallerExp > 0)
 			{
-				p.addNewTerme(0, i);
+				// On rajoute tous les termes nuls depuis le terme de
+				// plus petit degré déjà présent dans le polynome jusqu'au
+				// degré 0
+				for (int i=smallerExp-1; i>=0; i--)
+				{
+					p.addNewTerme(0, i);
+				}
 			}
 		}
 	}
