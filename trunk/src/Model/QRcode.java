@@ -489,6 +489,10 @@ public class QRcode {
 	public int getVersion() {
 		return m_version;
 	}
+	
+	public int getMatriceSize(){
+		return this.m_matriceSize;
+	}
 
 	public void setVersion(int version) {
 		m_version = version;
