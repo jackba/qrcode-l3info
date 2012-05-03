@@ -82,8 +82,8 @@ public class PenaltyRules {
 					System.out.println("trouverLigne");
 				}
 			}
-		}
-	}*/
+		}*/
+	}
 	
 	public int getPenaltyNb(){
 		return this.m_penaltyNb;
