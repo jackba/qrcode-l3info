@@ -1,12 +1,15 @@
 package PolynomialPack;
 
+import Model.AbstractCorrector;
+
 // Réalise une division polynomiale entre un générateur polynomial et un message polynomial
-public class DivisionPolynomial {
+public class DivisionPolynomial extends AbstractCorrector {
 	
 	private GeneratorPolynomial m_genP;
 	private MessagePolynomial m_msgP;
 	private AlphaPolynom m_generatedPolynomial;
 	private IntegerPolynom m_messagePolynomial;
+	private int m_nbWordsNeeded;
 	
 	public DivisionPolynomial()
 	{
@@ -24,6 +27,7 @@ public class DivisionPolynomial {
 		
 		m_msgP = new MessagePolynomial();
 		m_messagePolynomial  = m_msgP.createMessagePolynomial(msgBinaire, nbOctetsDeCorrection);
+		m_nbWordsNeeded = nbOctetsDeCorrection;
 	}
 	
 	// Multiplie un polynome (alpha ou entier) par x^exposant
@@ -222,7 +226,8 @@ public class DivisionPolynomial {
 		result = removeFirstZerosTerms(result);
 		
 		// On répète l'opération tant que le dernier terme du polynome résultat n'a pas un terme de degré 1 (exposant à 0)
-		while (result.getTermeAt(result.getNbTermes()-1).getExposant() != 0)
+		// et que l'exposant du premier terme n'est pas égal au nombre de mots requis moins 1.
+		while (result.getTermeAt(result.getNbTermes()-1).getExposant() != 0 && result.getTermeAt(0).getExposant() > m_nbWordsNeeded-1)
 		{
 			// Sauvegarde du résultat précédent pour le calcul de ce résultat
 			previousResultInteger = (IntegerPolynom) result.clone();
@@ -247,6 +252,9 @@ public class DivisionPolynomial {
 			// On retire les termes nuls du résultat
 			result = removeFirstZerosTerms(result);
 		}
+		
+		// Ajout des éventuels termes nuls de degrés inférieurs au plus petit degré du polynome
+		addNullTerms(result);
 		
 		// Le résultat contient un dernier terme de degré 1, le résultat est prêt
 		return result;
