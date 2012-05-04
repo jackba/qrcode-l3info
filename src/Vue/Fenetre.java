@@ -231,9 +231,6 @@ public class Fenetre extends JFrame {
 		BG_correction.add(m_RB_correctionM);
 		BG_correction.add(m_RB_correctionQ);
 		BG_correction.add(m_RB_correctionH);
-		
-		// Ajout des listeners sur les boutons
-		// TODO add listeners RadioButtons
 
 		// Ajout des composants dans une boîte horizontale
 		Box hB_correction = Box.createHorizontalBox();

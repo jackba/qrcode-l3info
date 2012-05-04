@@ -12,8 +12,8 @@ public class TAtxtController extends AbstractTextController implements DocumentL
 	
 	public TAtxtController(Fenetre f)
 	{
-		super(f);
-		m_maxLength = 250;
+		super(f,250,CharacterMode.BYTES);	// 250 caractères par défaut + mode bytes
+		m_maxLength = getDefaultLength();
 		m_difference = m_maxLength;
 		setCharsCountLabel();
 	}
@@ -48,8 +48,22 @@ public class TAtxtController extends AbstractTextController implements DocumentL
 		setCharsCountLabel();
 	}
 	
+	// Méthode appelée lorsque le nombre maximum de caractères disponibles pour tout le qrcode a changé
+	public void onMaxCharsChanged()
+	{
+		super.onMaxCharsChanged();
+		m_maxLength = getMaximumChars();
+		m_difference = m_maxLength - getFenetre().getTA_txt().getDocument().getLength();
+		setCharsCountLabel();
+	}
+	
 	public void changedUpdate(DocumentEvent event) {onTextChanged(event);}
 	public void insertUpdate(DocumentEvent event) {onTextChanged(event);}
 	public void removeUpdate(DocumentEvent event) {onTextChanged(event);}
+	
+	public String getMessage()
+	{
+		return getFenetre().getTA_txt().getText();
+	}
 
 }

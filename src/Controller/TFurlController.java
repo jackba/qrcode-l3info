@@ -11,13 +11,13 @@ public class TFurlController extends AbstractTextController implements FocusList
 	
 	public TFurlController(Fenetre f)
 	{
-		super(f);
+		super(f,255,CharacterMode.BYTES);
 		f.getTF_url().setText(HTTP);
 	}
 	
 	public boolean isValid()
 	{
-		if (getFenetre().getTF_url().getText().length() - HTTP.length() > 0)
+		if (getFenetre().getTF_url().getText().length() - HTTP.length() > 0 &&  getFenetre().getTF_url().getText().length() <= getMaximumChars())
 			return true;
 		return false;
 	}
@@ -30,4 +30,9 @@ public class TFurlController extends AbstractTextController implements FocusList
 	
 	// Méthodes inutilisées
 	public void focusGained(FocusEvent event) {}
+	
+	public String getMessage()
+	{
+		return getFenetre().getTF_url().getText();
+	}
 }
