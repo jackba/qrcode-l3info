@@ -42,10 +42,18 @@ public class TAtxtController extends AbstractTextController implements DocumentL
 		return false;
 	}
 	
+	public void switchEnableDisableBgenerer()
+	{
+		if (getFenetre().getRB_txt().isSelected())
+			if (isValid())getFenetre().getB_generer().setEnabled(true);
+			else getFenetre().getB_generer().setEnabled(false);
+	}
+	
 	public void onTextChanged(DocumentEvent event)
 	{
 		m_difference = m_maxLength - event.getDocument().getLength();
 		setCharsCountLabel();
+		switchEnableDisableBgenerer();
 	}
 	
 	// Méthode appelée lorsque le nombre maximum de caractères disponibles pour tout le qrcode a changé
@@ -55,6 +63,7 @@ public class TAtxtController extends AbstractTextController implements DocumentL
 		m_maxLength = getMaximumChars();
 		m_difference = m_maxLength - getFenetre().getTA_txt().getDocument().getLength();
 		setCharsCountLabel();
+		switchEnableDisableBgenerer();
 	}
 	
 	public void changedUpdate(DocumentEvent event) {onTextChanged(event);}

@@ -9,12 +9,14 @@ public class TAsmsMsgController extends AbstractTextController implements Docume
 
 	private int m_maxLength;	// Nombre de caractères maximum pour le champs
 	private int m_difference;	// Nombre de caractères restants
+	private TFsmsTelController m_TFsmsTelController;
 	
-	public TAsmsMsgController(Fenetre f)
+	public TAsmsMsgController(Fenetre f, TFsmsTelController smsTelController)
 	{
 		super(f,160,CharacterMode.BYTES);	// Champs avec une taille par défaut à 160 caractères et mode de départ en Bytes
 		m_maxLength = getDefaultLength();
 		m_difference = m_maxLength;
+		m_TFsmsTelController = smsTelController;
 		setCharsCountLabel();
 	}
 	
@@ -30,25 +32,37 @@ public class TAsmsMsgController extends AbstractTextController implements Docume
 	
 	public boolean isValid()
 	{
+		/*
 		if (m_difference >= 0 && m_difference < m_maxLength)
 			return true;
 		return false;
+		*/
+		return m_TFsmsTelController.isValid();
+	}
+	
+	public void switchEnableDisableBgenerer()
+	{
+		if (getFenetre().getRB_sms().isSelected()) 
+			if (isValid()) getFenetre().getB_generer().setEnabled(true);
+			else getFenetre().getB_generer().setEnabled(false);
 	}
 	
 	public void onTextChanged(DocumentEvent event)
 	{
 		m_difference = m_maxLength - event.getDocument().getLength();
 		setCharsCountLabel();
+		switchEnableDisableBgenerer();
 	}
 	
 	// Méthode appelée lorsque le nombre maximum de caractères disponibles pour tout le qrcode a changé
 	public void onMaxCharsChanged()
 	{
 		super.onMaxCharsChanged();
-		m_maxLength = getMaximumChars() - 12;
+		m_maxLength = getMaximumChars() - 17;
 		if (m_maxLength < 0) m_maxLength = 0;
-		m_difference = m_maxLength - getFenetre().getTA_txt().getDocument().getLength();
+		m_difference = m_maxLength - getFenetre().getTA_smsMsg().getText().length();
 		setCharsCountLabel();
+		switchEnableDisableBgenerer();
 	}
 	
 	public void changedUpdate(DocumentEvent event) {onTextChanged(event);}
@@ -57,6 +71,6 @@ public class TAsmsMsgController extends AbstractTextController implements Docume
 	
 	public String getMessage()
 	{
-		return getFenetre().getTA_smsMsg().getText();
+		return ":" + getFenetre().getTA_smsMsg().getText();
 	}
 }

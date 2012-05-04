@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.SwingUtilities;
 
+import Donnees.NumberOfSymbolCharacterParser;
 import Model.BinaryStringGenerator;
 import Model.QRcode;
 import Vue.Fenetre;
@@ -49,99 +50,100 @@ public class BgenererController extends AbstractController implements ActionList
 		else if (getFenetre().getRB_correctionQ().isSelected()) level = "Q";
 		else if (getFenetre().getRB_correctionH().isSelected()) level = "H";
 
-		int version = -1;
-		try
+		String message = null;
+		CharacterMode mode = null;
+		// Vérification de la validité des données
+		// récupération du message
+		// récupération du mode
+		if (getFenetre().getRB_url().isSelected())
 		{
-			version = Integer.parseInt(getFenetre().getCmB_taille().getSelectedItem().toString());
+			if (m_TFurlController.isValid())
+			{
+				message = m_TFurlController.getMessage();
+				mode = m_TFurlController.getMode();
+			}
 		}
-		catch (Exception e)
+		else if (getFenetre().getRB_txt().isSelected())
 		{
-			version = 40;
+			if (m_TAtxtController.isValid())
+			{
+				message = m_TAtxtController.getMessage();
+				mode = m_TAtxtController.getMode();
+			}
 		}
-		finally
+		else if (getFenetre().getRB_tel().isSelected())
 		{
+			if (m_TFtelController.isValid())
+			{
+				message = m_TFtelController.getMessage();
+				mode = m_TFtelController.getMode();
+			}
+		}
+		else if (getFenetre().getRB_sms().isSelected())
+		{
+			if (m_TFsmsTelController.isValid())
+			{
+				message = m_TFsmsTelController.getMessage();
+				if (m_TAsmsMsgController.isValid() && message != null)
+				{
+					message += m_TAsmsMsgController.getMessage();
+					mode = m_TFsmsTelController.getMode();
+				}
+			}
+		}
+		else
+		{
+			
+		}
+
+		if (message != null && !message.equals("") && level != null && !level.equals(""))
+		{
+			int version = -1;
+			try
+			{
+				version = Integer.parseInt(getFenetre().getCmB_taille().getSelectedItem().toString());
+			}
+			catch (Exception e)
+			{
+				version = NumberOfSymbolCharacterParser.getInstance().getFirstAdaptedVersion(mode, message.length(), level);
+			}
+
+			// Le message, le mode, la version et le niveau sont corrects, on peut passer à la génération
 			if (version > -1)
 			{
-				
-				String message = null;
-				CharacterMode mode = null;
-				// Vérification de la validité des données
-				// récupération du message
-				// récupération du mode
-				if (getFenetre().getRB_url().isSelected())
-				{
-					if (m_TFurlController.isValid())
-					{
-						message = m_TFurlController.getMessage();
-						mode = m_TFurlController.getMode();
-					}
-				}
-				else if (getFenetre().getRB_txt().isSelected())
-				{
-					if (m_TAtxtController.isValid())
-					{
-						message = m_TAtxtController.getMessage();
-						mode = m_TAtxtController.getMode();
-					}
-				}
-				else if (getFenetre().getRB_tel().isSelected())
-				{
-					if (m_TFtelController.isValid())
-					{
-						message = m_TFtelController.getMessage();
-						mode = m_TFtelController.getMode();
-					}
-				}
-				else if (getFenetre().getRB_sms().isSelected())
-				{
-					if (m_TFsmsTelController.isValid())
-					{
-						message = m_TFsmsTelController.getMessage();
-						if (m_TAsmsMsgController.isValid() && message != null)
-						{
-							message += m_TAsmsMsgController.getMessage();
-							mode = m_TFsmsTelController.getMode();
-						}
-					}
-				}
-				else
-				{
-					
-				}
-				
-				// Le message, le mode, la version et le niveau sont corrects, on peut passer à la génération
-				if (message != null && mode != null && version > -1 && level != null && !level.equals(""))
-				{
-					int qrMode;
-					
-					switch(mode)
-					{
-					case NUMERIC: qrMode=0; break;
-					case ALPHANUMERIC: qrMode=1; break;
-					case BYTES: qrMode=2; break;
-					case KANJI: qrMode=3; break;
-					default:
-						qrMode = 2;
-					}
-					
-					String encodedData = m_stringGenerator.getBinaryString(message, qrMode, version, level);
-					m_qrCode = new QRcode(version,level,encodedData);
-					m_qrCode.fillQRmatrix();
-					
-					// TODO afficher la bonne matrice avec le masque ayant le moins de pénalités
-					getFenetre().getQrPanel().drawImageFromMatrix(m_qrCode.getMaskedMatrix(0),1);
+				int qrMode;
 
-					// Redimensionne la fenêtre sans tout faire bugguer
-					SwingUtilities.invokeLater(new Runnable(){
-						public void run(){
-							getFenetre().getQrPanel().updateUI();
-							getFenetre().pack();
-							getFenetre().setPreferredSize(new Dimension(415 + getFenetre().getQrPanel().getImageSize()+5, getFenetre().getQrPanel().getImageSize() + 70));
-							getFenetre().setSize(getFenetre().getPreferredSize());
-						}
-					});
+				switch(mode)
+				{
+				case NUMERIC: qrMode=0; break;
+				case ALPHANUMERIC: qrMode=1; break;
+				case BYTES: qrMode=2; break;
+				case KANJI: qrMode=3; break;
+				default:
+					qrMode = 2;
 				}
-				
+
+				String encodedData = m_stringGenerator.getBinaryString(message, qrMode, version, level);
+				m_qrCode = new QRcode(version,level,encodedData);
+				m_qrCode.fillQRmatrix();
+
+				// TODO afficher la bonne matrice avec le masque ayant le moins de pénalités
+				getFenetre().getQrPanel().drawImageFromMatrix(m_qrCode.getMaskedMatrix(0),1);
+
+				// Redimensionne la fenêtre sans tout faire bugguer
+				SwingUtilities.invokeLater(new Runnable(){
+					public void run(){
+						getFenetre().getB_enregistrer().setVisible(true);
+						getFenetre().getQrPanel().updateUI();
+						getFenetre().pack();
+						if (getFenetre().getQrPanel().getImageSize() + 70 < 325)
+							getFenetre().setPreferredSize(new Dimension(415 + getFenetre().getQrPanel().getImageSize()+5, 325));
+						else
+							getFenetre().setPreferredSize(new Dimension(415 + getFenetre().getQrPanel().getImageSize()+5, getFenetre().getQrPanel().getImageSize() + 70));
+						getFenetre().setMinimumSize(getFenetre().getPreferredSize());
+						getFenetre().setSize(getFenetre().getPreferredSize());
+					}
+				});
 			}
 		}
 	}

@@ -9,7 +9,7 @@ public class TFtelController extends AbstractTextController implements DocumentL
 
 	public TFtelController(Fenetre f)
 	{
-		super(f,12,CharacterMode.BYTES);
+		super(f,14,CharacterMode.ALPHANUMERIC);
 	}
 	
 	public boolean isValid()
@@ -30,20 +30,35 @@ public class TFtelController extends AbstractTextController implements DocumentL
 			if (getFenetre().getTF_tel().getText().length() <= 10)
 				if (getFenetre().getTF_tel().getText().length() == 10)
 				{
-					if (3 + getFenetre().getTF_tel().getText().length()-1 <= getMaximumChars())
+					if (4 + getFenetre().getTF_tel().getText().length()-1 <= getMaximumChars())
 						return true;
 				}
 				else
 				{
-					if (3 + getFenetre().getTF_tel().getText().length() <= getMaximumChars())
+					if (4 + getFenetre().getTF_tel().getText().length() <= getMaximumChars())
 						return true;
 				}
 		}
 		return false;
 	}
 
+	public void switchEnableDisableBgenerer()
+	{
+		if (getFenetre().getRB_tel().isSelected()) 
+			if (isValid()) getFenetre().getB_generer().setEnabled(true);
+			else getFenetre().getB_generer().setEnabled(false);
+	}
+	
 	public void onTextChanged(DocumentEvent event)
 	{
+		switchEnableDisableBgenerer();
+	}
+	
+	// Méthode appelée lorsque le nombre maximum de caractères disponibles pour tout le qrcode a changé
+	public void onMaxCharsChanged()
+	{
+		super.onMaxCharsChanged();
+		switchEnableDisableBgenerer();
 	}
 	
 	public void changedUpdate(DocumentEvent event) {onTextChanged(event);}
@@ -52,12 +67,7 @@ public class TFtelController extends AbstractTextController implements DocumentL
 	
 	public String getMessage()
 	{
-		String tel;
-		if (getFenetre().getTF_tel().getText().length() == 10)
-			tel = getFenetre().getTF_tel().getText().substring(1, 9);
-		else
-			tel = getFenetre().getTF_tel().getText();
-		return "+33" + tel;
+		return "TEL:" + getFenetre().getTF_tel().getText();
 	}
 
 }
