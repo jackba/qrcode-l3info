@@ -75,12 +75,6 @@ public class Fenetre extends JFrame {
         hB_boutonsR.add(m_RB_sms);
         hB_boutonsR.add(Box.createHorizontalGlue());
         
-        // Ajout des listeners sur les boutons
-        m_RB_url.addActionListener(new UrlListener(this));
-        m_RB_txt.addActionListener(new TxtListener(this));
-        m_RB_tel.addActionListener(new TelListener(this));
-        m_RB_sms.addActionListener(new SmsListener(this));
-		
 		// Contenu
 		Box hB_contenu = Box.createHorizontalBox();
 		hB_contenu.add(hB_boutonsR);	// Ajout des boutons-radio dans le panel de contenu

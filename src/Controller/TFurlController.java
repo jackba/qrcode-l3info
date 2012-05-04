@@ -3,9 +3,12 @@ package Controller;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import Vue.Fenetre;
 
-public class TFurlController extends AbstractTextController implements FocusListener {
+public class TFurlController extends AbstractTextController implements FocusListener, DocumentListener {
 
 	private static String HTTP = "http://";
 	
@@ -35,4 +38,27 @@ public class TFurlController extends AbstractTextController implements FocusList
 	{
 		return getFenetre().getTF_url().getText();
 	}
+	
+	public void switchEnableDisableBgenerer()
+	{
+		if (getFenetre().getRB_url().isSelected()) 
+			if (isValid()) getFenetre().getB_generer().setEnabled(true);
+			else getFenetre().getB_generer().setEnabled(false);
+	}
+	
+	public void onTextChanged(DocumentEvent event)
+	{
+		switchEnableDisableBgenerer();
+	}
+	
+	// Méthode appelée lorsque le nombre maximum de caractères disponibles pour tout le qrcode a changé
+	public void onMaxCharsChanged()
+	{
+		super.onMaxCharsChanged();
+		switchEnableDisableBgenerer();
+	}
+	
+	public void changedUpdate(DocumentEvent event) {onTextChanged(event);}
+	public void insertUpdate(DocumentEvent event) {onTextChanged(event);}
+	public void removeUpdate(DocumentEvent event) {onTextChanged(event);}
 }
