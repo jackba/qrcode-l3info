@@ -17,6 +17,7 @@ public class MainController {
 	private BgenererController m_BgenererController;
 	private BenregistrerController m_BenregistrerController;
 	private CmBtailleController m_CmBtailleController;
+	private RBlevelsController m_RBlevelsController;
 	
 	// Lance l'application
 	public void runApplication()
@@ -40,9 +41,10 @@ public class MainController {
 		m_TFtelController = new TFtelController(m_fenetre);
 		m_TFsmsTelController = new TFsmsTelController(m_fenetre);
 		m_TAsmsMsgController = new TAsmsMsgController(m_fenetre);
-		m_BgenererController = new BgenererController(m_fenetre);
 		m_BenregistrerController = new BenregistrerController(m_fenetre);
+		m_BgenererController = new BgenererController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
 		m_CmBtailleController = new CmBtailleController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
+		m_RBlevelsController = new RBlevelsController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
 		
 		// Assignation des listeners aux composants de la fenetre
 		m_fenetre.getTF_url().addFocusListener(m_TFurlController);	// Listener sur le focus
@@ -53,6 +55,16 @@ public class MainController {
 		m_fenetre.getB_generer().addActionListener(m_BgenererController);	// Listener sur le click
 		m_fenetre.getB_enregistrer().addActionListener(m_BenregistrerController);
 		m_fenetre.getCmB_taille().addActionListener(m_CmBtailleController);
+		m_fenetre.getRB_correctionL().addActionListener(m_RBlevelsController);
+		m_fenetre.getRB_correctionM().addActionListener(m_RBlevelsController);
+		m_fenetre.getRB_correctionQ().addActionListener(m_RBlevelsController);
+		m_fenetre.getRB_correctionH().addActionListener(m_RBlevelsController);
+		
+		// Initialisation
+		m_CmBtailleController.actionPerformed(null);	// Récupération de la taille auto
+		m_fenetre.getRB_correctionL().setSelected(true);	// Niveau de correction d'erreur L coché
+		m_fenetre.getRB_txt().setSelected(true);	// panel de texte coché
+		m_fenetre.showTxtBox();	// affichage du panel de texte
 		
 		// Affichage de la fenêtre
 		m_fenetre.setVisible(true);
