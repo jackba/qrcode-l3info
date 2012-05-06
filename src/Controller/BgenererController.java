@@ -135,7 +135,6 @@ public class BgenererController extends AbstractController implements ActionList
 					public void run(){
 						getFenetre().getB_enregistrer().setVisible(true);
 						getFenetre().getQrPanel().updateUI();
-						getFenetre().pack();
 						if (getFenetre().getQrPanel().getImageSize() + 70 < 325)
 							getFenetre().setPreferredSize(new Dimension(415 + getFenetre().getQrPanel().getImageSize()+5, 325));
 						else
