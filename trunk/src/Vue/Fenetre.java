@@ -56,6 +56,19 @@ public class Fenetre extends JFrame {
 		setSize(320,240);
 		setLocationRelativeTo(null);
 		
+		// Application du look and feel du systeme.
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
+		
 		// Boutons-radios de contenu
 		m_RB_url = new JRadioButton("URL");
 		m_RB_txt = new JRadioButton("Texte");
