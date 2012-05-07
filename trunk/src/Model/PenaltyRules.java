@@ -139,7 +139,7 @@ public class PenaltyRules {
 		int nbPenalty;
 		for(int indexOfMask=0;indexOfMask<8;indexOfMask++){
 			nbPenalty=applyRules1(indexOfMask)+applyRules2(indexOfMask)+applyRules3(indexOfMask);
-			System.out.println(indexOfMask+" : "+nbPenalty);
+			//System.out.println(indexOfMask+" : "+nbPenalty);
 			if(indexOfMask==0){
 				this.m_penaltyNb=nbPenalty;
 				this.m_masque=indexOfMask;
