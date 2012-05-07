@@ -121,6 +121,7 @@ public class BgenererController extends AbstractController implements ActionList
 				case ALPHANUMERIC: qrMode=1; break;
 				case BYTES: qrMode=2; break;
 				case KANJI: qrMode=3; break;
+				case ECI: qrMode=4; break;
 				default:
 					qrMode = 2;
 				}

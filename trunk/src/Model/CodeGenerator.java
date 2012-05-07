@@ -13,7 +13,7 @@ public class CodeGenerator {
 	private String texte;
 	private int version;
 	private int bits_max;
-	private String mode; // 0->Numérique - 1->Alphanumérique - 2->Byte - 3->Kanji
+	private String mode; // 0->Numérique - 1->Alphanumérique - 2->Byte - 3->Kanji - 4->eci
 	private char level; // L - M - Q - H
 
 	public CodeGenerator(String texte, int mode, char level, int version)
@@ -27,6 +27,8 @@ public class CodeGenerator {
 			this.mode="byte";				
 		}else if(mode == 3){
 			this.mode="kanji";				
+		}else if(mode == 4){
+			this.mode="eci";				
 		}
 
 		this.level = level;
@@ -151,6 +153,8 @@ public class CodeGenerator {
 			genererAlphanumeric();
 		}else if (this.mode=="numeric"){
 			genererNumeric();
+		}else if (this.mode=="eci"){
+			genererECI();
 		}else{
 			System.out.println("La génération de ce mode est en cours de dévelopement.");
 		}
@@ -257,6 +261,12 @@ public class CodeGenerator {
 			}
 			this.resultBinaire = this.resultBinaire+lettre;
 		}
+	}
+	
+	//Generer la String de bits pour le mode ECI avec encodage ISO-8859-15
+	private void genererECI(){
+		// Mode Indicator
+		this.resultBinaire = ECI.getBinaryStringForCommonEuropeanLanguage(texte, version);
 	}
 
 

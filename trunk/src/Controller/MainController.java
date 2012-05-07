@@ -74,6 +74,7 @@ public class MainController {
 		m_fenetre.showTxtBox();	// affichage du panel de texte
 		m_fenetre.getB_enregistrer().setVisible(false);	// On masque le m=bouton enregistrer qui n'a pas d'intérêt à être visible puisqu'il n'y a pas encore de qrCode de généré
 		m_fenetre.getB_generer().setEnabled(false);
+		m_fenetre.getL_modeIndicator().setText(AbstractTextController.getTextForModeIndicator(CharacterMode.BYTES));
 		
 		// Affichage de la fenêtre
 		m_fenetre.setVisible(true);

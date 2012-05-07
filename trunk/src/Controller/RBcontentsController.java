@@ -43,22 +43,26 @@ public class RBcontentsController extends AbstractController implements ActionLi
 		{
 			getFenetre().showUrlBox();
 			m_TFurlController.switchEnableDisableBgenerer();
+			getFenetre().getL_modeIndicator().setText(AbstractTextController.getTextForModeIndicator(m_TFurlController.getMode()));
 		}
 		else if (rb.equals(getFenetre().getRB_txt()))
 		{
 			getFenetre().showTxtBox();
 			m_TAtxtController.switchEnableDisableBgenerer();
+			getFenetre().getL_modeIndicator().setText(AbstractTextController.getTextForModeIndicator(m_TAtxtController.getMode()));
 		}
 		else if (rb.equals(getFenetre().getRB_tel()))
 		{
 			getFenetre().showTelBox();
 			m_TFtelController.switchEnableDisableBgenerer();
+			getFenetre().getL_modeIndicator().setText(AbstractTextController.getTextForModeIndicator(m_TFtelController.getMode()));
 		}
 		else if (rb.equals(getFenetre().getRB_sms()))
 		{
 			getFenetre().showSmsBox();
 			m_TFsmsTelController.switchEnableDisableBgenerer();
 			m_TAsmsMsgController.switchEnableDisableBgenerer();
+			getFenetre().getL_modeIndicator().setText(AbstractTextController.getTextForModeIndicator(m_TAsmsMsgController.getMode()));
 		}
 	}
 
