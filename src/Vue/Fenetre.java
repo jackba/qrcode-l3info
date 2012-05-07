@@ -1,6 +1,7 @@
 package Vue;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 
@@ -37,6 +38,7 @@ public class Fenetre extends JFrame {
 	
 	private JLabel m_L_txtCount;
 	private JLabel m_L_smsMsgCount;
+	private JLabel m_L_modeIndicator;
 	
 	private QRcodeComponent m_qrPanel;
 	
@@ -250,10 +252,19 @@ public class Fenetre extends JFrame {
 		m_CmB_taille.setMaximumSize(m_CmB_taille.getPreferredSize());
 		m_CmB_taille.setAlignmentX(CENTER_ALIGNMENT);
 		
+		// Label du mode
+		m_L_modeIndicator = new JLabel("(Mode byte)");
+		
+		// Structure séparant le label et la combo-box
+		Component struc = Box.createHorizontalStrut(8);
+		struc.setMaximumSize(new Dimension(8,m_CmB_taille.getPreferredSize().height));
+		
 		// Ajout des composants dans une boîte horizontale
 		Box hB_taille = Box.createHorizontalBox();
 		hB_taille.add(L_taille);
 		hB_taille.add(m_CmB_taille);
+		hB_taille.add(struc);
+		hB_taille.add(m_L_modeIndicator);
 		hB_taille.add(Box.createHorizontalGlue());
 		
 		Box vB_params = Box.createVerticalBox();
@@ -407,5 +418,9 @@ public class Fenetre extends JFrame {
 
 	public JComboBox getCmB_taille() {
 		return m_CmB_taille;
+	}
+	
+	public JLabel getL_modeIndicator() {
+		return m_L_modeIndicator;
 	}
 }

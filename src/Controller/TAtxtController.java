@@ -6,10 +6,10 @@ import javax.swing.event.DocumentListener;
 import Vue.Fenetre;
 
 public class TAtxtController extends AbstractTextController implements DocumentListener{
-
+	
 	private int m_maxLength;	// Nombre de caractères maximum pour le champs
 	private int m_difference;	// Nombre de caractères restants
-	
+
 	public TAtxtController(Fenetre f)
 	{
 		super(f,250,CharacterMode.BYTES);	// 250 caractères par défaut + mode bytes
@@ -17,7 +17,7 @@ public class TAtxtController extends AbstractTextController implements DocumentL
 		m_difference = m_maxLength;
 		setCharsCountLabel();
 	}
-	
+
 	public void setMaxLength(int maxLength)
 	{
 		m_maxLength = maxLength;
@@ -34,28 +34,40 @@ public class TAtxtController extends AbstractTextController implements DocumentL
 		else
 			getFenetre().getL_txtCount().setText(m_difference + "/" + m_maxLength + " caractères restants");
 	}
-	
+
 	public boolean isValid()
 	{
 		if (m_difference >= 0 && m_difference < m_maxLength)
 			return true;
 		return false;
 	}
-	
+
 	public void switchEnableDisableBgenerer()
 	{
 		if (getFenetre().getRB_txt().isSelected())
 			if (isValid())getFenetre().getB_generer().setEnabled(true);
 			else getFenetre().getB_generer().setEnabled(false);
 	}
-	
+
+	// Méthode appelée lorsque le texte du champs est édité
 	public void onTextChanged(DocumentEvent event)
 	{
+		CharacterMode prevMode = getMode(); // Récupération du mode précédent
+		setMode(getAdaptedMode(getFenetre().getTA_txt().getText()));	// Assignation du mode le plus adapté au texte courant (qui peut être identique au mode précédent)
+		
+		// Le nouveau mode est différent du précédent, le nbr de caractères disponibles change
+		if (prevMode != getMode())
+		{
+			// On change le label du mode
+			getFenetre().getL_modeIndicator().setText(AbstractTextController.getTextForModeIndicator(getMode()));
+			onMaxCharsChanged();
+		}
+		
 		m_difference = m_maxLength - event.getDocument().getLength();
 		setCharsCountLabel();
 		switchEnableDisableBgenerer();
 	}
-	
+
 	// Méthode appelée lorsque le nombre maximum de caractères disponibles pour tout le qrcode a changé
 	public void onMaxCharsChanged()
 	{
@@ -65,11 +77,11 @@ public class TAtxtController extends AbstractTextController implements DocumentL
 		setCharsCountLabel();
 		switchEnableDisableBgenerer();
 	}
-	
+
 	public void changedUpdate(DocumentEvent event) {onTextChanged(event);}
 	public void insertUpdate(DocumentEvent event) {onTextChanged(event);}
 	public void removeUpdate(DocumentEvent event) {onTextChanged(event);}
-	
+
 	public String getMessage()
 	{
 		return getFenetre().getTA_txt().getText();

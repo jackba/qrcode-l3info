@@ -27,8 +27,21 @@ public class TFurlController extends AbstractTextController implements FocusList
 	
 	public void focusLost(FocusEvent event)
 	{
-		if (!getFenetre().getTF_url().getText().startsWith(HTTP))
-			getFenetre().getTF_url().setText(HTTP + getFenetre().getTF_url().getText());
+		if (!(getFenetre().getTF_url().getText().startsWith(HTTP.toLowerCase())
+				|| getFenetre().getTF_url().getText().startsWith(HTTP.toUpperCase())))
+		{
+			String initial = getFenetre().getTF_url().getText();
+			if(initial.equals(initial.toUpperCase()))
+			{
+				// La chaine est entièrement en majuscules
+				getFenetre().getTF_url().setText(HTTP.toUpperCase() + getFenetre().getTF_url().getText());
+			}
+			else
+			{
+				// La chaine n'est pas entièrement en majuscules
+				getFenetre().getTF_url().setText(HTTP + getFenetre().getTF_url().getText());
+			}
+		}
 	}
 	
 	// Méthodes inutilisées
@@ -48,6 +61,16 @@ public class TFurlController extends AbstractTextController implements FocusList
 	
 	public void onTextChanged(DocumentEvent event)
 	{
+		CharacterMode prevMode = getMode(); // Récupération du mode précédent
+		setMode(getAdaptedMode(getFenetre().getTF_url().getText()));	// Assignation du mode le plus adapté au texte courant (qui peut être identique au mode précédent)
+		
+		// Le nouveau mode est différent du précédent, le nbr de caractères disponibles change
+		if (prevMode != getMode())
+		{
+			// On change le label du mode
+			getFenetre().getL_modeIndicator().setText(AbstractTextController.getTextForModeIndicator(getMode()));
+			onMaxCharsChanged();	// On signale que le nombre maximum de caractères a changé
+		}
 		switchEnableDisableBgenerer();
 	}
 	

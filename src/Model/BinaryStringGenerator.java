@@ -16,7 +16,7 @@ public class BinaryStringGenerator {
 	}
 	
 	// Retourne une chaine binaire répondant aux spécifications du QRcode.
-	// mode: 0->Numérique - 1->Alphanumérique - 2->Byte - 3->Kanji
+	// mode: 0->Numérique - 1->Alphanumérique - 2->Byte - 3->Kanji - 4->ECI
 	public String getBinaryString(String message, int mode, int version, String level)
 	{
 		// Nouvelle instance du générateur binaire de la partie données
@@ -31,10 +31,12 @@ public class BinaryStringGenerator {
 		return m_correctionGenerator.getErrorCorrectionString(datas, spec, level);
 	}
 	
+	/*
 	public static void main(String[] args)
 	{
 		BinaryStringGenerator bsg = new BinaryStringGenerator();
 		String maChaine = bsg.getBinaryString("0123456789012345", 0, 4, "H");
 		System.out.println(maChaine);
 	}
+	*/
 }
