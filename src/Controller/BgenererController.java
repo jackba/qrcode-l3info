@@ -8,11 +8,13 @@ import javax.swing.SwingUtilities;
 
 import Donnees.NumberOfSymbolCharacterParser;
 import Model.BinaryStringGenerator;
+import Model.PenaltyRules;
 import Model.QRcode;
 import Vue.Fenetre;
 
 public class BgenererController extends AbstractController implements ActionListener {
 
+	private PenaltyRules m_penaltyRules;
 	private BinaryStringGenerator m_stringGenerator;
 	private QRcode m_qrCode;
 	private TFurlController m_TFurlController;
@@ -128,7 +130,8 @@ public class BgenererController extends AbstractController implements ActionList
 				m_qrCode.fillQRmatrix();
 
 				// TODO afficher la bonne matrice avec le masque ayant le moins de pénalités
-				getFenetre().getQrPanel().drawImageFromMatrix(m_qrCode.getMaskedMatrix(0),1);
+				m_penaltyRules = new PenaltyRules(m_qrCode);
+				getFenetre().getQrPanel().drawImageFromMatrix(m_qrCode.getMaskedMatrix(m_penaltyRules.getMask()),1);
 
 				// Redimensionne la fenêtre sans tout faire bugguer
 				SwingUtilities.invokeLater(new Runnable(){

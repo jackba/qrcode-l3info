@@ -11,11 +11,13 @@ public class PenaltyRules {
 		this.m_qrcode=qrcode;
 		this.m_penaltyNb=0;
 		this.m_masque=0;
+		
+		calculatePenalty();
 	}
 
 	//Fonction qui calcule la pénalité pour chaque masque de 0 a 7 puis stock dans m_masque le numero du masque avec la pénalité la plus faible
 	//La valeur de la pénalité est stocké dans m_penaltyNb
-	public void calculatePenalty(){	
+	private void calculatePenalty(){	
 		// Rules 1 : On cherche les pixels de même couleurs consécutifs par lignes
 		int compteur;
 		Boolean light;
@@ -27,7 +29,7 @@ public class PenaltyRules {
 			light = null;
 			for(int i=0; i<m_qrcode.getMatriceSize();i++){
 				for(int j=0;j<m_qrcode.getMatriceSize();j++){
-					if(m_qrcode.getQRmatrix()[i][j]==light && m_qrcode.getQRmatrix()[i][j]!=null){
+					if(m_qrcode.getMaskedMatrix(indexOfMask)[i][j]==light && m_qrcode.getMaskedMatrix(indexOfMask)[i][j]!=null){
 						compteur++;
 						if(compteur==5){
 							nbPenalty=nbPenalty+3;
@@ -36,7 +38,7 @@ public class PenaltyRules {
 						}
 					}else{
 						compteur=0;
-						light = m_qrcode.getQRmatrix()[i][j];
+						light = m_qrcode.getMaskedMatrix(indexOfMask)[i][j];
 					}
 				}
 			}
@@ -46,7 +48,7 @@ public class PenaltyRules {
 			light = null;
 			for(int i=0; i<m_qrcode.getMatriceSize();i++){
 				for(int j=0;j<m_qrcode.getMatriceSize();j++){
-					if(m_qrcode.getQRmatrix()[j][i]==light && m_qrcode.getQRmatrix()[j][i]!=null){
+					if(m_qrcode.getMaskedMatrix(indexOfMask)[j][i]==light && m_qrcode.getMaskedMatrix(indexOfMask)[j][i]!=null){
 						compteur++;
 						if(compteur==5){
 							nbPenalty=nbPenalty+3;
@@ -55,7 +57,7 @@ public class PenaltyRules {
 						}
 					}else{
 						compteur=0;
-						light = m_qrcode.getQRmatrix()[j][i];
+						light = m_qrcode.getMaskedMatrix(indexOfMask)[j][i];
 					}
 				}
 			}
@@ -64,8 +66,8 @@ public class PenaltyRules {
 			light=null;
 			for(int i=0; i<m_qrcode.getMatriceSize()-1;i++){
 				for(int j=0;j<m_qrcode.getMatriceSize()-1;j++){
-					light=m_qrcode.getQRmatrix()[i][j];
-					if(m_qrcode.getQRmatrix()[i+1][j]==light && m_qrcode.getQRmatrix()[i][j+1]==light && m_qrcode.getQRmatrix()[i+1][j+1]==light){
+					light=m_qrcode.getMaskedMatrix(indexOfMask)[i][j];
+					if(m_qrcode.getMaskedMatrix(indexOfMask)[i+1][j]==light && m_qrcode.getMaskedMatrix(indexOfMask)[i][j+1]==light && m_qrcode.getMaskedMatrix(indexOfMask)[i+1][j+1]==light){
 						nbPenalty=nbPenalty+3;
 					}
 				}
@@ -143,11 +145,10 @@ public class PenaltyRules {
 		QRcode qrCode = new QRcode(1,"Q",encodedData);
 		qrCode.fillQRmatrix();
 		PenaltyRules penRul = new PenaltyRules(qrCode);
-		penRul.calculatePenalty();
 		
 		System.out.println(penRul.getMask());
-	}*/
-
+	}
+*/
 }
 
 
