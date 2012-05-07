@@ -1,6 +1,6 @@
 package Vue;
 import java.awt.BorderLayout;
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -118,11 +118,13 @@ public class Fenetre extends JFrame {
 		m_TA_txt = new JTextArea(Short.MAX_VALUE,Short.MAX_VALUE);
 		m_TA_txt.setLineWrap(true);	// Découpe la ligne lorsqu'on arrive au bout
 		m_TA_txt.setWrapStyleWord(true);	// Effectue un retour à la ligne si le mot est trop long pour être affiché en bout de ligne
-		m_TA_txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); // Ajoute une bordure grise d'1 pixel autour de la zone de texte
+		//m_TA_txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); // Ajoute une bordure grise d'1 pixel autour de la zone de texte
 		m_TA_txt.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));	// Largeur et hauteur de la zone de texte infinie
 		m_TA_txt.setMinimumSize(new Dimension(0,0));	// Largeur et hauteur de la zone de texte infinie
+		JScrollPane SP_TAtxt = new JScrollPane(m_TA_txt,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		Box hB_textareaTxt = Box.createHorizontalBox();
-		hB_textareaTxt.add(m_TA_txt);
+		//hB_textareaTxt.add(m_TA_txt);
+		hB_textareaTxt.add(SP_TAtxt);
 		
 		// Saisie Texte libre (Label1, Label2 - TextArea)
 		m_vB_txt = Box.createVerticalBox();
@@ -176,11 +178,13 @@ public class Fenetre extends JFrame {
 		m_TA_smsMsg = new JTextArea(Short.MAX_VALUE,Short.MAX_VALUE);
 		m_TA_smsMsg.setLineWrap(true);	// Découpe la ligne lorsqu'on arrive au bout
 		m_TA_smsMsg.setWrapStyleWord(true);	// Effectue un retour à la ligne si le mot est trop long pour être affiché en bout de ligne
-		m_TA_smsMsg.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); // Ajoute une bordure grise d'1 pixel autour de la zone de texte
+		//m_TA_smsMsg.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); // Ajoute une bordure grise d'1 pixel autour de la zone de texte
 		m_TA_smsMsg.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));	// Largeur et hauteur de la zone de texte infinie
 		m_TA_smsMsg.setMinimumSize(new Dimension(0,0));	// Largeur et hauteur minimum de la zone de texte nulle
+		JScrollPane SP_TAsms = new JScrollPane(m_TA_smsMsg,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		Box hB_textAreaSmsMsg = Box.createHorizontalBox();
-		hB_textAreaSmsMsg.add(m_TA_smsMsg);
+		//hB_textAreaSmsMsg.add(m_TA_smsMsg);
+		hB_textAreaSmsMsg.add(SP_TAsms);
 		
 		// Saisie SMS - Num de Tel (Label - TextField) - Message (Label1, Label2 - TextArea)
 		m_vB_sms = Box.createVerticalBox();
