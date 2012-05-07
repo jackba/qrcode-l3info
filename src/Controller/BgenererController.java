@@ -130,7 +130,6 @@ public class BgenererController extends AbstractController implements ActionList
 				m_qrCode = new QRcode(version,level,encodedData);
 				m_qrCode.fillQRmatrix();
 
-				// TODO afficher la bonne matrice avec le masque ayant le moins de pénalités
 				m_penaltyRules = new PenaltyRules(m_qrCode);
 				getFenetre().getQrPanel().drawImageFromMatrix(m_qrCode.getMaskedMatrix(m_penaltyRules.getMask()),1);
 
