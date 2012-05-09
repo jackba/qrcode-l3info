@@ -167,40 +167,6 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 		}
 	}
 	
-	/*
-	// Dessine l'image correspondante à la matrice booléenne passée en paramètres
-	public void drawImageFromMatrix(Boolean[][] matrice)
-	{
-		// Récupération d'une dimension d'un côté du QRcode
-		// Dans l'image finale, chaque module (carré) est représenté par un carré de 4 pixels de coté.
-		// On y rajout des marges blanches tout autour de 4 modules (soit 4*4 = 16 pixels pour une marge, soit 32 pixels pour les deux marges)
-		// et on obtient le calcul suivant pour un coté de l'image finale:
-		int imageSize = matrice.length * 4 + 32;
-		
-		// Changement de taille du composant: le buffer sera automatiquement redimensionné
-		this.setPreferredSize(new Dimension(imageSize,imageSize));
-		this.setMaximumSize(this.getPreferredSize());
-		this.setSize(imageSize, imageSize);
-		
-		// Remplit le fond en blanc
-		m_buffer.setColor(Color.red);
-		m_buffer.fillRect(0, 0, getWidth(), getHeight());	// Rectangle blanc
-		
-		// Remplit tous les pixels noirs
-		for (int line=0; line<matrice.length; line++)
-			for (int column=0; column<matrice.length; column++)
-				if (matrice[line][column] != null)
-					if (matrice[line][column] == true)
-					{
-						m_buffer.setColor(Color.BLACK);
-						m_buffer.fillRect(32+4*column, 32+4*line, 4, 4);	// Carré noir de 4 pixels de côté
-					}
-		
-		// Rafraichissement de l'image
-		this.repaint();
-	}
-	*/
-	
 	// Dessine l'image correspondante à la matrice booléenne passée en paramètres
 	public void drawImageFromMatrix(Boolean[][] matrice, int scale)
 	{

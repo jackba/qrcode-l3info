@@ -3,6 +3,7 @@ package Controller;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.SwingUtilities;
 
@@ -22,13 +23,15 @@ public class BgenererController extends AbstractController implements ActionList
 	private TFtelController m_TFtelController;
 	private TFsmsTelController m_TFsmsTelController;
 	private TAsmsMsgController m_TAsmsMsgController;
+	private TFimgPathController m_TFimgPathController;
 
 	public BgenererController(Fenetre f,
 			TFurlController urlController,
 			TAtxtController txtController,
 			TFtelController telController,
 			TFsmsTelController smsTelController,
-			TAsmsMsgController smsMsgController)
+			TAsmsMsgController smsMsgController,
+			TFimgPathController imgPathController)
 	{
 		super(f);
 		m_TFurlController = urlController;
@@ -36,6 +39,7 @@ public class BgenererController extends AbstractController implements ActionList
 		m_TFtelController = telController;
 		m_TFsmsTelController = smsTelController;
 		m_TAsmsMsgController = smsMsgController;
+		m_TFimgPathController = imgPathController;
 		m_stringGenerator = new BinaryStringGenerator();
 	}
 
@@ -93,6 +97,14 @@ public class BgenererController extends AbstractController implements ActionList
 				}
 			}
 		}
+		else if (getFenetre().getRB_image().isSelected())
+		{
+			if (m_TFimgPathController.isValid())
+			{
+				message = m_TFimgPathController.getMessage();
+				mode = m_TFimgPathController.getMode();
+			}
+		}
 		else
 		{
 			
@@ -107,7 +119,14 @@ public class BgenererController extends AbstractController implements ActionList
 			}
 			catch (Exception e)
 			{
-				version = NumberOfSymbolCharacterParser.getInstance().getFirstAdaptedVersion(mode, message.length(), level);
+				int length;
+				if (mode == CharacterMode.IMAGE)
+					length = (int) (new File(message)).length();
+				else
+					length = message.length();
+				
+				version = NumberOfSymbolCharacterParser.getInstance().getFirstAdaptedVersion(mode, length, level);
+				//version = NumberOfSymbolCharacterParser.getInstance().getFirstAdaptedVersion(mode, message.length(), level);
 			}
 
 			// Le message, le mode, la version et le niveau sont corrects, on peut passer à la génération
@@ -122,6 +141,7 @@ public class BgenererController extends AbstractController implements ActionList
 				case BYTES: qrMode=2; break;
 				case KANJI: qrMode=3; break;
 				case ECI: qrMode=4; break;
+				case IMAGE: qrMode=5; break;
 				default:
 					qrMode = 2;
 				}

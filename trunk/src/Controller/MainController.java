@@ -46,7 +46,7 @@ public class MainController {
 		m_TAsmsMsgController = new TAsmsMsgController(m_fenetre, m_TFsmsTelController);
 		m_TFimgPathController = new TFimgPathController(m_fenetre);
 		m_BenregistrerController = new BenregistrerController(m_fenetre);
-		m_BgenererController = new BgenererController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
+		m_BgenererController = new BgenererController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController, m_TFimgPathController);
 		m_BchargerController = new BchargerController(m_fenetre);
 		m_CmBtailleController = new CmBtailleController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
 		m_RBlevelsController = new RBlevelsController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
