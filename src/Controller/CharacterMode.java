@@ -5,5 +5,6 @@ public enum CharacterMode {
 	ALPHANUMERIC,
 	BYTES,
 	KANJI,
-	ECI
+	ECI,
+	IMAGE
 }

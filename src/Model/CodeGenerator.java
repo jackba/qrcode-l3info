@@ -13,7 +13,7 @@ public class CodeGenerator {
 	private String texte;
 	private int version;
 	private int bits_max;
-	private String mode; // 0->Numérique - 1->Alphanumérique - 2->Byte - 3->Kanji - 4->eci
+	private String mode; // 0->Numérique - 1->Alphanumérique - 2->Byte - 3->Kanji - 4->ECI - 5->Image
 	private char level; // L - M - Q - H
 
 	public CodeGenerator(String texte, int mode, char level, int version)
@@ -29,6 +29,8 @@ public class CodeGenerator {
 			this.mode="kanji";				
 		}else if(mode == 4){
 			this.mode="eci";				
+		}else if(mode == 5){
+			this.mode="image";				
 		}
 
 		this.level = level;
@@ -155,6 +157,8 @@ public class CodeGenerator {
 			genererNumeric();
 		}else if (this.mode=="eci"){
 			genererECI();
+		}else if (this.mode=="image"){
+			genererImage();
 		}else{
 			System.out.println("La génération de ce mode est en cours de dévelopement.");
 		}
@@ -264,9 +268,27 @@ public class CodeGenerator {
 	}
 	
 	//Generer la String de bits pour le mode ECI avec encodage ISO-8859-15
-	private void genererECI(){
+	private void genererECI()
+	{
 		// Mode Indicator
 		this.resultBinaire = ECI.getBinaryStringForCommonEuropeanLanguage(texte, version);
+	}
+	
+	//Generer la String de bits pour le mode image
+	private void genererImage()
+	{
+		this.resultBinaire = "1111";	// Mode indicator
+		String binaryString = null;
+		try {
+			binaryString = ImageParser.getBinaryString(texte);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if (binaryString != null)
+		{
+			resultBinaire += ImageParser.getCountIndicator(binaryString, version);
+			resultBinaire += binaryString;
+		}
 	}
 
 
