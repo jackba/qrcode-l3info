@@ -161,8 +161,10 @@ public class ECI {
 	}
 	
 	// DEBUG
+	/*
 	public static void main(String[] args) {
 		// System.out.println(Integer.toBinaryString(999999));
 		ECI.getBinaryStringForCommonEuropeanLanguage("à table", 2);
 	}
+	*/
 }

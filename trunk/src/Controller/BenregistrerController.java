@@ -23,7 +23,7 @@ public class BenregistrerController extends AbstractController implements Action
 	}
 
 	public boolean isValid() {
-		return false;
+		return true;
 	}
 
 	// OnClick
@@ -76,5 +76,10 @@ public class BenregistrerController extends AbstractController implements Action
 		}
 		
 		return format;
+	}
+	
+	public JFileChooser getFileChooser()
+	{
+		return m_fileChooser;
 	}
 }

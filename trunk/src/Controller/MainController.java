@@ -14,8 +14,10 @@ public class MainController {
 	private TFtelController m_TFtelController;
 	private TFsmsTelController m_TFsmsTelController;
 	private TAsmsMsgController m_TAsmsMsgController;
+	private TFimgPathController m_TFimgPathController;
 	private BgenererController m_BgenererController;
 	private BenregistrerController m_BenregistrerController;
+	private BchargerController m_BchargerController;
 	private CmBtailleController m_CmBtailleController;
 	private RBlevelsController m_RBlevelsController;
 	private RBcontentsController m_RBcontentsController;
@@ -42,8 +44,10 @@ public class MainController {
 		m_TFtelController = new TFtelController(m_fenetre);
 		m_TFsmsTelController = new TFsmsTelController(m_fenetre);
 		m_TAsmsMsgController = new TAsmsMsgController(m_fenetre, m_TFsmsTelController);
+		m_TFimgPathController = new TFimgPathController(m_fenetre);
 		m_BenregistrerController = new BenregistrerController(m_fenetre);
 		m_BgenererController = new BgenererController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
+		m_BchargerController = new BchargerController(m_fenetre);
 		m_CmBtailleController = new CmBtailleController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
 		m_RBlevelsController = new RBlevelsController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
 		m_RBcontentsController = new RBcontentsController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
@@ -55,8 +59,10 @@ public class MainController {
 		m_fenetre.getTF_tel().getDocument().addDocumentListener(m_TFtelController);
 		m_fenetre.getTF_smsTel().getDocument().addDocumentListener(m_TFsmsTelController);
 		m_fenetre.getTA_smsMsg().getDocument().addDocumentListener(m_TAsmsMsgController);
+		m_fenetre.getTF_imgPath().getDocument().addDocumentListener(m_TFimgPathController);
 		m_fenetre.getB_generer().addActionListener(m_BgenererController);	// Listener sur le click
 		m_fenetre.getB_enregistrer().addActionListener(m_BenregistrerController);
+		m_fenetre.getB_charger().addActionListener(m_BchargerController);
 		m_fenetre.getCmB_taille().addActionListener(m_CmBtailleController);
 		m_fenetre.getRB_correctionL().addActionListener(m_RBlevelsController);
 		m_fenetre.getRB_correctionM().addActionListener(m_RBlevelsController);
@@ -66,6 +72,9 @@ public class MainController {
 		m_fenetre.getRB_txt().addActionListener(m_RBcontentsController);
 		m_fenetre.getRB_tel().addActionListener(m_RBcontentsController);
 		m_fenetre.getRB_sms().addActionListener(m_RBcontentsController);
+		m_fenetre.getRB_image().addActionListener(m_RBcontentsController);
+		m_fenetre.getRB_coloriage().addActionListener(m_RBcontentsController);
+		m_fenetre.getRB_decode().addActionListener(m_RBcontentsController);
 		
 		// Initialisation
 		m_CmBtailleController.actionPerformed(null);	// Récupération de la taille auto

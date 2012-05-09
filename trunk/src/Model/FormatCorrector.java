@@ -109,6 +109,7 @@ public class FormatCorrector extends AbstractCorrector {
 		return result;
 	}
 	
+	/*
 	public static void main(String[] args) {
 		FormatCorrector fc = new FormatCorrector();
 		
@@ -119,4 +120,5 @@ public class FormatCorrector extends AbstractCorrector {
 		if (result.equals(comparaison)) System.out.print(" - IDENTIQUES\n");
 		else System.out.print(" - DIFFERENTS\n");
 	}
+	*/
 }

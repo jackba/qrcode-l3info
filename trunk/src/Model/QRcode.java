@@ -671,6 +671,7 @@ public class QRcode {
 	}
 
 	// DEBUG
+	/*
 	public static void main(String[] args) {
 
 		BinaryStringGenerator bsg = new BinaryStringGenerator();
@@ -680,12 +681,13 @@ public class QRcode {
 		//System.out.println(code + "\n\n");
 		//System.out.println(code.matriceToString(code.getMaskedMatrix(0)));
 
-		/*
+		
 		QRcode qr = new QRcode(0, "Q", "tralilol");
 		Boolean[][] maMatrice = new Boolean[qr.getModuleCount(13)][qr.getModuleCount(13)];
 		qr.fillOptimizedMatrix(maMatrice,13);
 		System.out.println(qr.matriceToString(maMatrice));
-		 */
+		 
 
 	}
+	*/
 }

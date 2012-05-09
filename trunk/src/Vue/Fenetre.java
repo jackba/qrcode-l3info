@@ -14,6 +14,9 @@ public class Fenetre extends JFrame {
 	private JRadioButton m_RB_txt;
 	private JRadioButton m_RB_tel;
 	private JRadioButton m_RB_sms;
+	private JRadioButton m_RB_image;
+	private JRadioButton m_RB_coloriage;
+	private JRadioButton m_RB_decode;
 	private JRadioButton m_RB_correctionL;
 	private JRadioButton m_RB_correctionM;
 	private JRadioButton m_RB_correctionQ;
@@ -25,13 +28,18 @@ public class Fenetre extends JFrame {
 	private Box m_vB_txt;
 	private Box m_vB_tel;
 	private Box m_vB_sms;
+	private Box m_vB_image;
+	private Box m_vB_coloriage;
+	private Box m_vB_decode;
 	
 	private JButton m_B_generer;
 	private JButton m_B_enregistrer;
+	private JButton m_B_imgLoad;
 	
 	private JTextField m_TF_url;
 	private JTextField m_TF_tel;
 	private JTextField m_TF_smsTel;
+	private JTextField m_TF_imgPath;
 	
 	private JTextArea m_TA_txt;
 	private JTextArea m_TA_smsMsg;
@@ -74,6 +82,9 @@ public class Fenetre extends JFrame {
 		m_RB_txt = new JRadioButton("Texte");
 		m_RB_tel = new JRadioButton("Numéro de Tel");
 		m_RB_sms = new JRadioButton("SMS");
+		m_RB_image = new JRadioButton("Image");
+		m_RB_coloriage = new JRadioButton("Coloriage");
+		m_RB_decode = new JRadioButton("Décoder");
  
         // Ajout des boutons dans un même groupe
         ButtonGroup BG_contenu = new ButtonGroup();
@@ -81,6 +92,9 @@ public class Fenetre extends JFrame {
         BG_contenu.add(m_RB_txt);
         BG_contenu.add(m_RB_tel);
         BG_contenu.add(m_RB_sms);
+        BG_contenu.add(m_RB_image);
+        //BG_contenu.add(m_RB_coloriage);
+        //BG_contenu.add(m_RB_decode);
         
         // Ajout des boutons dans une boîte horizontale
         Box hB_boutonsR = Box.createHorizontalBox();
@@ -88,6 +102,9 @@ public class Fenetre extends JFrame {
         hB_boutonsR.add(m_RB_txt);
         hB_boutonsR.add(m_RB_tel);
         hB_boutonsR.add(m_RB_sms);
+        hB_boutonsR.add(m_RB_image);
+        //hB_boutonsR.add(m_RB_coloriage);
+        //hB_boutonsR.add(m_RB_decode);
         hB_boutonsR.add(Box.createHorizontalGlue());
         
 		// Contenu
@@ -196,7 +213,6 @@ public class Fenetre extends JFrame {
 		m_TA_smsMsg.setMinimumSize(new Dimension(0,0));	// Largeur et hauteur minimum de la zone de texte nulle
 		JScrollPane SP_TAsms = new JScrollPane(m_TA_smsMsg,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		Box hB_textAreaSmsMsg = Box.createHorizontalBox();
-		//hB_textAreaSmsMsg.add(m_TA_smsMsg);
 		hB_textAreaSmsMsg.add(SP_TAsms);
 		
 		// Saisie SMS - Num de Tel (Label - TextField) - Message (Label1, Label2 - TextArea)
@@ -206,6 +222,33 @@ public class Fenetre extends JFrame {
 		m_vB_sms.add(hB_labelSmsMsg);
 		m_vB_sms.add(hB_textAreaSmsMsg);
 		
+		/*
+		 * PANEL IMAGE
+		 */
+		m_B_imgLoad = new JButton("Charger");
+		m_TF_imgPath = new JTextField(Short.MAX_VALUE);
+		m_TF_imgPath.setMaximumSize(new Dimension(Short.MAX_VALUE, m_B_imgLoad.getPreferredSize().height));
+		
+		Box hB_buttonPath = Box.createHorizontalBox();
+		hB_buttonPath.add(m_B_imgLoad);
+		hB_buttonPath.add(m_TF_imgPath);
+		hB_buttonPath.add(Box.createHorizontalGlue());
+		
+		m_vB_image = Box.createVerticalBox();
+		m_vB_image.add(hB_buttonPath);
+		
+		/*
+		 * PANEL COLORIAGE
+		 */
+		
+		m_vB_coloriage = Box.createVerticalBox();
+		
+		/*
+		 * PANEL DECODEUR
+		 */
+		
+		m_vB_decode = Box.createVerticalBox();
+		
 		// Saisie
 		Box vB_saisie = Box.createHorizontalBox();
 		
@@ -214,12 +257,18 @@ public class Fenetre extends JFrame {
 		vB_saisie.add(m_vB_txt);
 		vB_saisie.add(m_vB_tel);
 		vB_saisie.add(m_vB_sms);
+		vB_saisie.add(m_vB_image);
+		vB_saisie.add(m_vB_coloriage);
+		vB_saisie.add(m_vB_decode);
 		
 		// On masque les différents panneaux. Leur affichage sera géré dynamiquement lors des évènements utilisateurs
 		m_vB_url.setVisible(false);
 		m_vB_txt.setVisible(false);
 		m_vB_tel.setVisible(false);
 		m_vB_sms.setVisible(false);
+		m_vB_image.setVisible(false);
+		m_vB_coloriage.setVisible(false);
+		m_vB_decode.setVisible(false);
 		
 		vB_saisie.add(Box.createHorizontalGlue());	// Etend la boite sur toute la largeur
 		vB_saisie.setBorder(BorderFactory.createTitledBorder("Saisie"));	// Définit la bordure et le titre
@@ -350,6 +399,9 @@ public class Fenetre extends JFrame {
 		if (m_vB_txt.isVisible()) m_vB_txt.setVisible(false);
 		if (m_vB_tel.isVisible()) m_vB_tel.setVisible(false);
 		if (m_vB_sms.isVisible()) m_vB_sms.setVisible(false);
+		if (m_vB_image.isVisible()) m_vB_image.setVisible(false);
+		if (m_vB_coloriage.isVisible()) m_vB_coloriage.setVisible(false);
+		if (m_vB_decode.isVisible()) m_vB_decode.setVisible(false);
 	}
 	
 	// Permet d'afficher les conteneurs Box désirés depuis les listeners
@@ -357,6 +409,9 @@ public class Fenetre extends JFrame {
 	public void showTxtBox() {m_vB_txt.setVisible(true);}
 	public void showTelBox() {m_vB_tel.setVisible(true);}
 	public void showSmsBox() {m_vB_sms.setVisible(true);}
+	public void showImgBox() {m_vB_image.setVisible(true);}
+	public void showPaintBox() {m_vB_coloriage.setVisible(true);}
+	public void showDecodeBox() {m_vB_decode.setVisible(true);}
 	
 	/*
 	 *  GETTERS
@@ -376,6 +431,18 @@ public class Fenetre extends JFrame {
 	public JRadioButton getRB_sms() {
 		return m_RB_sms;
 	}
+	
+	public JRadioButton getRB_image() {
+		return m_RB_image;
+	}
+	
+	public JRadioButton getRB_coloriage() {
+		return m_RB_coloriage;
+	}
+	
+	public JRadioButton getRB_decode() {
+		return m_RB_decode;
+	}
 
 	public JButton getB_generer() {
 		return m_B_generer;
@@ -383,6 +450,10 @@ public class Fenetre extends JFrame {
 	
 	public JButton getB_enregistrer() {
 		return m_B_enregistrer;
+	}
+	
+	public JButton getB_charger() {
+		return m_B_imgLoad;
 	}
 
 	public JTextField getTF_url() {
@@ -395,6 +466,10 @@ public class Fenetre extends JFrame {
 
 	public JTextField getTF_smsTel() {
 		return m_TF_smsTel;
+	}
+	
+	public JTextField getTF_imgPath() {
+		return m_TF_imgPath;
 	}
 
 	public JTextArea getTA_txt() {

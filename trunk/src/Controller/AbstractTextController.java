@@ -67,16 +67,20 @@ public abstract class AbstractTextController extends AbstractController {
 	
 	public static String getTextForModeIndicator(CharacterMode mode)
 	{
-		switch(mode)
+		if (mode != null)
 		{
-		case NUMERIC: return "(mode Numérique)";
-		case ALPHANUMERIC: return "(mode Alpha-numérique)";
-		case BYTES: return "(mode Octet)";
-		case KANJI: return "(mode Kanji)";
-		case ECI: return "(mode Latin-9)";
-		default:
-			return "(mode Octet)";
+			switch(mode)
+			{
+			case NUMERIC: return "(mode Numérique)";
+			case ALPHANUMERIC: return "(mode Alpha-numérique)";
+			case BYTES: return "(mode Octet)";
+			case KANJI: return "(mode Kanji)";
+			case ECI: return "(mode Latin-9)";
+			default:
+				return "";
+			}
 		}
+		return "";
 	}
 
 	public int getDefaultLength() {
