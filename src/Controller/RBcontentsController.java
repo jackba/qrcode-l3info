@@ -64,6 +64,21 @@ public class RBcontentsController extends AbstractController implements ActionLi
 			m_TAsmsMsgController.switchEnableDisableBgenerer();
 			getFenetre().getL_modeIndicator().setText(AbstractTextController.getTextForModeIndicator(m_TAsmsMsgController.getMode()));
 		}
+		else if (rb.equals(getFenetre().getRB_image()))
+		{
+			getFenetre().showImgBox();
+			getFenetre().getL_modeIndicator().setText(AbstractTextController.getTextForModeIndicator(CharacterMode.BYTES));
+		}
+		else if (rb.equals(getFenetre().getRB_coloriage()))
+		{
+			getFenetre().showPaintBox();
+			getFenetre().getL_modeIndicator().setText(AbstractTextController.getTextForModeIndicator(CharacterMode.BYTES));
+		}
+		else if (rb.equals(getFenetre().getRB_decode()))
+		{
+			getFenetre().showDecodeBox();
+			getFenetre().getL_modeIndicator().setText(AbstractTextController.getTextForModeIndicator(null));
+		}
 	}
 
 }
