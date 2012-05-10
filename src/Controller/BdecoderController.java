@@ -5,10 +5,13 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
 import com.google.zxing.BinaryBitmap;
+import com.google.zxing.DecodeHintType;
 import com.google.zxing.LuminanceSource;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.ReaderException;
@@ -65,6 +68,7 @@ public class BdecoderController extends AbstractController implements ActionList
 		try {
 			image = ImageIO.read(file);
 		} catch (IOException e) {
+			e.printStackTrace();
 			m_isAnImage = false;
 			return e.toString();
 		}
@@ -76,7 +80,10 @@ public class BdecoderController extends AbstractController implements ActionList
 		BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
 		Result result;
 		try {
-			result = new MultiFormatReader().decode(bitmap);
+			Map<DecodeHintType,Object> mp = new HashMap<DecodeHintType,Object>();
+			mp.put(DecodeHintType.PURE_BARCODE, null);
+			mp.put(DecodeHintType.TRY_HARDER, null);
+			result = new MultiFormatReader().decode(bitmap,mp);	// DecodeHint
 		} catch (ReaderException e) {
 			m_isAnImage = false;
 			return e.toString();
