@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 ZXing authors
+ * Copyright 2010 ZXing authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,26 @@
  * limitations under the License.
  */
 
-package com.google.zxing;
+package com.google.zxing.client.result;
 
 /**
- * These are a set of hints that you may pass to Writers to specify their behavior.
+ * Represents the type of data encoded by a barcode -- from plain text, to a
+ * URI, to an e-mail address, etc.
  *
- * @author dswitkin@google.com (Daniel Switkin)
+ * @author Sean Owen
  */
-public enum EncodeHintType {
+public enum ParsedResultType {
 
-  /**
-   * Specifies what degree of error correction to use, for example in QR Codes (type Integer).
-   */
-  ERROR_CORRECTION,
-
-  /**
-   * Specifies what character encoding to use where applicable (type String)
-   */
-  CHARACTER_SET,
+  ADDRESSBOOK,
+  EMAIL_ADDRESS,
+  PRODUCT,
+  URI,
+  TEXT,
+  GEO,
+  TEL,
+  SMS,
+  CALENDAR,
+  WIFI,
+  ISBN,
 
 }
