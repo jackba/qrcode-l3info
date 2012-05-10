@@ -14,26 +14,27 @@
  * limitations under the License.
  */
 
-package com.google.zxing;
+package com.google.zxing.client.result;
 
 /**
- * A base class which covers the range of exceptions which may occur when encoding a barcode using
- * the Writer framework.
- *
- * @author dswitkin@google.com (Daniel Switkin)
+ * @author jbreiden@google.com (Jeff Breidenbach)
  */
-@SuppressWarnings("serial")
-public final class WriterException extends Exception {
+public final class ISBNParsedResult extends ParsedResult {
 
-  public WriterException() {
+  private final String isbn;
+
+  ISBNParsedResult(String isbn) {
+    super(ParsedResultType.ISBN);
+    this.isbn = isbn;
   }
 
-  public WriterException(String message) {
-    super(message);
+  public String getISBN() {
+    return isbn;
   }
-  
-  public WriterException(Throwable cause) {
-    super(cause);
+
+  @Override
+  public String getDisplayResult() {
+    return isbn;
   }
 
 }

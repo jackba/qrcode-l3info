@@ -34,7 +34,9 @@ public enum Mode {
   FNC1_FIRST_POSITION(new int[]{0, 0, 0}, 0x05),
   FNC1_SECOND_POSITION(new int[]{0, 0, 0}, 0x09),
   /** See GBT 18284-2000; "Hanzi" is a transliteration of this mode name. */
-  HANZI(new int[]{8, 10, 12}, 0x0D);
+  HANZI(new int[]{8, 10, 12}, 0x0D),
+  /** This mode is not specified in the QR code standard; It is only for proof of concept*/
+  IMAGE(new int[]{8, 10, 12}, 0x0F);
 
   private final int[] characterCountBitsForVersions;
   private final int bits;
@@ -72,6 +74,9 @@ public enum Mode {
       case 0xD:
     	  // 0xD is defined in GBT 18284-2000, may not be supported in foreign country
         return HANZI;
+      case 0xF:
+    	  // 0xF is not defined in QR code standard. Using it will laid to an unreadable code for other code readers.
+    	return IMAGE;
       default:
         throw new IllegalArgumentException();
     }
