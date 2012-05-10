@@ -31,6 +31,8 @@ public class Fenetre extends JFrame {
 	private Box m_vB_image;
 	private Box m_vB_coloriage;
 	private Box m_vB_decode;
+	private Box m_hB_textResult;
+	private Box m_hB_imageResult;
 	
 	private JButton m_B_generer;
 	private JButton m_B_enregistrer;
@@ -46,12 +48,14 @@ public class Fenetre extends JFrame {
 	
 	private JTextArea m_TA_txt;
 	private JTextArea m_TA_smsMsg;
+	private JTextArea m_TA_result;
 	
 	private JLabel m_L_txtCount;
 	private JLabel m_L_smsMsgCount;
 	private JLabel m_L_modeIndicator;
 	
 	private QRcodeComponent m_qrPanel;
+	private ImageComponent m_ImageComponent;
 	
 	public Fenetre()
 	{
@@ -250,6 +254,7 @@ public class Fenetre extends JFrame {
 		 * PANEL DECODEUR
 		 */
 		
+		// Boite de décodage
 		m_B_decodeImgLoad = new JButton("Charger");
 		m_TF_decodeImgPath = new JTextField(Short.MAX_VALUE);
 		m_TF_decodeImgPath.setMaximumSize(new Dimension(Short.MAX_VALUE, m_B_decodeImgLoad.getPreferredSize().height));
@@ -264,8 +269,32 @@ public class Fenetre extends JFrame {
 		hB_decodeButtonPath.add(m_B_decodeProcess);
 		hB_decodeButtonPath.add(Box.createHorizontalGlue());
 		
+		// Boite de résultat textuel
+		// Champs de texte du résultat avec possible saisie
+		m_TA_result = new JTextArea(Short.MAX_VALUE,Short.MAX_VALUE);
+		m_TA_result.setLineWrap(true);	// Découpe la ligne lorsqu'on arrive au bout
+		m_TA_result.setWrapStyleWord(true);	// Effectue un retour à la ligne si le mot est trop long pour être affiché en bout de ligne
+		m_TA_result.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));	// Largeur et hauteur de la zone de texte infinie
+		m_TA_result.setMinimumSize(new Dimension(0,0));	// Largeur et hauteur minimum de la zone de texte nulle
+		JScrollPane SP_TAresult = new JScrollPane(m_TA_result,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		
+		m_hB_textResult = Box.createHorizontalBox();
+		m_hB_textResult.add(SP_TAresult);
+		
+		// Boite de résultat image
+		m_ImageComponent = new ImageComponent();
+		m_ImageComponent.setPreferredSize(new Dimension(20,20));
+		
+		m_hB_imageResult = Box.createHorizontalBox();
+		m_hB_imageResult.add(m_ImageComponent);
+		
 		m_vB_decode = Box.createVerticalBox();
 		m_vB_decode.add(hB_decodeButtonPath);
+		m_vB_decode.add(m_hB_textResult);
+		m_vB_decode.add(m_hB_imageResult);
+		
+		m_hB_textResult.setVisible(false);
+		m_hB_imageResult.setVisible(false);
 		
 		// Saisie
 		Box vB_saisie = Box.createHorizontalBox();
@@ -406,7 +435,7 @@ public class Fenetre extends JFrame {
         Container c = getContentPane();	// Récupère la zone cliente de la frame (zone dans laquelle on peut placer des composants/conteneurs)
         c.add(hB_principale,BorderLayout.CENTER);	// Place la boite principale dans la fenêtre
         pack();	// Ajuste la taille de la frame de manière à ce que tous les composants soient visibles
-        setMinimumSize(new Dimension(615,325));	// Définit la taille minimale de la frame de manière à ce que tous les composants soient bien visibles
+        setMinimumSize(new Dimension(690,325));	// Définit la taille minimale de la frame de manière à ce que tous les composants soient bien visibles
         // setMinimumSize(getPreferredSize());	// Définit la taille minimale de la frame comme étant la taille après l'opération pack (tous les composants visibles)
 	}
 	
@@ -431,6 +460,17 @@ public class Fenetre extends JFrame {
 	public void showPaintBox() {m_vB_coloriage.setVisible(true);}
 	public void showDecodeBox() {m_vB_decode.setVisible(true);}
 	
+	// Meme chose qu'au dessus, mais à l'intérieur de la boxde résultat
+	public void showResultTextBox() {m_hB_textResult.setVisible(true);}
+	public void showResultImgBox() {m_hB_imageResult.setVisible(true);}
+	
+	// Masque les boites de résultat affichées
+	public void hideShownResultBoxes()
+	{
+		if (m_hB_textResult.isVisible()) m_hB_textResult.setVisible(false);
+		if (m_hB_imageResult.isVisible()) m_hB_imageResult.setVisible(false);
+	}
+
 	/*
 	 *  GETTERS
 	 */
@@ -509,6 +549,10 @@ public class Fenetre extends JFrame {
 	public JTextArea getTA_smsMsg() {
 		return m_TA_smsMsg;
 	}
+	
+	public JTextArea getTA_result() {
+		return m_TA_result;
+	}
 
 	public JLabel getL_txtCount() {
 		return m_L_txtCount;
@@ -520,6 +564,10 @@ public class Fenetre extends JFrame {
 	
 	public QRcodeComponent getQrPanel() {
 		return m_qrPanel;
+	}
+	
+	public ImageComponent getImageComponent() {
+		return m_ImageComponent;
 	}
 
 	public JRadioButton getRB_correctionL() {

@@ -20,6 +20,7 @@ public class MainController {
 	private BenregistrerController m_BenregistrerController;
 	private BchargerController m_BchargerImgController;
 	private BchargerController m_BchargerDecodeImgController;
+	private BdecoderController m_BdecoderController;
 	private CmBtailleController m_CmBtailleController;
 	private RBlevelsController m_RBlevelsController;
 	private RBcontentsController m_RBcontentsController;
@@ -52,6 +53,7 @@ public class MainController {
 		m_BgenererController = new BgenererController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController, m_TFimgPathController);
 		m_BchargerImgController = new BchargerController(m_fenetre, m_fenetre.getTF_imgPath());
 		m_BchargerDecodeImgController = new BchargerController(m_fenetre, m_fenetre.getTF_decodeImgPath());
+		m_BdecoderController = new BdecoderController(m_fenetre);
 		m_CmBtailleController = new CmBtailleController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
 		m_RBlevelsController = new RBlevelsController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
 		m_RBcontentsController = new RBcontentsController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
@@ -69,6 +71,7 @@ public class MainController {
 		m_fenetre.getB_enregistrer().addActionListener(m_BenregistrerController);
 		m_fenetre.getB_charger().addActionListener(m_BchargerImgController);
 		m_fenetre.getB_chargerDecode().addActionListener(m_BchargerDecodeImgController);
+		m_fenetre.getB_decoder().addActionListener(m_BdecoderController);
 		m_fenetre.getCmB_taille().addActionListener(m_CmBtailleController);
 		m_fenetre.getRB_correctionL().addActionListener(m_RBlevelsController);
 		m_fenetre.getRB_correctionM().addActionListener(m_RBlevelsController);
