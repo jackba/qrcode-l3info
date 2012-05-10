@@ -58,7 +58,6 @@ public class BdecoderController extends AbstractController implements ActionList
 			getFenetre().showResultTextBox();
 			getFenetre().getTA_result().setText(m_decodedString);
 		}
-		System.out.println(getFenetre().getSize());
 	}
 
 	// Retourne le texte résultant du décodage de l'image
