@@ -35,11 +35,14 @@ public class Fenetre extends JFrame {
 	private JButton m_B_generer;
 	private JButton m_B_enregistrer;
 	private JButton m_B_imgLoad;
+	private JButton m_B_decodeImgLoad;
+	private JButton m_B_decodeProcess;
 	
 	private JTextField m_TF_url;
 	private JTextField m_TF_tel;
 	private JTextField m_TF_smsTel;
 	private JTextField m_TF_imgPath;
+	private JTextField m_TF_decodeImgPath;
 	
 	private JTextArea m_TA_txt;
 	private JTextArea m_TA_smsMsg;
@@ -84,7 +87,7 @@ public class Fenetre extends JFrame {
 		m_RB_sms = new JRadioButton("SMS");
 		m_RB_image = new JRadioButton("Image");
 		m_RB_coloriage = new JRadioButton("Coloriage");
-		m_RB_decode = new JRadioButton("Décoder");
+		m_RB_decode = new JRadioButton("Décodeur");
  
         // Ajout des boutons dans un même groupe
         ButtonGroup BG_contenu = new ButtonGroup();
@@ -94,7 +97,7 @@ public class Fenetre extends JFrame {
         BG_contenu.add(m_RB_sms);
         BG_contenu.add(m_RB_image);
         //BG_contenu.add(m_RB_coloriage);
-        //BG_contenu.add(m_RB_decode);
+        BG_contenu.add(m_RB_decode);
         
         // Ajout des boutons dans une boîte horizontale
         Box hB_boutonsR = Box.createHorizontalBox();
@@ -104,7 +107,7 @@ public class Fenetre extends JFrame {
         hB_boutonsR.add(m_RB_sms);
         hB_boutonsR.add(m_RB_image);
         //hB_boutonsR.add(m_RB_coloriage);
-        //hB_boutonsR.add(m_RB_decode);
+        hB_boutonsR.add(m_RB_decode);
         hB_boutonsR.add(Box.createHorizontalGlue());
         
 		// Contenu
@@ -247,7 +250,22 @@ public class Fenetre extends JFrame {
 		 * PANEL DECODEUR
 		 */
 		
+		m_B_decodeImgLoad = new JButton("Charger");
+		m_TF_decodeImgPath = new JTextField(Short.MAX_VALUE);
+		m_TF_decodeImgPath.setMaximumSize(new Dimension(Short.MAX_VALUE, m_B_decodeImgLoad.getPreferredSize().height));
+		Component strut = Box.createHorizontalStrut(30);
+		strut.setMaximumSize(new Dimension(30,m_B_decodeImgLoad.getPreferredSize().height));
+		m_B_decodeProcess = new JButton("Décoder");
+		
+		Box hB_decodeButtonPath = Box.createHorizontalBox();
+		hB_decodeButtonPath.add(m_B_decodeImgLoad);
+		hB_decodeButtonPath.add(m_TF_decodeImgPath);
+		hB_decodeButtonPath.add(strut);
+		hB_decodeButtonPath.add(m_B_decodeProcess);
+		hB_decodeButtonPath.add(Box.createHorizontalGlue());
+		
 		m_vB_decode = Box.createVerticalBox();
+		m_vB_decode.add(hB_decodeButtonPath);
 		
 		// Saisie
 		Box vB_saisie = Box.createHorizontalBox();
@@ -455,7 +473,15 @@ public class Fenetre extends JFrame {
 	public JButton getB_charger() {
 		return m_B_imgLoad;
 	}
-
+	
+	public JButton getB_chargerDecode() {
+		return m_B_decodeImgLoad;
+	}
+	
+	public JButton getB_decoder() {
+		return m_B_decodeProcess;
+	}
+	
 	public JTextField getTF_url() {
 		return m_TF_url;
 	}
@@ -470,6 +496,10 @@ public class Fenetre extends JFrame {
 	
 	public JTextField getTF_imgPath() {
 		return m_TF_imgPath;
+	}
+	
+	public JTextField getTF_decodeImgPath() {
+		return m_TF_decodeImgPath;
 	}
 
 	public JTextArea getTA_txt() {

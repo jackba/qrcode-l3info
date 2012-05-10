@@ -69,6 +69,7 @@ public class ImageParser {
 	
 	private static StringBuilder m_stringBuilder = new StringBuilder();
 	
+	// Convertit un byte en chaine binaire de 8 bits
 	public static String byteToBinary(byte b){
 		m_stringBuilder.delete(0, m_stringBuilder.length());
 		int i = b & 0xFF;

@@ -2,14 +2,18 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import javax.swing.JFileChooser;
+import javax.swing.JTextField;
 
 import Vue.Fenetre;
 
 public class BchargerController extends BenregistrerController{
 
-	public BchargerController(Fenetre f)
+	private JTextField m_champs;
+	
+	public BchargerController(Fenetre f, JTextField champsTexte)
 	{
 		super(f);
+		m_champs = champsTexte;
 	}
 	
 	public void actionPerformed(ActionEvent event)
@@ -21,7 +25,7 @@ public class BchargerController extends BenregistrerController{
 		if (bouton == JFileChooser.APPROVE_OPTION)
 		{
 			// Affichage du chemin du fichier sélectionné par l'utilisateur	dans le champs de texte	
-			getFenetre().getTF_imgPath().setText(getFileChooser().getSelectedFile().getAbsolutePath());
+			m_champs.setText(getFileChooser().getSelectedFile().getAbsolutePath());
 		}
 	}
 	
