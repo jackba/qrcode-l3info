@@ -27,35 +27,53 @@ import java.util.List;
  */
 public final class DecoderResult {
 
-  private final byte[] rawBytes;
-  private final String text;
-  private final List<byte[]> byteSegments;
-  private final String ecLevel;
+	private final byte[] rawBytes;
+	private final String text;
+	private final List<byte[]> byteSegments;
+	private final String ecLevel;
+	private final boolean isAnImage;
 
-  public DecoderResult(byte[] rawBytes,
-                       String text,
-                       List<byte[]> byteSegments,
-                       String ecLevel) {
-    this.rawBytes = rawBytes;
-    this.text = text;
-    this.byteSegments = byteSegments;
-    this.ecLevel = ecLevel;
-  }
+	public DecoderResult(byte[] rawBytes,
+			String text,
+			List<byte[]> byteSegments,
+			String ecLevel) {
+		this.rawBytes = rawBytes;
+		this.text = text;
+		this.byteSegments = byteSegments;
+		this.ecLevel = ecLevel;
+		this.isAnImage = false;
+	}
 
-  public byte[] getRawBytes() {
-    return rawBytes;
-  }
+	public DecoderResult(byte[] rawBytes,
+			String text,
+			List<byte[]> byteSegments,
+			String ecLevel,
+			boolean isAnImage) {
+		this.rawBytes = rawBytes;
+		this.text = text;
+		this.byteSegments = byteSegments;
+		this.ecLevel = ecLevel;
+		this.isAnImage = isAnImage;
+	}
 
-  public String getText() {
-    return text;
-  }
+	public byte[] getRawBytes() {
+		return rawBytes;
+	}
 
-  public List<byte[]> getByteSegments() {
-    return byteSegments;
-  }
+	public String getText() {
+		return text;
+	}
 
-  public String getECLevel() {
-    return ecLevel;
-  }
+	public List<byte[]> getByteSegments() {
+		return byteSegments;
+	}
 
+	public String getECLevel() {
+		return ecLevel;
+	}
+
+	public boolean isImage()
+	{
+		return isAnImage;
+	}
 }
