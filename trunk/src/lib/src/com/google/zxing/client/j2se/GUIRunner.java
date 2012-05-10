@@ -21,6 +21,7 @@ import com.google.zxing.LuminanceSource;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
+import com.google.zxing.ResultMetadataType;
 import com.google.zxing.common.HybridBinarizer;
 
 import java.awt.Container;
@@ -85,7 +86,7 @@ public final class GUIRunner extends JFrame {
     textArea.setText(decodeText);
   }
 
-  private static String getDecodeText(File file) {
+private static String getDecodeText(File file) {
     BufferedImage image;
     try {
       image = ImageIO.read(file);
@@ -100,6 +101,9 @@ public final class GUIRunner extends JFrame {
     Result result;
     try {
       result = new MultiFormatReader().decode(bitmap);
+      System.out.println(result.getResultMetadata().size());
+      boolean isAnImage = (Boolean)result.getResultMetadata().get(ResultMetadataType.OTHER);
+      System.out.println(isAnImage);
     } catch (ReaderException re) {
       return re.toString();
     }

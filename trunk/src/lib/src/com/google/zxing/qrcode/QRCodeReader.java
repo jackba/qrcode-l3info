@@ -87,6 +87,7 @@ public class QRCodeReader implements Reader {
     if (ecLevel != null) {
       result.putMetadata(ResultMetadataType.ERROR_CORRECTION_LEVEL, ecLevel);
     }
+    result.putMetadata(ResultMetadataType.OTHER, decoderResult.isImage());
     return result;
   }
 
