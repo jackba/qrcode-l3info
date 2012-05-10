@@ -111,6 +111,8 @@ final class DecodedBitStreamParser {
               decodeByteSegment(bits, result, count, currentCharacterSetECI, byteSegments, hints);
             } else if (mode == Mode.KANJI) {
               decodeKanjiSegment(bits, result, count);
+            } else if (mode == Mode.IMAGE) {
+              decodeImageSegment(bits, result, count, currentCharacterSetECI, byteSegments, hints);
             } else {
               throw FormatException.getFormatInstance();
             }
@@ -125,7 +127,7 @@ final class DecodedBitStreamParser {
                              ecLevel == null ? null : ecLevel.toString());
   }
 
-  /**
+/**
    * See specification GBT 18284-2000
    */
   private static void decodeHanziSegment(BitSource bits,
@@ -232,6 +234,34 @@ final class DecodedBitStreamParser {
       throw FormatException.getFormatInstance();
     }
     byteSegments.add(readBytes);
+  }
+  
+  // Décode un segment d'image. Un segment d'image est décodé selon les mêmes principes qu'un BYTE
+  /** Not supported by ISO specification
+ * @throws FormatException */
+  private static void decodeImageSegment(BitSource bits, StringBuilder result,
+			int count, CharacterSetECI currentCharacterSetECI,
+			List<byte[]> byteSegments, Map<DecodeHintType, ?> hints) throws FormatException {
+	    if (count << 3 > bits.available()) {
+	      throw FormatException.getFormatInstance();
+	    }
+	    byte[] readBytes = new byte[count];
+	    for (int i = 0; i < count; i++) {
+	      readBytes[i] = (byte) bits.readBits(8);
+	      result.append(byteToBinary(readBytes[i]));
+	    }
+	    byteSegments.add(readBytes);
+  }
+  
+  private static StringBuilder m_stringBuilder = new StringBuilder();
+
+  // Convertit un byte en chaine binaire de 8 bits
+  private static String byteToBinary(byte b){
+	  m_stringBuilder.delete(0, m_stringBuilder.length());
+	  int i = b & 0xFF;
+	  m_stringBuilder.append(Integer.toBinaryString(i));
+	  while (m_stringBuilder.length()<8) m_stringBuilder.insert(0,'0');
+	  return m_stringBuilder.toString();
   }
 
   private static char toAlphaNumericChar(int value) throws FormatException {

@@ -78,6 +78,7 @@ public class RBcontentsController extends AbstractController implements ActionLi
 		{
 			getFenetre().showDecodeBox();
 			getFenetre().getL_modeIndicator().setText(AbstractTextController.getTextForModeIndicator(null));
+			getFenetre().getB_generer().setEnabled(false);
 		}
 	}
 

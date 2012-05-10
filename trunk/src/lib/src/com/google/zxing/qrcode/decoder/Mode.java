@@ -36,7 +36,7 @@ public enum Mode {
   /** See GBT 18284-2000; "Hanzi" is a transliteration of this mode name. */
   HANZI(new int[]{8, 10, 12}, 0x0D),
   /** This mode is not specified in the QR code standard; It is only for proof of concept*/
-  IMAGE(new int[]{8, 10, 12}, 0x0F);
+  IMAGE(new int[]{8, 16, 16}, 0x0F);
 
   private final int[] characterCountBitsForVersions;
   private final int bits;
