@@ -85,6 +85,9 @@ public class MainController {
 		m_fenetre.getRB_coloriage().addActionListener(m_RBcontentsController);
 		m_fenetre.getRB_decode().addActionListener(m_RBcontentsController);
 		
+		// DEBUG
+		//m_fenetre.addMouseMotionListener(new TestController(m_fenetre));
+		
 		// Initialisation
 		m_CmBtailleController.actionPerformed(null);	// Récupération de la taille auto
 		m_fenetre.getRB_correctionL().setSelected(true);	// Niveau de correction d'erreur L coché
