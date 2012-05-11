@@ -72,6 +72,8 @@ public class Fenetre extends JFrame {
 		setLocationRelativeTo(null);
 		
 		// Application du look and feel du systeme.
+		// Commenter le groupe de try/catch suivant pour
+		// revenir au style Java par défaut (généralement moins beau).
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException e) {
@@ -100,7 +102,7 @@ public class Fenetre extends JFrame {
         BG_contenu.add(m_RB_tel);
         BG_contenu.add(m_RB_sms);
         BG_contenu.add(m_RB_image);
-        //BG_contenu.add(m_RB_coloriage);
+        BG_contenu.add(m_RB_coloriage);
         BG_contenu.add(m_RB_decode);
         
         // Ajout des boutons dans une boîte horizontale
@@ -110,7 +112,7 @@ public class Fenetre extends JFrame {
         hB_boutonsR.add(m_RB_tel);
         hB_boutonsR.add(m_RB_sms);
         hB_boutonsR.add(m_RB_image);
-        //hB_boutonsR.add(m_RB_coloriage);
+        hB_boutonsR.add(m_RB_coloriage);
         hB_boutonsR.add(m_RB_decode);
         hB_boutonsR.add(Box.createHorizontalGlue());
         
@@ -155,12 +157,10 @@ public class Fenetre extends JFrame {
 		m_TA_txt = new JTextArea(Short.MAX_VALUE,Short.MAX_VALUE);
 		m_TA_txt.setLineWrap(true);	// Découpe la ligne lorsqu'on arrive au bout
 		m_TA_txt.setWrapStyleWord(true);	// Effectue un retour à la ligne si le mot est trop long pour être affiché en bout de ligne
-		//m_TA_txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); // Ajoute une bordure grise d'1 pixel autour de la zone de texte
 		m_TA_txt.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));	// Largeur et hauteur de la zone de texte infinie
 		m_TA_txt.setMinimumSize(new Dimension(0,0));	// Largeur et hauteur de la zone de texte infinie
 		JScrollPane SP_TAtxt = new JScrollPane(m_TA_txt,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		Box hB_textareaTxt = Box.createHorizontalBox();
-		//hB_textareaTxt.add(m_TA_txt);
 		hB_textareaTxt.add(SP_TAtxt);
 		
 		// Saisie Texte libre (Label1, Label2 - TextArea)
@@ -247,7 +247,25 @@ public class Fenetre extends JFrame {
 		/*
 		 * PANEL COLORIAGE
 		 */
-		
+		/*
+		 * TODO: Ajouter des box, composants, etc pour le coloriage manuel du QRcode
+		 * 
+		 * Quelques méthodes utiles pour construire l'interface:
+		 * - Créer une boite horizontale: Box maBoiteHorizontale = Box.createHorizontalBox();
+		 * - Créer une boite verticale: Box maBoiteVerticale = Box.createVerticalBox();
+		 * - Ajouter un composant dans une boite: maBoite.add(monComposant);
+		 * - Ajouter un espace de taille fixe dans la boite (où XXX = horizontal ou vertical): maBoite.add(Box.createXXXStrut());
+		 * - Ajouter un espace flexible (équivalent des stretchs dans d'autres librairies): maBoite.add(Box.createXXXGlue());
+		 * 
+		 * Pour faire en sorte qu'un composant se redimensionne en prenant toujours tout l'espace disponible en largeur et en hauteur:
+		 * - monComposant.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
+		 * 
+		 * Pour empecher qu'un composant se redimensionne (en hauteur par exemple):
+		 * - monComposant.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
+		 * 
+		 * Enfin, une fois que tous les composants sont créés et agencés dans des boites, les ajouter dans la boite m_vB_coloriage
+		 * Qui est automatiquement masquée/affichée lorsque l'utilisateur clique sur les boutons radios dans l'interface.
+		 */
 		m_vB_coloriage = Box.createVerticalBox();
 		
 		/*
@@ -435,8 +453,7 @@ public class Fenetre extends JFrame {
         Container c = getContentPane();	// Récupère la zone cliente de la frame (zone dans laquelle on peut placer des composants/conteneurs)
         c.add(hB_principale,BorderLayout.CENTER);	// Place la boite principale dans la fenêtre
         pack();	// Ajuste la taille de la frame de manière à ce que tous les composants soient visibles
-        setMinimumSize(new Dimension(690,325));	// Définit la taille minimale de la frame de manière à ce que tous les composants soient bien visibles
-        // setMinimumSize(getPreferredSize());	// Définit la taille minimale de la frame comme étant la taille après l'opération pack (tous les composants visibles)
+        setMinimumSize(new Dimension(700,325));	// Définit la taille minimale de la frame de manière à ce que tous les composants soient bien visibles
 	}
 	
 	// Masque les panels de saisie affichés (en théorie un seul est affiché)
