@@ -47,6 +47,8 @@ public class Fenetre extends JFrame {
 	private JTextField m_TF_imgPath;
 	private JTextField m_TF_decodeImgPath;
 	
+	private QRcodeComponent m_qrModifiable;
+	
 	private JTextArea m_TA_txt;
 	private JTextArea m_TA_smsMsg;
 	private JTextArea m_TA_result;
@@ -258,6 +260,20 @@ public class Fenetre extends JFrame {
 		/*
 		 * PANEL COLORIAGE
 		 */
+		JLabel L_qrcoloriage = new JLabel("QRCode à modifier :");
+		Box hB_labelColoriage = Box.createHorizontalBox();
+		hB_labelColoriage.add(L_qrcoloriage);
+		hB_labelColoriage.add(Box.createHorizontalGlue());
+		
+		m_qrModifiable = new QRcodeComponent();
+		Box hB_qrModifiable = Box.createHorizontalBox();
+		hB_qrModifiable.add(m_qrModifiable);
+		hB_qrModifiable.add(Box.createHorizontalGlue());
+		
+		m_vB_coloriage = Box.createVerticalBox();
+		m_vB_coloriage.add(hB_labelColoriage);
+		m_vB_coloriage.add(hB_qrModifiable);
+
 		/*
 		 * TODO: Ajouter des box, composants, etc pour le coloriage manuel du QRcode
 		 * 
@@ -277,7 +293,6 @@ public class Fenetre extends JFrame {
 		 * Enfin, une fois que tous les composants sont créés et agencés dans des boites, les ajouter dans la boite m_vB_coloriage
 		 * Qui est automatiquement masquée/affichée lorsque l'utilisateur clique sur les boutons radios dans l'interface.
 		 */
-		m_vB_coloriage = Box.createVerticalBox();
 		
 		/*
 		 * PANEL DECODEUR
@@ -646,5 +661,9 @@ public class Fenetre extends JFrame {
 	
 	public JLabel getL_modeIndicator() {
 		return m_L_modeIndicator;
+	}
+	
+	public QRcodeComponent getQrModifiable(){
+		return m_qrModifiable;
 	}
 }

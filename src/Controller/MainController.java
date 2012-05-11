@@ -3,6 +3,7 @@ package Controller;
 import javax.swing.SwingUtilities;
 
 import Vue.Fenetre;
+import Vue.QRcodeComponent;
 
 // Controleur principal. Il initialise et lance l'application
 public class MainController {
@@ -24,6 +25,7 @@ public class MainController {
 	private CmBtailleController m_CmBtailleController;
 	private RBlevelsController m_RBlevelsController;
 	private RBcontentsController m_RBcontentsController;
+	private QRColorationController m_QRcolorationController;
 	
 	// Lance l'application
 	public void runApplication()
@@ -57,6 +59,7 @@ public class MainController {
 		m_CmBtailleController = new CmBtailleController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
 		m_RBlevelsController = new RBlevelsController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
 		m_RBcontentsController = new RBcontentsController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
+		m_QRcolorationController = new QRColorationController(m_fenetre,m_fenetre.getQrModifiable());
 		
 		// Assignation des listeners aux composants de la fenetre
 		m_fenetre.getTF_url().addFocusListener(m_TFurlController);	// Listener sur le focus
@@ -84,6 +87,7 @@ public class MainController {
 		m_fenetre.getRB_image().addActionListener(m_RBcontentsController);
 		m_fenetre.getRB_coloriage().addActionListener(m_RBcontentsController);
 		m_fenetre.getRB_decode().addActionListener(m_RBcontentsController);
+		m_fenetre.getQrModifiable().addMouseListener(m_QRcolorationController);
 		
 		// DEBUG
 		//m_fenetre.addMouseMotionListener(new TestController(m_fenetre));
