@@ -53,6 +53,8 @@ public class Fenetre extends JFrame {
 	private JLabel m_L_txtCount;
 	private JLabel m_L_smsMsgCount;
 	private JLabel m_L_modeIndicator;
+	private JLabel m_L_decodeNotif;
+	private JLabel m_L_imgNotif;
 	
 	private QRcodeComponent m_qrPanel;
 	private ImageComponent m_ImageComponent;
@@ -215,7 +217,6 @@ public class Fenetre extends JFrame {
 		m_TA_smsMsg = new JTextArea(Short.MAX_VALUE,Short.MAX_VALUE);
 		m_TA_smsMsg.setLineWrap(true);	// Découpe la ligne lorsqu'on arrive au bout
 		m_TA_smsMsg.setWrapStyleWord(true);	// Effectue un retour à la ligne si le mot est trop long pour être affiché en bout de ligne
-		//m_TA_smsMsg.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); // Ajoute une bordure grise d'1 pixel autour de la zone de texte
 		m_TA_smsMsg.setMaximumSize(new Dimension(Short.MAX_VALUE,Short.MAX_VALUE));	// Largeur et hauteur de la zone de texte infinie
 		m_TA_smsMsg.setMinimumSize(new Dimension(0,0));	// Largeur et hauteur minimum de la zone de texte nulle
 		JScrollPane SP_TAsms = new JScrollPane(m_TA_smsMsg,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -232,6 +233,7 @@ public class Fenetre extends JFrame {
 		/*
 		 * PANEL IMAGE
 		 */
+		// Boite de chargement
 		m_B_imgLoad = new JButton("Charger");
 		m_TF_imgPath = new JTextField(Short.MAX_VALUE);
 		m_TF_imgPath.setMaximumSize(new Dimension(Short.MAX_VALUE, m_B_imgLoad.getPreferredSize().height));
@@ -241,8 +243,16 @@ public class Fenetre extends JFrame {
 		hB_buttonPath.add(m_TF_imgPath);
 		hB_buttonPath.add(Box.createHorizontalGlue());
 		
+		// Boite de notification
+		m_L_imgNotif = new JLabel("");
+		
+		Box hB_imgNotification = Box.createHorizontalBox();
+		hB_imgNotification.add(m_L_imgNotif);
+		hB_imgNotification.add(Box.createHorizontalGlue());
+		
 		m_vB_image = Box.createVerticalBox();
 		m_vB_image.add(hB_buttonPath);
+		m_vB_image.add(hB_imgNotification);
 		
 		/*
 		 * PANEL COLORIAGE
@@ -287,6 +297,13 @@ public class Fenetre extends JFrame {
 		hB_decodeButtonPath.add(m_B_decodeProcess);
 		hB_decodeButtonPath.add(Box.createHorizontalGlue());
 		
+		// Boite de notification
+		m_L_decodeNotif = new JLabel("");
+		
+		Box hB_decodeNotification = Box.createHorizontalBox();
+		hB_decodeNotification.add(m_L_decodeNotif);
+		hB_decodeNotification.add(Box.createHorizontalGlue());
+		
 		// Boite de résultat textuel
 		// Champs de texte du résultat avec possible saisie
 		m_TA_result = new JTextArea(Short.MAX_VALUE,Short.MAX_VALUE);
@@ -308,6 +325,7 @@ public class Fenetre extends JFrame {
 		
 		m_vB_decode = Box.createVerticalBox();
 		m_vB_decode.add(hB_decodeButtonPath);
+		m_vB_decode.add(hB_decodeNotification);
 		m_vB_decode.add(m_hB_textResult);
 		m_vB_decode.add(m_hB_imageResult);
 		
@@ -453,7 +471,7 @@ public class Fenetre extends JFrame {
         Container c = getContentPane();	// Récupère la zone cliente de la frame (zone dans laquelle on peut placer des composants/conteneurs)
         c.add(hB_principale,BorderLayout.CENTER);	// Place la boite principale dans la fenêtre
         pack();	// Ajuste la taille de la frame de manière à ce que tous les composants soient visibles
-        setMinimumSize(new Dimension(700,325));	// Définit la taille minimale de la frame de manière à ce que tous les composants soient bien visibles
+        setMinimumSize(new Dimension(780,325));	// Définit la taille minimale de la frame de manière à ce que tous les composants soient bien visibles
 	}
 	
 	// Masque les panels de saisie affichés (en théorie un seul est affiché)
@@ -577,6 +595,14 @@ public class Fenetre extends JFrame {
 
 	public JLabel getL_smsMsgCount() {
 		return m_L_smsMsgCount;
+	}
+	
+	public JLabel getL_decodeNotif() {
+		return m_L_decodeNotif;
+	}
+	
+	public JLabel getL_imgNotif() {
+		return m_L_imgNotif;
 	}
 	
 	public QRcodeComponent getQrPanel() {
