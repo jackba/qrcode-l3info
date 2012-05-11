@@ -13,6 +13,14 @@ public class QRcode {
 	private VersionCorrector m_versionCorrector;
 	private FormatCorrector m_FormatCorrector;
 	private Boolean[][] m_matricePatron;
+	
+	public QRcode(int version)
+	{
+		setVersion(version);		
+		m_matrice = new Boolean[m_matriceSize][m_matriceSize];
+		drawPatternMatrix(m_matrice,m_version);
+		fillWhite();
+	}
 
 	public QRcode(int version, String correcLevel , String binaryDataEncoded)
 	{
@@ -661,6 +669,16 @@ public class QRcode {
 			matrix[line+7][column] = value;
 		}
 	}
+	
+	private void fillWhite(){
+		for(int i=0; i<this.m_matriceSize;i++){
+			for(int j=0; j<this.m_matriceSize;j++){
+				if(m_matrice[i][j]==null){
+					m_matrice[i][j]=false;
+				}
+			}
+		}
+	}
 
 	public void fillOptimizedMatrix(Boolean[][] matrix, int version)
 	{
@@ -668,6 +686,10 @@ public class QRcode {
 		drawExpandedTimingPatterns(matrix);
 		drawExpandedAlignmentPatterns(matrix, version);
 		drawExpandedVersionInformation(matrix, version);
+	}
+	
+	public void modifierPixel(int x, int y){
+		this.m_matrice[x][y]= !this.m_matrice[x][y];
 	}
 
 	// DEBUG
@@ -690,4 +712,10 @@ public class QRcode {
 
 	}
 	*/
+	/*
+	public static void main(String[] args) {
+		QRcode qr = new QRcode(1);
+		System.out.println(qr.toString());
+		 
+	}*/
 }
