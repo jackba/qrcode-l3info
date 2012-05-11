@@ -5,6 +5,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.StringBuilder;
 import java.util.Iterator;
@@ -170,11 +171,59 @@ public class ImageParser {
 		else
 			throw new Exception("Unsupported Format Exception");
 	}
-
-	public static boolean isInLegalSize(String imagePath, long maxBits)
+	
+	public static boolean isUnderMaximum(File fichier, int maximumSizeInOctets)
 	{
-		File f = new File(imagePath);
-		return maxBits >= (f.length()*8);
+		return fichier.length() <= maximumSizeInOctets;
+	}
+	
+	public static boolean isSupportedImageFormat(File fichier)
+	{
+		// Création d'un flux de lecture ouvert sur le fichier
+		FileInputStream fileInStream;
+		try {
+			fileInStream = new FileInputStream(fichier);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+			return false;
+		}
+
+		// Création d'un flux en écriture dans un tableau d'octets,
+		// dans lequel seront stockés les octets lus par le flux de lecture
+		ByteArrayOutputStream bytesOutStream = new ByteArrayOutputStream();
+
+		// Création d'un tableau d'octets qui servira de mémoire tampon
+		byte[] buffer = new byte[4];
+
+		// Tant que nous recevons encore des octets en provenance du flux de lecture (c.à.d que nous ne sommes pas à la fin du fichier)
+		// On lit une nouvelle série d'octets qui est stockée dans le buffer
+		// On récupère le nombre d'octets lus en provenance du flux d'entrée
+		try {
+			for (int nbrOctetsLus; (nbrOctetsLus = fileInStream.read(buffer)) != -1;)
+			{
+				// On écrit sur le flux de sortie le contenu du buffer,
+				// en partant de l'indice 0 jusqu'au nombre d'octets lus
+				// (4 au maximum, car notre buffer a une taille de 4 octets)
+				bytesOutStream.write(buffer, 0, nbrOctetsLus); 
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		// On retourne les 4 premiers octets que l'on stocke dans notre buffer (pour gagner en simplicité et performances)
+		buffer = bytesOutStream.toByteArray();
+		
+		// Création de la chaine binaire
+		StringBuilder binary = new StringBuilder(32);
+		for (int i=0; i<4; i++)
+			binary.append(byteToBinary(buffer[i]));
+		
+		// Comparaison avec les headers connus
+		for (int i=0; i<MAGIC_NUMBERS_TABLE.length; i++)
+			if (binary.toString().startsWith(MAGIC_NUMBERS_TABLE[i][1]))
+				return true;	// Le format est connu
+		return false;	// Le format est inconnu
 	}
 
 	// Retourne le nombre de caractères codés selon la version du QRcode dans laquelle seront codés les caractères
