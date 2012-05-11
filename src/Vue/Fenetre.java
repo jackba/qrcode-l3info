@@ -39,6 +39,7 @@ public class Fenetre extends JFrame {
 	private JButton m_B_imgLoad;
 	private JButton m_B_decodeImgLoad;
 	private JButton m_B_decodeProcess;
+	private JButton m_B_resultSave;
 	
 	private JTextField m_TF_url;
 	private JTextField m_TF_tel;
@@ -323,11 +324,15 @@ public class Fenetre extends JFrame {
 		m_hB_imageResult = Box.createHorizontalBox();
 		m_hB_imageResult.add(m_ImageComponent);
 		
+		// Bouton de sauvegarde
+		m_B_resultSave = new JButton("Sauvegarder");
+		
 		m_vB_decode = Box.createVerticalBox();
 		m_vB_decode.add(hB_decodeButtonPath);
 		m_vB_decode.add(hB_decodeNotification);
 		m_vB_decode.add(m_hB_textResult);
 		m_vB_decode.add(m_hB_imageResult);
+		m_vB_decode.add(m_B_resultSave);
 		
 		m_hB_textResult.setVisible(false);
 		m_hB_imageResult.setVisible(false);
@@ -498,6 +503,8 @@ public class Fenetre extends JFrame {
 	// Meme chose qu'au dessus, mais à l'intérieur de la boxde résultat
 	public void showResultTextBox() {m_hB_textResult.setVisible(true);}
 	public void showResultImgBox() {m_hB_imageResult.setVisible(true);}
+	public boolean isResultTextBoxVisible() {return m_hB_textResult.isVisible();}
+	public boolean isResultImageBoxVisible() {return m_hB_imageResult.isVisible();}
 	
 	// Masque les boites de résultat affichées
 	public void hideShownResultBoxes()
@@ -555,6 +562,10 @@ public class Fenetre extends JFrame {
 	
 	public JButton getB_decoder() {
 		return m_B_decodeProcess;
+	}
+	
+	public JButton getB_resultSave() {
+		return m_B_resultSave;
 	}
 	
 	public JTextField getTF_url() {
