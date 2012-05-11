@@ -17,7 +17,7 @@ public class BenregistrerController extends AbstractController implements Action
 
 	public BenregistrerController(Fenetre f) {
 		super(f);
-		m_fileFilter = new FileNameExtensionFilter("Images *bmp, *gif, *jpg, *png", "bmp", "gif", "jpg", "jpeg", "png");
+		m_fileFilter = new FileNameExtensionFilter("Images *.bmp, *.gif, *.jpg, *.png", "bmp", "gif", "jpg", "jpeg", "png");
 		m_fileChooser = new JFileChooser();
 		m_fileChooser.setFileFilter(m_fileFilter);
 	}
@@ -76,6 +76,11 @@ public class BenregistrerController extends AbstractController implements Action
 		}
 		
 		return format;
+	}
+	
+	public FileFilter getImageFileFilter()
+	{
+		return m_fileFilter;
 	}
 	
 	public JFileChooser getFileChooser()
