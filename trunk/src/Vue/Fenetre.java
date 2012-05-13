@@ -266,6 +266,7 @@ public class Fenetre extends JFrame {
 		hB_labelColoriage.add(Box.createHorizontalGlue());
 		
 		m_qrModifiable = new QRcodeComponent();
+		m_qrModifiable.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
 		Box hB_qrModifiable = Box.createHorizontalBox();
 		hB_qrModifiable.add(m_qrModifiable);
 		hB_qrModifiable.add(Box.createHorizontalGlue());

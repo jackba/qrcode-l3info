@@ -9,7 +9,6 @@ import Vue.QRcodeComponent;
 public class MainController {
 	
 	private Fenetre m_fenetre;	// Instance de la fenêtre de l'application
-	
 	private TFurlController m_TFurlController;
 	private TAtxtController m_TAtxtController;
 	private TFtelController m_TFtelController;
@@ -75,6 +74,7 @@ public class MainController {
 		m_fenetre.getB_charger().addActionListener(m_BchargerImgController);
 		m_fenetre.getB_chargerDecode().addActionListener(m_BchargerDecodeImgController);
 		m_fenetre.getB_decoder().addActionListener(m_BdecoderController);
+		m_fenetre.getCmB_taille().addActionListener(m_QRcolorationController);
 		m_fenetre.getCmB_taille().addActionListener(m_CmBtailleController);
 		m_fenetre.getRB_correctionL().addActionListener(m_RBlevelsController);
 		m_fenetre.getRB_correctionM().addActionListener(m_RBlevelsController);

@@ -18,6 +18,7 @@ public class QRcode {
 	{
 		setVersion(version);		
 		m_matrice = new Boolean[m_matriceSize][m_matriceSize];
+		m_versionCorrector = new VersionCorrector();
 		drawPatternMatrix(m_matrice,m_version);
 		fillWhite();
 	}
