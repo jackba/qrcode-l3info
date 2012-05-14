@@ -1,5 +1,6 @@
 package Model;
 
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -14,6 +15,8 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
+
+import java.awt.image.BufferedImage;
 
 public class ImageParser {
 
@@ -67,9 +70,9 @@ public class ImageParser {
 		// On retourne le tableau d'octets issu du flux de sortie et qui représente notre fichier
 		return bytesOutStream.toByteArray();
 	}
-	
+
 	private static StringBuilder m_stringBuilder = new StringBuilder();
-	
+
 	// Convertit un byte en chaine binaire de 8 bits
 	public static String byteToBinary(byte b){
 		m_stringBuilder.delete(0, m_stringBuilder.length());
@@ -104,7 +107,7 @@ public class ImageParser {
 
 	// Retourne le format de l'image encodée dans la chaine binaire
 	// Retourne null si le format n'est pas supporté
-	private static String getImageExtension(String binaryString)
+	public static String getImageExtension(String binaryString)
 	{
 		for (int i=0; i<MAGIC_NUMBERS_TABLE.length; i++)
 			if (binaryString.startsWith(MAGIC_NUMBERS_TABLE[i][1]))
@@ -149,34 +152,34 @@ public class ImageParser {
 	public static Image getImage(String binaryString) throws Exception
 	{
 		String extension = getImageExtension(binaryString);
-		
+
 		if (extension != null)
 		{
 			byte[] donnees = getBytesFromString(binaryString);
-			
+
 			ByteArrayInputStream bytesInStream = new ByteArrayInputStream(donnees);
-	        Iterator<?> readers = ImageIO.getImageReadersByFormatName(extension);
-	 
-	        ImageReader reader = (ImageReader) readers.next();
-	        Object source = bytesInStream;
-	 
-	        ImageInputStream imgInputStream = ImageIO.createImageInputStream(source);
-	 
-	        reader.setInput(imgInputStream, true);
-	        ImageReadParam param = reader.getDefaultReadParam();
-	 
-	        Image image = reader.read(0, param);
-	        return image;
+			Iterator<?> readers = ImageIO.getImageReadersByFormatName(extension);
+
+			ImageReader reader = (ImageReader) readers.next();
+			Object source = bytesInStream;
+
+			ImageInputStream imgInputStream = ImageIO.createImageInputStream(source);
+
+			reader.setInput(imgInputStream, true);
+			ImageReadParam param = reader.getDefaultReadParam();
+
+			Image image = reader.read(0, param);
+			return image;
 		}
 		else
 			throw new Exception("Unsupported Format Exception");
 	}
-	
+
 	public static boolean isUnderMaximum(File fichier, int maximumSizeInOctets)
 	{
 		return fichier.length() <= maximumSizeInOctets;
 	}
-	
+
 	public static boolean isSupportedImageFormat(File fichier)
 	{
 		// Création d'un flux de lecture ouvert sur le fichier
@@ -213,29 +216,29 @@ public class ImageParser {
 
 		// On retourne les 4 premiers octets que l'on stocke dans notre buffer (pour gagner en simplicité et performances)
 		buffer = bytesOutStream.toByteArray();
-		
+
 		// Création de la chaine binaire
 		StringBuilder binary = new StringBuilder(32);
 		for (int i=0; i<4; i++)
 			binary.append(byteToBinary(buffer[i]));
-		
+
 		// Comparaison avec les headers connus
 		for (int i=0; i<MAGIC_NUMBERS_TABLE.length; i++)
 			if (binary.toString().startsWith(MAGIC_NUMBERS_TABLE[i][1]))
 				return true;	// Le format est connu
 		return false;	// Le format est inconnu
 	}
-
+	
 	// Retourne le nombre de caractères codés selon la version du QRcode dans laquelle seront codés les caractères
 	public static String getCountIndicator(String binaryString, int version)
 	{
 		int length;
 		if (binaryString.length()%8 == 0) length = (int)(binaryString.length()/8);
 		else length = (int)(binaryString.length()/8) + 1;
-		
+
 		StringBuilder sb = new StringBuilder();
 		sb.append(Integer.toBinaryString(length));
-		
+
 		if(version>=1 && version <=9)
 		{
 			while (sb.length() < 8)
@@ -246,19 +249,33 @@ public class ImageParser {
 			while (sb.length() < 16)
 				sb.insert(0, '0');
 		}
-		
+
 		return sb.toString();
 	}
-	
+
+	// Ecrit l'image dans un fichier
+	public static void saveImage(Image img, String pathFile, String format) throws IOException
+	{
+		// Création d'un buffer d'image pour y dessiner notre image
+		BufferedImage bufferedImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_RGB);
+		
+		// Récupération de l'objet Graphics associé au buffer pour peindre l'image
+		Graphics2D g2 = bufferedImage.createGraphics();
+		g2.drawImage(img, null, null);	// Peinture de l'image dans le buffer
+		
+		File imageFile = new File(pathFile);	// Création d'un nouveau fichier à l'emplacement désigné
+		ImageIO.write(bufferedImage, format, imageFile);	// Ecriture du buffer dans le fichier
+	}
+
 	/*
 	public static void main(String[] args) throws IOException
 	{
 		String path = "/home/etudiant/test.jpg";
 		String binaryString = getBinaryString(path);
-		
+
 		byte[] b1 = getBytesFromImage(path);
 		byte[] b2 = getBytesFromString(binaryString);
-		
+
 		if (b1.length == b2.length)
 			for (int i=0; i<b1.length; i++)
 			{
@@ -268,5 +285,5 @@ public class ImageParser {
 				System.out.println();
 			}
 	}
-	*/
+	 */
 }

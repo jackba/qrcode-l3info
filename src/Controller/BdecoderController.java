@@ -47,7 +47,7 @@ public class BdecoderController extends AbstractController implements ActionList
 		{
 			getFenetre().showResultImgBox();
 			try {
-				getFenetre().getImageComponent().setImage(ImageParser.getImage(m_decodedString));
+				getFenetre().getImageComponent().setImage(ImageParser.getImage(m_decodedString), ImageParser.getImageExtension(m_decodedString));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -58,6 +58,7 @@ public class BdecoderController extends AbstractController implements ActionList
 			getFenetre().showResultTextBox();
 			getFenetre().getTA_result().setText(m_decodedString);
 		}
+		getFenetre().showResultSaveBox();
 	}
 
 	// Retourne le texte résultant du décodage de l'image
