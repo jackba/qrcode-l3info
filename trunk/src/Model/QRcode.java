@@ -20,7 +20,7 @@ public class QRcode {
 		m_matrice = new Boolean[m_matriceSize][m_matriceSize];
 		m_versionCorrector = new VersionCorrector();
 		drawPatternMatrix(m_matrice,m_version);
-		fillWhite();
+		fillWhite(m_matrice);
 	}
 
 	public QRcode(int version, String correcLevel , String binaryDataEncoded)
@@ -671,11 +671,11 @@ public class QRcode {
 		}
 	}
 	
-	private void fillWhite(){
-		for(int i=0; i<this.m_matriceSize;i++){
-			for(int j=0; j<this.m_matriceSize;j++){
-				if(m_matrice[i][j]==null){
-					m_matrice[i][j]=false;
+	private void fillWhite(Boolean[][] matrix){
+		for(int i=0; i<matrix.length;i++){
+			for(int j=0; j<matrix.length;j++){
+				if(matrix[i][j]==null){
+					matrix[i][j]=false;
 				}
 			}
 		}
