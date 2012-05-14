@@ -18,8 +18,8 @@ public class BenregistrerController extends AbstractController implements Action
 	public BenregistrerController(Fenetre f) {
 		super(f);
 		m_fileFilter = new FileNameExtensionFilter("Images *.bmp, *.gif, *.jpg, *.png", "bmp", "gif", "jpg", "jpeg", "png");
-		m_fileChooser = new JFileChooser();
-		m_fileChooser.setFileFilter(m_fileFilter);
+		setM_fileChooser(new JFileChooser());
+		getM_fileChooser().setFileFilter(m_fileFilter);
 	}
 
 	public boolean isValid() {
@@ -30,13 +30,13 @@ public class BenregistrerController extends AbstractController implements Action
 	public void actionPerformed(ActionEvent event)
 	{
 		// Affichage de la fenêtre modale de sauvegarde.
-		int bouton = m_fileChooser.showSaveDialog(getFenetre());
+		int bouton = getM_fileChooser().showSaveDialog(getFenetre());
 
 		// L'utilisateur a cliqué sur enregistrer
 		if (bouton == JFileChooser.APPROVE_OPTION)
 		{
 			// Chemin du fichier sélectionné par l'utilisateur
-			String pathFile = m_fileChooser.getSelectedFile().getAbsolutePath();
+			String pathFile = getM_fileChooser().getSelectedFile().getAbsolutePath();
 			
 			// Récupération du format
 			ImageFormat format = getFormat(pathFile);
@@ -85,6 +85,14 @@ public class BenregistrerController extends AbstractController implements Action
 	
 	public JFileChooser getFileChooser()
 	{
+		return getM_fileChooser();
+	}
+
+	public void setM_fileChooser(JFileChooser m_fileChooser) {
+		this.m_fileChooser = m_fileChooser;
+	}
+
+	public JFileChooser getM_fileChooser() {
 		return m_fileChooser;
 	}
 }

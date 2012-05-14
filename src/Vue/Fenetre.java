@@ -41,6 +41,7 @@ public class Fenetre extends JFrame {
 	private JButton m_B_decodeImgLoad;
 	private JButton m_B_decodeProcess;
 	private JButton m_B_resultSave;
+	private JButton m_B_saveQrModif;
 	
 	private JTextField m_TF_url;
 	private JTextField m_TF_tel;
@@ -261,20 +262,25 @@ public class Fenetre extends JFrame {
 		/*
 		 * PANEL COLORIAGE
 		 */
+		m_B_saveQrModif = new JButton("Enregistrer");
 		JLabel L_qrcoloriage = new JLabel("QRCode à modifier :");
 		Box hB_labelColoriage = Box.createHorizontalBox();
 		hB_labelColoriage.add(L_qrcoloriage);
 		hB_labelColoriage.add(Box.createHorizontalGlue());
 		
 		m_qrModifiable = new QRcodeComponent();
+		m_qrModifiable.setMinimumSize(getMaximumSize());
 		m_qrModifiable.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
+		m_qrModifiable.setMinimumSize(getMaximumSize());
 		Box hB_qrModifiable = Box.createHorizontalBox();
+		hB_qrModifiable.add(Box.createHorizontalGlue());
 		hB_qrModifiable.add(m_qrModifiable);
 		hB_qrModifiable.add(Box.createHorizontalGlue());
 		
 		m_vB_coloriage = Box.createVerticalBox();
 		m_vB_coloriage.add(hB_labelColoriage);
 		m_vB_coloriage.add(hB_qrModifiable);
+		m_vB_coloriage.add(m_B_saveQrModif);
 
 		/*
 		 * TODO: Ajouter des box, composants, etc pour le coloriage manuel du QRcode
@@ -574,6 +580,10 @@ public class Fenetre extends JFrame {
 	
 	public JButton getB_enregistrer() {
 		return m_B_enregistrer;
+	}
+	
+	public JButton getB_saveQrModif(){
+		return this.m_B_saveQrModif;
 	}
 	
 	public JButton getB_charger() {

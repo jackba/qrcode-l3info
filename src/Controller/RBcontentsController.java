@@ -87,8 +87,8 @@ public class RBcontentsController extends AbstractController implements ActionLi
 		}
 		else if (rb.equals(getFenetre().getRB_coloriage()) && rb.isSelected())
 		{
+			lockOnErrorL();
 			refreshCmB_taille();
-			refreshRB_level();
 			getFenetre().showPaintBox();
 			getFenetre().getL_modeIndicator().setText(AbstractTextController.getTextForModeIndicator(CharacterMode.BYTES));
 		}

@@ -19,9 +19,8 @@ public class QRColorationController extends AbstractController implements MouseL
 		super(f);
 		this.m_qrCodeComponent = qrCodeComponent;
 		m_qrcodeVersion = 1;
-		m_qrCode = new QRcode(40);
+		m_qrCode = new QRcode(m_qrcodeVersion);
 		m_qrCodeComponent.drawImageFromMatrix(m_qrCode.getQRmatrix(), 1);
-		m_qrCode=new QRcode(1);
 		// TODO Auto-generated constructor stub
 	}
 
