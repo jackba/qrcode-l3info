@@ -37,7 +37,7 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 	public QRcodeComponent()
 	{
 		// Définition d'une taille par défaut
-		this.setPreferredSize(new Dimension(200,200));
+		this.setPreferredSize(new Dimension(20,20));
 		
 		// initialisation des dernières plus grandes dimensions qu'a pris le composant
 		m_previousWidth = getPreferredSize().width;

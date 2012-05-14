@@ -18,6 +18,7 @@ public class MainController {
 	private TFdecodeImgPathController m_TFdecodeImgPathController;
 	private BgenererController m_BgenererController;
 	private BenregistrerController m_BenregistrerController;
+	private BenregistrerQrModifController m_BenregistrerQrModifController;
 	private BchargerController m_BchargerImgController;
 	private BchargerController m_BchargerDecodeImgController;
 	private BdecoderController m_BdecoderController;
@@ -52,6 +53,7 @@ public class MainController {
 		m_TFimgPathController = new TFimgPathController(m_fenetre);
 		m_TFdecodeImgPathController = new TFdecodeImgPathController(m_fenetre);
 		m_BenregistrerController = new BenregistrerController(m_fenetre);
+		m_BenregistrerQrModifController = new BenregistrerQrModifController(m_fenetre);
 		m_BgenererController = new BgenererController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController, m_TFimgPathController);
 		m_BchargerImgController = new BchargerController(m_fenetre, m_fenetre.getTF_imgPath());
 		m_BchargerDecodeImgController = new BchargerController(m_fenetre, m_fenetre.getTF_decodeImgPath());
@@ -73,6 +75,7 @@ public class MainController {
 		m_fenetre.getTF_decodeImgPath().getDocument().addDocumentListener(m_TFdecodeImgPathController);
 		m_fenetre.getB_generer().addActionListener(m_BgenererController);	// Listener sur le click
 		m_fenetre.getB_enregistrer().addActionListener(m_BenregistrerController);
+		m_fenetre.getB_saveQrModif().addActionListener(m_BenregistrerQrModifController);
 		m_fenetre.getB_charger().addActionListener(m_BchargerImgController);
 		m_fenetre.getB_chargerDecode().addActionListener(m_BchargerDecodeImgController);
 		m_fenetre.getB_decoder().addActionListener(m_BdecoderController);
