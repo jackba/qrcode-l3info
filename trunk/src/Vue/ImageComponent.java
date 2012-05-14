@@ -13,12 +13,14 @@ import javax.swing.SwingUtilities;
 public class ImageComponent extends JPanel {
 	
 	private Image m_image;
+	private String m_format;
 	
 	public ImageComponent(){}
 	
-	public ImageComponent(Image img)
+	public ImageComponent(Image img, String format)
 	{
 		m_image = img;
+		m_format = format;
 		refreshImage();
 	}
 	
@@ -29,9 +31,10 @@ public class ImageComponent extends JPanel {
 		g.drawImage(m_image, 0, 0, this.getWidth(), this.getHeight(), this);
 	}
 	
-	public void setImage(Image img)
+	public void setImage(Image img, String format)
 	{
 		m_image = img;
+		m_format = format;
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
 				refreshImage();
@@ -50,5 +53,15 @@ public class ImageComponent extends JPanel {
 			this.repaint();
 			this.updateUI();
 		}
+	}
+	
+	public Image getImage()
+	{
+		return m_image;
+	}
+	
+	public String getFormat()
+	{
+		return m_format;
 	}
 }

@@ -33,6 +33,7 @@ public class Fenetre extends JFrame {
 	private Box m_vB_decode;
 	private Box m_hB_textResult;
 	private Box m_hB_imageResult;
+	private Box m_hB_saveResult;
 	
 	private JButton m_B_generer;
 	private JButton m_B_enregistrer;
@@ -342,13 +343,18 @@ public class Fenetre extends JFrame {
 		
 		// Bouton de sauvegarde
 		m_B_resultSave = new JButton("Sauvegarder");
+		// Boite du bouton de sauvegarde
+		m_hB_saveResult = Box.createHorizontalBox();
+		m_hB_saveResult.add(Box.createHorizontalGlue());
+		m_hB_saveResult.add(m_B_resultSave);
+		m_hB_saveResult.add(Box.createHorizontalGlue());
 		
 		m_vB_decode = Box.createVerticalBox();
 		m_vB_decode.add(hB_decodeButtonPath);
 		m_vB_decode.add(hB_decodeNotification);
 		m_vB_decode.add(m_hB_textResult);
 		m_vB_decode.add(m_hB_imageResult);
-		m_vB_decode.add(m_B_resultSave);
+		m_vB_decode.add(m_hB_saveResult);
 		
 		m_hB_textResult.setVisible(false);
 		m_hB_imageResult.setVisible(false);
@@ -516,9 +522,11 @@ public class Fenetre extends JFrame {
 	public void showPaintBox() {m_vB_coloriage.setVisible(true);}
 	public void showDecodeBox() {m_vB_decode.setVisible(true);}
 	
-	// Meme chose qu'au dessus, mais à l'intérieur de la boxde résultat
+	// Meme chose qu'au dessus, mais à l'intérieur de la box de résultat
 	public void showResultTextBox() {m_hB_textResult.setVisible(true);}
 	public void showResultImgBox() {m_hB_imageResult.setVisible(true);}
+	public void showResultSaveBox() {m_hB_saveResult.setVisible(true);}
+	public void hideResultSaveBox() {m_hB_saveResult.setVisible(false);}
 	public boolean isResultTextBoxVisible() {return m_hB_textResult.isVisible();}
 	public boolean isResultImageBoxVisible() {return m_hB_imageResult.isVisible();}
 	

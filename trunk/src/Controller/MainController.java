@@ -3,12 +3,12 @@ package Controller;
 import javax.swing.SwingUtilities;
 
 import Vue.Fenetre;
-import Vue.QRcodeComponent;
 
 // Controleur principal. Il initialise et lance l'application
 public class MainController {
 	
 	private Fenetre m_fenetre;	// Instance de la fenêtre de l'application
+	
 	private TFurlController m_TFurlController;
 	private TAtxtController m_TAtxtController;
 	private TFtelController m_TFtelController;
@@ -24,6 +24,7 @@ public class MainController {
 	private CmBtailleController m_CmBtailleController;
 	private RBlevelsController m_RBlevelsController;
 	private RBcontentsController m_RBcontentsController;
+	private BresultSaveController m_BresultSaveController;
 	private QRColorationController m_QRcolorationController;
 	
 	// Lance l'application
@@ -55,6 +56,7 @@ public class MainController {
 		m_BchargerImgController = new BchargerController(m_fenetre, m_fenetre.getTF_imgPath());
 		m_BchargerDecodeImgController = new BchargerController(m_fenetre, m_fenetre.getTF_decodeImgPath());
 		m_BdecoderController = new BdecoderController(m_fenetre);
+		m_BresultSaveController = new BresultSaveController(m_fenetre);
 		m_CmBtailleController = new CmBtailleController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
 		m_RBlevelsController = new RBlevelsController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
 		m_RBcontentsController = new RBcontentsController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
@@ -74,6 +76,7 @@ public class MainController {
 		m_fenetre.getB_charger().addActionListener(m_BchargerImgController);
 		m_fenetre.getB_chargerDecode().addActionListener(m_BchargerDecodeImgController);
 		m_fenetre.getB_decoder().addActionListener(m_BdecoderController);
+		m_fenetre.getB_resultSave().addActionListener(m_BresultSaveController);
 		m_fenetre.getCmB_taille().addActionListener(m_QRcolorationController);
 		m_fenetre.getCmB_taille().addActionListener(m_CmBtailleController);
 		m_fenetre.getRB_correctionL().addActionListener(m_RBlevelsController);
@@ -101,6 +104,7 @@ public class MainController {
 		m_fenetre.getB_generer().setEnabled(false);
 		m_fenetre.getL_modeIndicator().setText(AbstractTextController.getTextForModeIndicator(CharacterMode.BYTES));
 		m_fenetre.getB_decoder().setEnabled(false);
+		m_fenetre.hideResultSaveBox();
 		
 		// Affichage de la fenêtre
 		m_fenetre.setVisible(true);
