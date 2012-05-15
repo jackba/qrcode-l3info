@@ -1,5 +1,6 @@
 package Controller;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -53,5 +54,14 @@ public class QRColorationController extends AbstractController implements MouseL
 		}
 		m_qrCode = new QRcode(m_qrcodeVersion);
 		m_qrCodeComponent.drawImageFromMatrix(m_qrCode.getQRmatrix(), 1);
+		getFenetre().getQrModifiable().updateUI();
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run(){
+				getFenetre().getQrModifiable().updateUI();
+				getFenetre().repaint();
+				m_qrCodeComponent.drawImageFromMatrix(m_qrCode.getQRmatrix(), 1);
+			}
+		});
+
 	}	
 }
