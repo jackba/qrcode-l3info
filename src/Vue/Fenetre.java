@@ -75,7 +75,7 @@ public class Fenetre extends JFrame {
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Générateur de QRcode");
-		setSize(320,240);
+		// setSize(320,240);
 		setLocationRelativeTo(null);
 		
 		// Application du look and feel du systeme.
@@ -504,7 +504,7 @@ public class Fenetre extends JFrame {
         Container c = getContentPane();	// Récupère la zone cliente de la frame (zone dans laquelle on peut placer des composants/conteneurs)
         c.add(hB_principale,BorderLayout.CENTER);	// Place la boite principale dans la fenêtre
         pack();	// Ajuste la taille de la frame de manière à ce que tous les composants soient visibles
-        setMinimumSize(new Dimension(780,325));	// Définit la taille minimale de la frame de manière à ce que tous les composants soient bien visibles
+        setMinimumSize(new Dimension(780,400));	// Définit la taille minimale de la frame de manière à ce que tous les composants soient bien visibles
 	}
 	
 	// Masque les panels de saisie affichés (en théorie un seul est affiché)
