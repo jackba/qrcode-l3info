@@ -62,8 +62,6 @@ public class QRColorationController extends AbstractController implements MouseL
 				{
 					getFenetre().setMinimumSize(new Dimension(getFenetre().getWidth(),m_qrCodeComponent.getImageSize() + 285));
 				}
-				System.out.println("Composant = " + m_qrCodeComponent.getImageSize());
-				System.out.println("Fenetre = " + getFenetre().getSize());
 			}
 		});
 
