@@ -98,6 +98,7 @@ public class MainController {
 		//m_fenetre.addMouseMotionListener(new TestController(m_fenetre));
 		
 		// Initialisation
+		//m_fenetre.getCmB_taille().setSelectedIndex(0);
 		m_CmBtailleController.actionPerformed(null);	// Récupération de la taille auto
 		m_fenetre.getRB_correctionL().setSelected(true);	// Niveau de correction d'erreur L coché
 		m_fenetre.getRB_txt().setSelected(true);	// panel de texte coché
@@ -107,6 +108,7 @@ public class MainController {
 		m_fenetre.getL_modeIndicator().setText(AbstractTextController.getTextForModeIndicator(CharacterMode.BYTES));
 		m_fenetre.getB_decoder().setEnabled(false);
 		m_fenetre.hideResultSaveBox();
+		m_QRcolorationController.setVersion(0);
 		
 		// Affichage de la fenêtre
 		m_fenetre.setVisible(true);

@@ -61,9 +61,16 @@ public class QRColorationController extends AbstractController implements MouseL
 				m_qrCodeComponent.drawImageFromMatrix(m_qrCode.getQRmatrix(), 1);
 				m_qrCodeComponent.updateUI();
 				
-				if (m_qrCodeComponent.getImageSize() + 285 > 400)	// La hauteur du composant + la hauteur des autres composants est supérieure à la hauteur de base
+				if (m_qrCodeComponent.getImageSize() + 285 > getFenetre().getBaseHeight())	// La hauteur du composant + la hauteur des autres composants est supérieure à la hauteur de base
 				{
-					getFenetre().setMinimumSize(new Dimension(getFenetre().getWidth(),m_qrCodeComponent.getImageSize() + 285));
+					getFenetre().setMinimumSize(new Dimension(getFenetre().getWidth(), m_qrCodeComponent.getImageSize() + 285));
+				}
+				int largeurQRpanel = 200;
+				if (getFenetre().getQrPanel().getImageSize() > 200) largeurQRpanel = getFenetre().getQrPanel().getImageSize();
+					
+				if (m_qrCodeComponent.getImageSize() + largeurQRpanel + 30 > getFenetre().getBaseWidth())	// La largeur du composant + la largeur des autres composants est supérieure à la largeur de base
+				{
+					getFenetre().setMinimumSize(new Dimension(m_qrCodeComponent.getImageSize() + largeurQRpanel + 30, getFenetre().getHeight()));
 				}
 			}
 		});
