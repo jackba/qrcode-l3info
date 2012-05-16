@@ -504,7 +504,7 @@ public class Fenetre extends JFrame {
         Container c = getContentPane();	// Récupère la zone cliente de la frame (zone dans laquelle on peut placer des composants/conteneurs)
         c.add(hB_principale,BorderLayout.CENTER);	// Place la boite principale dans la fenêtre
         pack();	// Ajuste la taille de la frame de manière à ce que tous les composants soient visibles
-        setMinimumSize(new Dimension(780,400));	// Définit la taille minimale de la frame de manière à ce que tous les composants soient bien visibles
+        setMinimumSize(new Dimension(getBaseWidth(),getBaseHeight()));	// Définit la taille minimale de la frame de manière à ce que tous les composants soient bien visibles
 	}
 	
 	// Masque les panels de saisie affichés (en théorie un seul est affiché)
@@ -684,5 +684,15 @@ public class Fenetre extends JFrame {
 	
 	public QRcodeComponent getQrModifiable(){
 		return m_qrModifiable;
+	}
+	
+	public int getBaseWidth()
+	{
+		return 780;
+	}
+	
+	public int getBaseHeight()
+	{
+		return 400;
 	}
 }

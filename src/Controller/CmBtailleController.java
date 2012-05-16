@@ -71,8 +71,10 @@ public class CmBtailleController extends AbstractController implements ActionLis
 			m_TFtelController.setMaximumsChars(m_capacities);
 			m_TFsmsTelController.setMaximumsChars(m_capacities);
 			m_TAsmsMsgController.setMaximumsChars(m_capacities);
-			if (getFenetre().getRB_coloriage().isSelected())
+			if (getFenetre().getRB_coloriage().isSelected() && m_QRColorationController.getVersion() > 0)
 				m_QRColorationController.setVersion(version);
+			else
+				m_QRColorationController.setVersion(0);
 		}
 		
 		if (getFenetre().getRB_coloriage().isSelected())
