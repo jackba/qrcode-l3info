@@ -59,10 +59,10 @@ public class MainController {
 		m_BchargerDecodeImgController = new BchargerController(m_fenetre, m_fenetre.getTF_decodeImgPath());
 		m_BdecoderController = new BdecoderController(m_fenetre);
 		m_BresultSaveController = new BresultSaveController(m_fenetre);
-		m_CmBtailleController = new CmBtailleController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
-		m_RBlevelsController = new RBlevelsController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
-		m_RBcontentsController = new RBcontentsController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
 		m_QRcolorationController = new QRColorationController(m_fenetre,m_fenetre.getQrModifiable());
+		m_CmBtailleController = new CmBtailleController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController,m_QRcolorationController);
+		m_RBlevelsController = new RBlevelsController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController);
+		m_RBcontentsController = new RBcontentsController(m_fenetre, m_TFurlController, m_TAtxtController, m_TFtelController, m_TFsmsTelController, m_TAsmsMsgController,m_QRcolorationController);
 		
 		// Assignation des listeners aux composants de la fenetre
 		m_fenetre.getTF_url().addFocusListener(m_TFurlController);	// Listener sur le focus
@@ -80,7 +80,6 @@ public class MainController {
 		m_fenetre.getB_chargerDecode().addActionListener(m_BchargerDecodeImgController);
 		m_fenetre.getB_decoder().addActionListener(m_BdecoderController);
 		m_fenetre.getB_resultSave().addActionListener(m_BresultSaveController);
-		m_fenetre.getCmB_taille().addActionListener(m_QRcolorationController);
 		m_fenetre.getCmB_taille().addActionListener(m_CmBtailleController);
 		m_fenetre.getRB_correctionL().addActionListener(m_RBlevelsController);
 		m_fenetre.getRB_correctionM().addActionListener(m_RBlevelsController);

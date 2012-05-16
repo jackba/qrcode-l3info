@@ -1,8 +1,6 @@
 package Controller;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -12,12 +10,12 @@ import Model.QRcode;
 import Vue.Fenetre;
 import Vue.QRcodeComponent;
 
-public class QRColorationController extends AbstractController implements MouseListener, ActionListener{
-
+public class QRColorationController extends AbstractController implements MouseListener {
+	
 	private QRcode m_qrCode;
 	private QRcodeComponent m_qrCodeComponent;
 	private int m_qrcodeVersion;
-
+	
 	public QRColorationController(Fenetre f,QRcodeComponent qrCodeComponent)
 	{
 		super(f);
@@ -32,39 +30,42 @@ public class QRColorationController extends AbstractController implements MouseL
 	}
 
 	public void mouseClicked(MouseEvent e) {
+		int line = (int)(e.getY()-17)/4;
+		int column = (int)(e.getX()-17)/4;
 		if(e.getY()<m_qrCodeComponent.getSize().getWidth()-15 && e.getX()<m_qrCodeComponent.getSize().getHeight()-15 && e.getX()>17 && e.getY()>17)
-			m_qrCode.modifierPixel((int)(e.getY()-17)/4,(int)(e.getX()-17)/4);
+		m_qrCode.modifierPixel(line,column);
+		//m_qrCodeComponent.drawPoint(line, column, 1);
 		m_qrCodeComponent.drawImageFromMatrix(m_qrCode.getQRmatrix(), 1);
 	}
 
+	public int getVersion()
+	{
+		return m_qrcodeVersion;
+	}
+	
+	public void setVersion(int version)
+	{
+		m_qrcodeVersion = version;
+	}
+	
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
-
-	public void actionPerformed(ActionEvent e)
+	
+	public void drawNewQrVersion()
 	{
-		if(getFenetre().getRB_coloriage().isSelected()){
-			if(getFenetre().getCmB_taille().getSelectedItem().toString()=="Auto")
-			{
-				m_qrcodeVersion = 1;
-			}
-			else
-			{
-				m_qrcodeVersion = Integer.parseInt(getFenetre().getCmB_taille().getSelectedItem().toString());
-			}
-			m_qrCode = new QRcode(m_qrcodeVersion);
-			SwingUtilities.invokeLater(new Runnable(){
-				public void run(){
-					m_qrCodeComponent.drawImageFromMatrix(m_qrCode.getQRmatrix(), 1);
-					m_qrCodeComponent.updateUI();
-
-					if (m_qrCodeComponent.getImageSize() + 285 > 400)	// La hauteur du composant + la hauteur des autres composants est supérieure à la hauteur de base
-					{
-						getFenetre().setMinimumSize(new Dimension(getFenetre().getWidth(),m_qrCodeComponent.getImageSize() + 285));
-					}
+		m_qrCode = new QRcode(m_qrcodeVersion);
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run(){
+				m_qrCodeComponent.drawImageFromMatrix(m_qrCode.getQRmatrix(), 1);
+				m_qrCodeComponent.updateUI();
+				
+				if (m_qrCodeComponent.getImageSize() + 285 > 400)	// La hauteur du composant + la hauteur des autres composants est supérieure à la hauteur de base
+				{
+					getFenetre().setMinimumSize(new Dimension(getFenetre().getWidth(),m_qrCodeComponent.getImageSize() + 285));
 				}
-			});
-		}
-	}	
+			}
+		});
+	}
 }

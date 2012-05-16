@@ -14,6 +14,7 @@ public class RBcontentsController extends AbstractController implements ActionLi
 	private TFtelController m_TFtelController;
 	private TFsmsTelController m_TFsmsTelController;
 	private TAsmsMsgController m_TAsmsMsgController;
+	private QRColorationController m_QRColorationController;
 	private int m_previousSelectedIndex;	// L'item de la combo-box sélectionné dans le mode précédent
 	private boolean m_needRefreshSelectedIndex;
 	private JRadioButton m_previousSelectedLevel;
@@ -24,7 +25,8 @@ public class RBcontentsController extends AbstractController implements ActionLi
 			TAtxtController txtController,
 			TFtelController telController,
 			TFsmsTelController smsTelController,
-			TAsmsMsgController smsMsgController)
+			TAsmsMsgController smsMsgController,
+			QRColorationController colorationController)
 	{
 		super(f);
 		m_TFurlController = urlController;
@@ -32,6 +34,7 @@ public class RBcontentsController extends AbstractController implements ActionLi
 		m_TFtelController = telController;
 		m_TFsmsTelController = smsTelController;
 		m_TAsmsMsgController = smsMsgController;
+		m_QRColorationController = colorationController;
 		m_needRefreshSelectedIndex = false;
 		m_needRefreshSelectedLevel = false;
 	}
@@ -91,6 +94,8 @@ public class RBcontentsController extends AbstractController implements ActionLi
 			refreshCmB_taille();
 			getFenetre().showPaintBox();
 			getFenetre().getL_modeIndicator().setText(AbstractTextController.getTextForModeIndicator(CharacterMode.BYTES));
+			stockPreviousVersion();
+			getFenetre().getCmB_taille().setSelectedIndex(m_QRColorationController.getVersion());
 		}
 		else if (rb.equals(getFenetre().getRB_decode()) && rb.isSelected())
 		{
@@ -111,6 +116,14 @@ public class RBcontentsController extends AbstractController implements ActionLi
 			getFenetre().getCmB_taille().setSelectedIndex(m_previousSelectedIndex);
 			getFenetre().getCmB_taille().setEnabled(true);
 		}
+	}
+	
+	private void stockPreviousVersion()
+	{
+		m_needRefreshSelectedIndex = true;
+		m_previousSelectedIndex = getFenetre().getCmB_taille().getSelectedIndex();
+		//if (m_selectedIndexColoriage == -1) m_selectedIndexColoriage = getFenetre().getCmB_taille().getSelectedIndex();
+		//else getFenetre().getCmB_taille().setSelectedIndex(m_selectedIndexColoriage);
 	}
 
 	// Sélectionne l'item Auto et empêche l'utilisateur de sélectionner dans la combo-box
