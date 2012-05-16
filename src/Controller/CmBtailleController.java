@@ -15,13 +15,15 @@ public class CmBtailleController extends AbstractController implements ActionLis
 	private TFtelController m_TFtelController;
 	private TFsmsTelController m_TFsmsTelController;
 	private TAsmsMsgController m_TAsmsMsgController;
+	private QRColorationController m_QRColorationController;
 	
 	public CmBtailleController (Fenetre f,
 			TFurlController urlController,
 			TAtxtController txtController,
 			TFtelController telController,
 			TFsmsTelController smsTelController,
-			TAsmsMsgController smsMsgController)
+			TAsmsMsgController smsMsgController,
+			QRColorationController colorationController)
 	{
 		super(f);
 		m_TFurlController = urlController;
@@ -30,6 +32,7 @@ public class CmBtailleController extends AbstractController implements ActionLis
 		m_TFsmsTelController = smsTelController;
 		m_TAsmsMsgController = smsMsgController;
 		m_symbolCharacterParser = NumberOfSymbolCharacterParser.getInstance();
+		m_QRColorationController = colorationController;
 	}
 
 	public boolean isValid() {
@@ -55,6 +58,8 @@ public class CmBtailleController extends AbstractController implements ActionLis
 			if (!isAuto)
 			{
 				m_capacities = m_symbolCharacterParser.getCapacities(version);
+				if (getFenetre().getRB_coloriage().isSelected())
+					m_QRColorationController.setVersion(1);
 			}
 			// L'utilisateur a choisit la sélection automatique
 			else
@@ -66,6 +71,13 @@ public class CmBtailleController extends AbstractController implements ActionLis
 			m_TFtelController.setMaximumsChars(m_capacities);
 			m_TFsmsTelController.setMaximumsChars(m_capacities);
 			m_TAsmsMsgController.setMaximumsChars(m_capacities);
+			if (getFenetre().getRB_coloriage().isSelected())
+				m_QRColorationController.setVersion(version);
+		}
+		
+		if (getFenetre().getRB_coloriage().isSelected())
+		{
+			m_QRColorationController.drawNewQrVersion();
 		}
 	}
 

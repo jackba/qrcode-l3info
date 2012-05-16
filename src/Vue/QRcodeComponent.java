@@ -27,9 +27,13 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 	private int m_previousWidth;
 	private int m_previousHeight;
 	
-	private boolean m_mustPaint;
+	private boolean m_mustPaintMatrix;
 	private Boolean[][] m_matrix;
 	private int m_scale;
+	
+	private boolean m_mustPaintPoint;
+	private int m_line;
+	private int m_column;
 	
 	private int m_imageSize;
 
@@ -45,7 +49,8 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 		
 		m_imageSize = m_previousHeight;
 		
-		m_mustPaint = false;
+		m_mustPaintMatrix = false;
+		m_mustPaintPoint = false;
 		m_scale = 1;
 		
 		// Ajout d'un écouteur sur le redimensionnement
@@ -70,10 +75,15 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 		m_buffer.fillRect(0, 0, getWidth(), getHeight());	// Rectangle blanc
 		*/
 		
-		if (m_mustPaint)
+		if (m_mustPaintMatrix)
 		{
-			m_mustPaint = false;
+			m_mustPaintMatrix = false;
 			paintMatrix(m_scale);
+		}
+		if (m_mustPaintPoint)
+		{
+			m_mustPaintPoint = false;
+			paintPoint(m_scale);
 		}
 		/*
 		m_buffer.setColor(Color.black);
@@ -186,13 +196,21 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 		this.setMinimumSize(this.getPreferredSize());
 		this.setSize(imageSize, imageSize);
 		
-		m_mustPaint = true;
+		m_mustPaintMatrix = true;
 		
 		// Rafraichissement de l'image
 		this.repaint();
 	}
 	
-	public void paintMatrix(int scale)
+	public void drawPoint(int line, int column, int scale)
+	{
+		m_line = line;
+		m_column = column;
+		m_mustPaintPoint = true;
+		this.repaint();
+	}
+	
+	private void paintMatrix(int scale)
 	{
 		// Remplit le fond en blanc
 		m_buffer.setColor(Color.WHITE);
@@ -207,6 +225,13 @@ public class QRcodeComponent extends JPanel implements ComponentListener {
 						m_buffer.setColor(Color.BLACK);
 						m_buffer.fillRect(16*scale+4*column*scale, 16*scale+4*line*scale, 4*scale, 4*scale);	// Carré noir de 4 pixels de côté
 					}
+	}
+	
+	private void paintPoint(int scale)
+	{
+		// Carré noir de 4 pixels de côté x scale
+		m_buffer.setColor(Color.BLACK);
+		m_buffer.fillRect(16*scale+4*m_column*scale, 16*scale+4*m_line*scale, 4*scale, 4*scale);
 	}
 	
 	public int getImageSize()
