@@ -1,0 +1,1 @@
+Génère un QR Code à partir d'un texte ou d'une image.
